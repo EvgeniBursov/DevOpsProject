@@ -1,14 +1,35 @@
-jobs: 
-  cicd-job: 
-    executor: 
-      name: node/default
-    steps: 
-      - checkout
-      - run: 
-          name: install dependencies - NPM packages
-          command: npm install
+name: Node.js CI
 
-workflows: 
-  example-workflow: 
-    jobs: 
-      - cicd-job
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+
+    - name: Build and deploy
+      run: |
+        # Add any additional build or deploy steps here
+        # For example, you can deploy to a server or a cloud platform
+
