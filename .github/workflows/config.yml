@@ -1,0 +1,14 @@
+jobs: 
+  cicd-job: 
+    executor: 
+      name: node/default
+    steps: 
+      - checkout
+      - run: 
+          name: install dependencies - NPM packages
+          command: npm install
+
+workflows: 
+  example-workflow: 
+    jobs: 
+      - cicd-job
