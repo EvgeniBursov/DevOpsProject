@@ -25,9 +25,12 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Set up environment variables
+    - name: Run application
       run: |
-        echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+        npm run start
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
 
     #- name: Run tests
     #  run: npm test
@@ -37,3 +40,4 @@ jobs:
         # Add any additional build or deploy steps here
         # For example, you can deploy to a server or a cloud platform
         curl "https://api.render.com/deploy/srv-cn8vmhmd3nmc73dfkff0?key=Mkkg-BEOOww"
+
