@@ -35,22 +35,9 @@ jobs:
     #  run: npm test
 
     - name: Build and deploy
-      if: startsWith(github.ref, 'refs/heads/main')
       run: |
-        # Add any additional build or deploy steps here for the 'main' branch
+        # Add any additional build or deploy steps here
+        # For example, you can deploy to a server or a cloud platform
         curl "https://api.render.com/deploy/srv-cn8vmhmd3nmc73dfkff0?key=Mkkg-BEOOww"
-
-    - name: Build and deploy for feature branches
-      if: startsWith(github.ref, 'refs/heads/login_and_register/')
-      run: |
-        # Add any additional build or deploy steps here for feature branches
-        echo "Building and deploying for feature branch"
-
-
-    #- name: Build and deploy
-    #  run: |
-    #    # Add any additional build or deploy steps here
-    #    # For example, you can deploy to a server or a cloud platform
-    #    curl "https://api.render.com/deploy/srv-cn8vmhmd3nmc73dfkff0?key=Mkkg-BEOOww"
 
 
