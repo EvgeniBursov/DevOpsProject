@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - feature/*
+      - login_and_register
       # Add more branches as needed
 
 jobs:
