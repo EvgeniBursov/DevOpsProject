@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+      - Home_page_Product_page
+      # Add more branches as needed
 
 jobs:
   build:
@@ -36,6 +38,4 @@ jobs:
       run: |
         # Add any additional build or deploy steps here
         # For example, you can deploy to a server or a cloud platform
-        curl "https://api.render.com/deploy/srv-cn8vmhmd3nmc73dfkff0?key=Mkkg-BEOOww"
-
-
+        # curl "https://api.render.com/deploy/srv-cn8vmhmd3nmc73dfkff0?key=Mkkg-BEOOww"
