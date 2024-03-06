@@ -1,9 +1,9 @@
-window.onload = () => {
+/*window.onload = () => {
     if(sessionStorage.user){
         user = JSON.parse(sessionStorage.user)
         
     }
-}
+}*/
 
 const loader = document.querySelector('.loader');
 // select inputs 
@@ -36,7 +36,7 @@ submitBtn.addEventListener('click', () => {
             })
         }
     } else {
-        if(!email.value.length || password.value.length){
+        if(email.value.length < 1|| password.value.length < 1){
             showAlert('fill all the inputs')
         } else {
             loader.style.display = 'block'

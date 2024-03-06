@@ -11,17 +11,21 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// eslint-disable-next-line no-undef
 const port = process.env.PORT || 5000;
 const app = express();
+// eslint-disable-next-line no-unused-vars
 const result = dotenv.config()
 
 
 const DATABASE_URL = "mongodb+srv://evgenbu2:xq8zmS4ABlsldbMa@webproject.fupstrj.mongodb.net/"
 mongoose.connect(DATABASE_URL)
+// eslint-disable-next-line no-unused-vars
 .then((result) => {
   console.log('Connected to the DataBase successfully');
 })
 .catch((err) => console.log(err));
+// eslint-disable-next-line no-unused-vars
 var db = mongoose.connection
 
 app.use(express.static('public'));
@@ -62,7 +66,7 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'login.html'));
 });
 
-app.post('/login', async (req, res) => {
+/*app.post('/login', async (req, res) => {
   var req_email = req.body.email;
   var req_pass = req.body.password;
   if(!req_email.lenght || !req_pass.lenght){
@@ -79,8 +83,41 @@ app.post('/login', async (req, res) => {
   }catch(err){
     return res.json({'alert':'fail checking user'})
   }
-})
+})*/
 
+app.post('/login', async (req, res) => {
+  const req_email = req.body.email;
+  const req_pass = req.body.password;
+
+  // Check if email and password are provided
+  if (!req_email.length || !req_pass.length) {
+    return res.json({ 'alert': 'Fill in both email and password!!!' });
+  }
+
+  try {
+    // Find the user by email
+    const logUser = await User.findOne({ 'email': req_email });
+
+    // Check if the user exists
+    if (!logUser) {
+      return res.json({ 'alert': 'Incorrect user' });
+    }
+
+    // Compare the provided password with the stored hashed password
+    const isPasswordValid = await logUser.comparePassword(req_pass);
+
+    // Check if the password is correct
+    if (!isPasswordValid) {
+      return res.json({ 'alert': 'Incorrect password' });
+    }
+
+    // Successfully logged in
+    res.json({ 'message': 'Login successful', 'user': logUser });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ 'alert': 'Fail checking user' });
+  }
+});
 
 
 app.get('/404', (req, res) => {
