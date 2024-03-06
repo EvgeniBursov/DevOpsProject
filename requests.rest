@@ -1,20 +1,26 @@
 ###
 
-GET http://localhost:4000/
+GET http://localhost:5000/
 
 ###
 
-GET http://localhost:4000/signup
+GET http://localhost:5000/signup
 
 ###
 
 
-POST http://localhost:4000/signup
+POST http://localhost:5000/signup
 Content-Type: application/json
 
 {
-    "name": "alex111232131",
+    "nameUser": "alex111232131",
     "email": "user1@gmail.com",
     "password": "123456",
     "number": "123456789"
 }
+
+###
+POST http://localhost:5000/404
+
+###
+GET http://localhost:5000/public/404

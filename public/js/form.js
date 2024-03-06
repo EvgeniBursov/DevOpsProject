@@ -21,7 +21,7 @@ submitBtn.addEventListener('click', () => {
         showAlert('invalid number, please enter valid one');
     } else{
         loader.style.display = 'block'
-        sendData('https://devopsproject-v74y.onrender.com/signup.html', {
+        sendData('/signup', {
             nameUser: nameUser.value,
             email: email.value,
             password: password.value,
