@@ -36,8 +36,8 @@ jobs:
     #  run: npm run lint
       # Assuming you have a lint script in your package.json file
 
-    #- name: Run tests
-    #  run: npm test
+    - name: Run tests
+      run: npm test
 
     - name: Build and deploy
       run: |
