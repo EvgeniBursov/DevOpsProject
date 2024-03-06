@@ -41,7 +41,7 @@ const showAlert = (msg) => {
     }, 1500);
 }
 
-const sendData = (path, data) => {
+/*const sendData = (path, data) => {
     fetch(path, {
         method: 'post',
         headers: new Headers({'Content-Type': 'application/json'}),
@@ -50,7 +50,20 @@ const sendData = (path, data) => {
     .then(response => {
         processData(response);
     })
+}*/
+
+const sendData = (path, data) => {
+  fetch(path, {
+      method: "POST", 
+      mode: "cors", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data), 
+    })
 }
+
+
 
 const processData = (data) => {
     loader.style.display = null;
@@ -61,4 +74,13 @@ const processData = (data) => {
         location.replace('/');
     }
 }
+
+/*const response = await fetch(url, {
+    method: "POST", 
+    mode: "cors", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data), 
+  })*/
 
