@@ -79,19 +79,19 @@ app.post('/signup', async (req, res) => {
   res.json(data)
 })
 
-/*app.get('/404', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', '404.html'));
-});*/
-
-
 app.get('/404', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public', '404.html'));
+});
+
+
+/*app.get('/404', (req, res) => {
   res.sendFile(path.resolve('public/404.html'), (err) => {
     if (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
     }
   });
-});
+});*/
 
 app.use((req, res) => {
   res.redirect('/404')
