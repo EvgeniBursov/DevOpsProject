@@ -4,8 +4,13 @@ on:
   push:
     branches:
       - main
+<<<<<<< HEAD
       - develop_v_0.2_back
 
+=======
+      - Home_page_Product_page
+      # Add more branches as needed
+>>>>>>> eb23d4c21fcd3227c35ff0226ebc20807af314a2
 
 jobs:
   build:
