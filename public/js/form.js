@@ -21,7 +21,7 @@ submitBtn.addEventListener('click', () => {
         showAlert('invalid number, please enter valid one');
     } else{
         loader.style.display = 'block'
-        sendData('http://localhost:5000/signup', {
+        sendData('http://localhost:10000/signup', {
             nameUser: nameUser.value,
             email: email.value,
             password: password.value,
