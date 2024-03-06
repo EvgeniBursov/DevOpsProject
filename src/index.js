@@ -109,7 +109,7 @@ app.post('/login', async (req, res) => {
     }
 
     // Successfully logged in
-    res.json({ 'message': 'Login successful', 'user': logUser });
+    return res.json({ 'message': 'Login successful', 'user': logUser });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ 'alert': 'Fail checking user' });
