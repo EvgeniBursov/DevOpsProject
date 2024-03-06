@@ -20,7 +20,11 @@ mongoose.connect(DATABASE_URL)
 .catch((err) => console.log(err));
 var db = mongoose.connection
 
-app.use(express.static('public'))
+const currentModuleUrl = new URL(import.meta.url);
+const currentDirectory = path.dirname(currentModuleUrl.pathname);
+let staticPath = path.join(currentDirectory, 'public');
+app.use(express.static(staticPath));
+
 
 app.use(cors())
 
@@ -29,19 +33,33 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 
-
-
-
-
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+  res.sendFile(path.resolve('public/index.html'), (err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+});
+
+app.get('/signup', (req, res) => {
+  res.sendFile(path.resolve('public/signup.html'), (err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 });
 
 
-app.get('/signup', (req, res) => {
+/*app.get('/signup', (req, res) => {
+  res.sendFile(path.join(staticPath, "signup.html"));
+})*/
+
+/*app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'signup.html'));
 })
-
+*/
 
 
 app.post('/signup', async (req, res) => {
@@ -61,14 +79,24 @@ app.post('/signup', async (req, res) => {
   res.json(data)
 })
 
+/*app.get('/404', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public', '404.html'));
+});*/
+
 
 app.get('/404', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', '404.html'));
+  res.sendFile(path.resolve('public/404.html'), (err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 });
 
 app.use((req, res) => {
   res.redirect('/404')
 })
+
 
 
 app.listen(port, () => {
