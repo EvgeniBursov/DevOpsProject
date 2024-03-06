@@ -13,7 +13,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    nubmer:{
+        type: String,
+        required: true
+    }
 }, { timestamps: true });
 
-User = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
 export default User;
