@@ -21,7 +21,7 @@ submitBtn.addEventListener('click', () => {
         showAlert('invalid number, please enter valid one');
     } else{
         loader.style.display = 'block'
-        sendData('/signup', {
+        sendData('http://localhost:4000/signup', {
             nameUser: nameUser.value,
             email: email.value,
             password: password.value,
@@ -53,14 +53,24 @@ const showAlert = (msg) => {
 }*/
 
 const sendData = (path, data) => {
-  fetch(path, {
-      method: "POST", 
-      mode: "cors", 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data), 
+    console.log(path, data);  
+    fetch(path, {
+        method: "POST", 
+        mode: "cors", 
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data), 
     })
+    .then((res) => res.json())
+    .then(response => {
+        processData(response);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        loader.style.display = null;
+        showAlert('An error occurred while sending data.');
+    });
 }
 
 
