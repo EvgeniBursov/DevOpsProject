@@ -1,3 +1,4 @@
+
 const createNav = () => {
     let nav = document.querySelector('.navbar');
 
@@ -13,7 +14,8 @@ const createNav = () => {
                 <img src="img/user.png" id="user-img" alt="">
                 <div class="login-logout-popup hide">
                     <p class="account-info">Log in as, name</p>
-                    <button class="btn" id="user-btn">Log out</button>
+                    <button class="reg_btn" id="user-btn" >Register</button>
+                    <button class="btn" id="user-btn">Log In</button>
                 </div>
                 </a>
                 <a href="#"><img src="img/cart.png" alt=""></a>
@@ -34,8 +36,18 @@ createNav();
 const userImageButton = document.querySelector('#user-img');
 const userPop = document.querySelector('.login-logout-popup');
 const popuptext = document.querySelector('.account-info');
+const registerBtn = document.querySelector('.reg_btn');
+const loginBtn = document.querySelector('.btn');
 const actionBtn = document.querySelector('#user-btn');
 
 userImageButton.addEventListener('click', () => {
     userPop.classList.toggle('hide')
+})
+
+registerBtn.addEventListener('click', () => {
+    window.location.href = 'signup.html';
+})
+
+loginBtn.addEventListener('click', () => {
+    window.location.href = 'login.html';
 })
