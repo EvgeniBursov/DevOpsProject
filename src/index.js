@@ -56,10 +56,30 @@ app.post('/signup', async (req, res) => {
   res.json(data)
 })
 
+
+
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'login.html'));
 });
 
+app.post('/login', async (req, res) => {
+  var req_email = req.body.email;
+  var req_pass = req.body.password;
+  if(!req_email.lenght || !req_pass.lenght){
+    return res.json({'alert': 'fill all the inputs'})
+  }
+  try{
+    const logUser = User.findOne({'email': req_email})
+    if(logUser == null){
+      return res.json({'alert': 'incorrect user'})
+    }
+
+    const logPass = User.findOne({'password': req_pass})
+    if(!logPass) return res.json({'alert': 'incorrect password'})
+  }catch(err){
+    return res.json({'alert':'fail checking user'})
+  }
+})
 
 
 

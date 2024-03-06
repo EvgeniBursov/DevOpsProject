@@ -8,7 +8,7 @@ const createNav = () => {
             <div class="nav-items">
                 <div class="search">
                     <input type="text" class="search-box" placeholder="search brand, product">
-                    <button class="search-btn">search</button>
+                    <button class="search-btn" id="search-btn">search</button>
                 </div>
                 <a>
                 <img src="img/user.png" id="user-img" alt="">
@@ -39,6 +39,7 @@ const popuptext = document.querySelector('.account-info');
 const registerBtn = document.querySelector('.reg_btn');
 const loginBtn = document.querySelector('.btn');
 const actionBtn = document.querySelector('#user-btn');
+const searchBtn = document.querySelector('.search-btn')
 
 userImageButton.addEventListener('click', () => {
     userPop.classList.toggle('hide')
@@ -51,3 +52,22 @@ registerBtn.addEventListener('click', () => {
 loginBtn.addEventListener('click', () => {
     window.location.href = 'login.html';
 })
+
+searchBtn.addEventListener('click', () => {
+    window.location.href = 'search.html'
+})
+
+
+window.onload = () =>{
+    let user = JSON.parse(sessionStorage.user || null)
+    if(user != null){
+        popuptext.innerHTML = `log in as, ${user.name}`
+        actionBtn.innerHTML = 'log-out'
+        actionBtn.addEventListener('click', () => {
+            sessionStorage.clear()
+            location.reload()
+        })
+    } else {
+        popuptext.innerHTML = 'Hello user'
+    }
+} 

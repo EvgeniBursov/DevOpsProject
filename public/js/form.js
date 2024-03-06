@@ -1,4 +1,10 @@
-//import User from "../../models/user.js"
+window.onload = () => {
+    if(sessionStorage.user){
+        user = JSON.parse(sessionStorage.user)
+        
+    }
+}
+
 const loader = document.querySelector('.loader');
 // select inputs 
 const submitBtn = document.querySelector('.submit-btn');
@@ -9,24 +15,36 @@ const number = document.querySelector('#number');
 
  
 submitBtn.addEventListener('click', () => {
-    if(nameUser.value.length <1){
-        showAlert('name must be 3 letters long');
-    } else if(!email.value.length){
-        showAlert('enter your email');
-    } else if(password.value.length < 1){
-        showAlert('password should be 8 letters long');
-    } else if(!number.value.length){
-        showAlert('enter your phone number');
-    } else if(!Number(number.value) || number.value.length < 1){
-        showAlert('invalid number, please enter valid one');
-    } else{
-        loader.style.display = 'block'
-        sendData('/signup', {
-            nameUser: nameUser.value,
-            email: email.value,
-            password: password.value,
-            number: number.value,
-        })
+    if(nameUser != null){
+        if(nameUser.value.length <1){
+            showAlert('name must be 3 letters long');
+        } else if(!email.value.length){
+            showAlert('enter your email');
+        } else if(password.value.length < 1){
+            showAlert('password should be 8 letters long');
+        } else if(!number.value.length){
+            showAlert('enter your phone number');
+        } else if(!Number(number.value) || number.value.length < 1){
+            showAlert('invalid number, please enter valid one');
+        } else{
+            loader.style.display = 'block'
+            sendData('/signup', {
+                nameUser: nameUser.value,
+                email: email.value,
+                password: password.value,
+                number: number.value,
+            })
+        }
+    } else {
+        if(!email.value.length || password.value.length){
+            showAlert('fill all the inputs')
+        } else {
+            loader.style.display = 'block'
+            sendData('/login', {
+                email: email.value,
+                password: password.value,
+            })
+        }
     }
 })
 
