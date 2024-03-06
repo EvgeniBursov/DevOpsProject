@@ -21,7 +21,7 @@ submitBtn.addEventListener('click', () => {
         showAlert('invalid number, please enter valid one');
     } else{
         loader.style.display = 'block'
-        sendData('http://localhost:4000/signup', {
+        sendData('https://devopsproject-v74y.onrender.com/signup.html', {
             nameUser: nameUser.value,
             email: email.value,
             password: password.value,
@@ -81,7 +81,7 @@ const processData = (data) => {
         showAlert(data.alert);
     } else if(data.name){
         sessionStorage.user = JSON.stringify(data);
-        location.replace('/');
+        location.replace('/public/index.html');
     }
 }
 
