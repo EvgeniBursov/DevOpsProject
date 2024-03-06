@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import User from '../models/user.js'
+import path from 'path'
 
 const port = process.env.PORT || 5000;
 const app = express();
