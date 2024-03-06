@@ -91,7 +91,7 @@ app.post('/login', async (req, res) => {
 
   // Check if email and password are provided
   if (!req_email.length || !req_pass.length) {
-    return res.json({ 'alert': 'Fill in both email and password!!!' });
+    return res.json({ 'alert': 'Fill in both email and password' });
   }
 
   try {
@@ -103,11 +103,8 @@ app.post('/login', async (req, res) => {
       return res.json({ 'alert': 'Incorrect user' });
     }
 
-    // Compare the provided password with the stored hashed password
-    const isPasswordValid = await logUser.comparePassword(req_pass);
-
-    // Check if the password is correct
-    if (!isPasswordValid) {
+    // Compare the provided password with the stored password
+    if (req_pass !== logUser.password) {
       return res.json({ 'alert': 'Incorrect password' });
     }
 
@@ -118,6 +115,7 @@ app.post('/login', async (req, res) => {
     return res.status(500).json({ 'alert': 'Fail checking user' });
   }
 });
+
 
 
 app.get('/404', (req, res) => {
