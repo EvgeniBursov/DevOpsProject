@@ -131,19 +131,21 @@ app.post('/login', async (req, res) => {
   try {
     // Find the user by email
     const logUser = await User.findOne({ 'email': req_email });
-
-    // Check if the user exists
     if (!logUser) {
       return res.json({ 'alert': 'Incorrect user' });
     }
-
-    // Compare the provided password with the stored password
-    if (req_pass !== logUser.password) {
-      return res.json({ 'alert': 'Incorrect password' });
+    const match_pass = await bcrypt.compare(req_pass, logUser.password)
+    if(!match_pass) {
+      return res.json({ 'alert': "incorrect password"})
+    }else{
+      let data = logUser.data()
+      return res.json({
+        name: data.nameUser,
+        email: data.email
+      })
     }
-
     // Successfully logged in
-    return res.json({ 'message': 'Login successful', 'user': logUser });
+    //return res.json({ 'message': 'Login successful', 'user': logUser });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ 'alert': 'Fail checking user' });
