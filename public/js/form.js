@@ -16,12 +16,12 @@ const number = document.querySelector('#number');
  
 submitBtn.addEventListener('click', () => {
     if(nameUser != null){
-        if(nameUser.value.length <1){
-            showAlert('name must be 3 letters long');
+        if(nameUser.value.length < 2){
+            showAlert('name must be 2 letters long');
         } else if(!email.value.length){
             showAlert('enter your email');
-        } else if(password.value.length < 1){
-            showAlert('password should be 8 letters long');
+        } else if(password.value.length < 6){
+            showAlert('password should be 6 letters long');
         } else if(!number.value.length){
             showAlert('enter your phone number');
         } else if(!Number(number.value) || number.value.length < 1){
@@ -36,7 +36,7 @@ submitBtn.addEventListener('click', () => {
             })
         }
     } else {
-        if(email.value.length < 1|| password.value.length < 1){
+        if(email.value.length < 1|| password.value.length < 6){
             showAlert('fill all the inputs')
         } else {
             loader.style.display = 'block'

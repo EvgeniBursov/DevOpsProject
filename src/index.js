@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import User from '../models/user.js'
 import path from 'path'
+import bcrypt from 'bcrypt'
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -53,7 +54,34 @@ app.post('/signup', async (req, res) => {
   var req_pass = req.body.password;
   var req_number = req.body.number;
 
+  try{
+    const user = await User.findOne({'email': req_email})
+    if(user != null){
+      return res.json({ 'alert': 'the user is exist' });
+    }
+}catch(err){
+  return (res,err)
+}
+
+try{
+  const salt = await bcrypt.genSalt(10)
+  const encryptedPwd = await bcrypt.hash(req_pass,salt)
+
   const data = new User({
+    name: req_name,
+    email: req_email,
+    password: encryptedPwd,
+    nubmer: req_number
+  })
+  const newUser = await data.save()
+  res.json(data)
+}catch(err){
+  return (res,err)
+}
+
+
+
+  /*const data = new User({
     name: req_name,
     email: req_email,
     password: req_pass,
@@ -62,7 +90,7 @@ app.post('/signup', async (req, res) => {
   const newUser = await data.save()
   console.log({newUser})
   res.json(data)
-})
+})*/
 
 
 
