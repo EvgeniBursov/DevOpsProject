@@ -36,11 +36,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+  res.sendFile(path.join(__dirname, '../public/pages', 'index.html'));
 });
 
 app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'signup.html'));
+  res.sendFile(path.join(__dirname, '../public/pages', 'signup.html'));
 })
 
 app.post('/signup', async (req, res) => {
@@ -63,7 +63,7 @@ app.post('/signup', async (req, res) => {
 
 
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'login.html'));
+  res.sendFile(path.join(__dirname, '../public/pages', 'login.html'));
 });
 
 /*app.post('/login', async (req, res) => {
@@ -119,7 +119,7 @@ app.post('/login', async (req, res) => {
 
 
 app.get('/404', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', '404.html'));
+  res.sendFile(path.join(__dirname, '../public/pages', '404.html'));
 });
 
 app.use((req, res) => {
