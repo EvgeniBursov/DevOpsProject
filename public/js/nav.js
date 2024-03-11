@@ -50,11 +50,11 @@ registerBtn.addEventListener('click', () => {
 })
 
 loginBtn.addEventListener('click', () => {
-    window.location.href = 'login.html';
+    window.location.href = '../pages/login.html';
 })
 
 searchBtn.addEventListener('click', () => {
-    window.location.href = 'search.html'
+    window.location.href = '../pages/search.html'
 })
 
 
