@@ -138,11 +138,8 @@ app.post('/login', async (req, res) => {
     if(!match_pass) {
       return res.json({ 'alert': "incorrect password"})
     }else{
-      let data = logUser.data()
-      return res.json({
-        name: data.nameUser,
-        email: data.email
-      })
+      const userData = logUser.data()
+      return res.json(userData)
     }
     // Successfully logged in
     //return res.json({ 'message': 'Login successful', 'user': logUser });
