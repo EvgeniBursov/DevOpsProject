@@ -46,7 +46,7 @@ userImageButton.addEventListener('click', () => {
 })
 
 registerBtn.addEventListener('click', () => {
-    window.location.href = 'signup.html';
+    window.location.href = '../pages/signup.html';
 })
 
 loginBtn.addEventListener('click', () => {
@@ -68,6 +68,6 @@ window.onload = () =>{
             location.reload()
         })
     } else {
-        popuptext.innerHTML = 'Hello user'
+        popuptext.innerHTML = 'Hello user '
     }
 } 
