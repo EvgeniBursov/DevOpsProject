@@ -73,11 +73,13 @@ try{
     password: encryptedPwd,
     nubmer: req_number
   })
+  // eslint-disable-next-line no-unused-vars
   const newUser = await data.save()
   res.json(data)
 }catch(err){
   return (res,err)
 }
+})
 
 
 
