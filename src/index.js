@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 })*/
 
 app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'pages', 'signup.html'));
+  res.sendFile(path.join(__dirname, '../public', 'pages', 'signup.html'));
 })
 
 app.post('/signup', async (req, res) => {
