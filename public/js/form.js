@@ -1,12 +1,4 @@
-/*window.onload = () => {
-    if(sessionStorage.user){
-        user = JSON.parse(sessionStorage.user)
-        
-    }
-}*/
-
 const loader = document.querySelector('.loader');
-// select inputs 
 const submitBtn = document.querySelector('.submit-btn');
 const nameUser = document.querySelector('#name');
 const email = document.querySelector('#email');
@@ -36,7 +28,7 @@ submitBtn.addEventListener('click', () => {
             })
         }
     } else {
-        if(email.value.length < 1|| password.value.length < 6){
+        if(email.value.length < 1|| password.value.length < 1){
             showAlert('fill all the inputs')
         } else {
             loader.style.display = 'block'
@@ -48,7 +40,6 @@ submitBtn.addEventListener('click', () => {
     }
 })
 
-
 const showAlert = (msg) => {
     let alertBox = document.querySelector('.alert-box');
     let alertMsg = document.querySelector('.alert-msg');
@@ -58,17 +49,6 @@ const showAlert = (msg) => {
         alertBox.classList.remove('show');
     }, 1500);
 }
-
-/*const sendData = (path, data) => {
-    fetch(path, {
-        method: 'post',
-        headers: new Headers({'Content-Type': 'application/json'}),
-        body: JSON.stringify(data)
-    }).then((res) => res.json())
-    .then(response => {
-        processData(response);
-    })
-}*/
 
 const sendData = (path, data) => {
     console.log(path, data);  
@@ -91,8 +71,6 @@ const sendData = (path, data) => {
     });
 }
 
-
-
 const processData = (data) => {
     loader.style.display = null;
     if(data.alert){
@@ -102,13 +80,3 @@ const processData = (data) => {
         location.replace('/');
     }
 }
-
-/*const response = await fetch(url, {
-    method: "POST", 
-    mode: "cors", 
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data), 
-  })*/
-

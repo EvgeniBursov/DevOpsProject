@@ -39,6 +39,9 @@ jobs:
     #- name: Run tests
     #  run: npm test
 
+    #- name: Run Automation tests
+    #  run: npm test
+
     - name: Build and deploy
       run: |
         # Add any additional build or deploy steps here
