@@ -4,21 +4,21 @@ const createNav = () => {
 
     nav.innerHTML = `
         <div class="nav">
-            <img src="img/dark-logo.png" class="brand-logo" alt="">
+            <img src="../img/dark-logo.png" class="brand-logo" alt="">
             <div class="nav-items">
                 <div class="search">
                     <input type="text" class="search-box" placeholder="search brand, product">
-                    <button class="search-btn">search</button>
+                    <button class="search-btn" id="search-btn">search</button>
                 </div>
                 <a>
-                <img src="img/user.png" id="user-img" alt="">
+                <img src="../img/user.png" id="user-img" alt="">
                 <div class="login-logout-popup hide">
                     <p class="account-info">Log in as, name</p>
                     <button class="reg_btn" id="user-btn" >Register</button>
                     <button class="btn" id="user-btn">Log In</button>
                 </div>
                 </a>
-                <a href="#"><img src="img/cart.png" alt=""></a>
+                <a href="#"><img src="../img/cart.png" alt=""></a>
             </div>
         </div>
         <ul class="links-container">
@@ -39,15 +39,36 @@ const popuptext = document.querySelector('.account-info');
 const registerBtn = document.querySelector('.reg_btn');
 const loginBtn = document.querySelector('.btn');
 const actionBtn = document.querySelector('#user-btn');
+const searchBtn = document.querySelector('.search-btn')
 
 userImageButton.addEventListener('click', () => {
     userPop.classList.toggle('hide')
 })
 
 registerBtn.addEventListener('click', () => {
-    window.location.href = 'signup.html';
+    window.location.href = '../pages/signup.html';
 })
 
 loginBtn.addEventListener('click', () => {
-    window.location.href = 'login.html';
+    window.location.href = '../pages/login.html';
 })
+
+searchBtn.addEventListener('click', () => {
+    window.location.href = '../pages/search.html'
+})
+
+
+window.onload = () =>{
+    let user = JSON.parse(sessionStorage.user || null)
+    if(user != null){
+        popuptext.innerHTML = `log in as, ${user.name}`
+        actionBtn.innerHTML = 'log-out'
+        loginBtn.style.display = 'none'
+        actionBtn.addEventListener('click', () => {
+            sessionStorage.clear()
+            location.reload()
+        })
+    } else {
+        popuptext.innerHTML = 'Hello guest '
+    }
+} 
