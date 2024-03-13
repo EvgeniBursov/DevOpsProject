@@ -63,11 +63,12 @@ window.onload = () =>{
     if(user != null){
         popuptext.innerHTML = `log in as, ${user.name}`
         actionBtn.innerHTML = 'log-out'
+        loginBtn.style.display = 'none'
         actionBtn.addEventListener('click', () => {
             sessionStorage.clear()
             location.reload()
         })
     } else {
-        popuptext.innerHTML = 'Hello user '
+        popuptext.innerHTML = 'Hello guest '
     }
 } 
