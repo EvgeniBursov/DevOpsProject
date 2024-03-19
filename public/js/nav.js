@@ -23,11 +23,13 @@ const createNav = () => {
         </div>
         <ul class="links-container">
         <li class="link-item"><a href="#" class="link">home</a></li>
+        <li class="link-item"><a href="#" class="link" id="pets-link">pets</a></li>
         <li class="link-item"><a href="#" class="link">clothing</a></li>
-        <li class="link-item"><a href="#" class="link">pets</a></li>
         <li class="link-item"><a href="#" class="link">electronics</a></li>
         <li class="link-item"><a href="#" class="link">accessories</a></li>
     </ul>
+    
+
     `;
 }
 
@@ -40,6 +42,22 @@ const registerBtn = document.querySelector('.reg_btn');
 const loginBtn = document.querySelector('.btn');
 const actionBtn = document.querySelector('#user-btn');
 const searchBtn = document.querySelector('.search-btn')
+
+
+    //petsLink.addEventListener('mouseout', hidePetPicture);
+
+/*function showPetPicture() {
+    // Replace 'pet-image.jpg' with the path to your small picture
+    nav.innerHTML += `<img src="../img/pet-image.jpg" class="pet-image" alt="Pet Image">`;
+}
+
+function hidePetPicture() {
+    const petImage = document.querySelector('.pet-image');
+    if (petImage) {
+        petImage.remove();
+    }
+}*/
+
 
 userImageButton.addEventListener('click', () => {
     userPop.classList.toggle('hide')
