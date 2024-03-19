@@ -20,7 +20,7 @@ async function registerTest() {
     await driver.findElement(By.id('name')).sendKeys('Rita');
   
     await driver.wait(until.elementLocated(By.id('email')), 5000);
-    await driver.findElement(By.id('email')).sendKeys('rita1234@gmail.com');
+    await driver.findElement(By.id('email')).sendKeys('riiita12378@gmail.com');
   
     await driver.wait(until.elementLocated(By.id('password')), 5000);
     await driver.findElement(By.id('password')).sendKeys('123456');
