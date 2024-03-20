@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoppin Cart</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/nav.css">
+</head>
+
+
+<body>
+    <nav class="navbar"></nav>
+
+
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve product data from sessionStorage
+            let product = JSON.parse(sessionStorage.getItem('cartProduct'));
+
+            // Display product details
+            let cartProductDetails = document.getElementById('cartProductDetails');
+            if (product) {
+                cartProductDetails.innerHTML = `
+                    <h2>${product.brand}</h2>
+                    <p>${product.shortDescription}</p>
+                    <p>Price: ${product.price}</p>
+                    <p>Actual Price: ${product.actualPrice}</p>
+                `;
+            } else {
+                cartProductDetails.innerHTML = '<p>No product added to cart</p>';
+            }
+        });
+    </script>
+
+    <footer></footer>
+    
+    <script src="../js/nav.js"></script>
+    <script src="../js/home.js"></script>
+    <script src="../js/footer.js"></script>
+</body>

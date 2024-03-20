@@ -18,7 +18,7 @@ const createNav = () => {
                     <button class="btn" id="user-btn">Log In</button>
                 </div>
                 </a>
-                <a href="#"><img src="../img/cart.png" alt=""></a>
+                <a href="../pages/shoppingCart.html"><img src="../img/cart.png" id="cart-btn" alt=""></a>
             </div>
         </div>
         <ul class="links-container">
@@ -43,20 +43,6 @@ const loginBtn = document.querySelector('.btn');
 const actionBtn = document.querySelector('#user-btn');
 const searchBtn = document.querySelector('.search-btn')
 
-
-    //petsLink.addEventListener('mouseout', hidePetPicture);
-
-/*function showPetPicture() {
-    // Replace 'pet-image.jpg' with the path to your small picture
-    nav.innerHTML += `<img src="../img/pet-image.jpg" class="pet-image" alt="Pet Image">`;
-}
-
-function hidePetPicture() {
-    const petImage = document.querySelector('.pet-image');
-    if (petImage) {
-        petImage.remove();
-    }
-}*/
 
 
 userImageButton.addEventListener('click', () => {
