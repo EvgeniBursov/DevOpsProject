@@ -6,7 +6,11 @@ import { assert } from 'chai'
 async function fullCoverTest() {
     let driver
     try{
-        driver = await new Builder().forBrowser('chrome').build();
+        const hubUrl = 'http://localhost:4444/wd/hub';
+        
+        driver = await new Builder().usingServer(hubUrl)
+        .forBrowser('chrome').build();
+
         await driver.get('https://devopsproject-v74y.onrender.com/');
         //check the name of page
         let title = await driver.getTitle();
