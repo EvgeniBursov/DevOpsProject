@@ -191,8 +191,8 @@
 
 
     function checkUserLoggedIn() {
-    const userData = sessionStorage.getItem('user');
-    console.log(getItem('user'))
+    const userData = sessionStorage.user;
+    console.log(userData)
     return userData !== null; // Return true if user data exists, indicating user is logged in
 }
 </script>
