@@ -64,6 +64,9 @@ searchBtn.addEventListener('click', () => {
 
 window.onload = () =>{
     let user = JSON.parse(sessionStorage.user || null)
+    console.log(JSON.parse(sessionStorage.user))
+    console.log(sessionStorage.user)
+
     if(user != null){
         popuptext.innerHTML = `log in as, ${user.name}`
         actionBtn.innerHTML = 'log-out'
