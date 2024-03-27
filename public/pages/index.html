@@ -161,38 +161,40 @@
 
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
+
+            const isLoggedIn = checkUserLoggedIn();
             const productCard = button.closest('.product-card');
             const brand = productCard.querySelector('.product-brand').innerText;
             const shortDescription = productCard.querySelector('.product-short-des').innerText;
             const price = productCard.querySelector('.price').innerText;
             const actualPrice = productCard.querySelector('.actual-price').innerText;
+            const productImage = document.querySelector('.product-thumb');
 
-            checkUserLoggedIn()
-            // Construct a JSON object for the current product
-            const product = {
-                id: index + 1, // Assign a unique ID to each product
-                brand: brand,
-                shortDescription: shortDescription,
-                price: price,
-                actualPrice: actualPrice
-            };
-
-            // Push the product object to the productsData array
-            productsData.push(product);
-
-            // Convert productsData array to JSON string
-            const productsJSON = JSON.stringify(productsData);
-            console.log(productsJSON);
-
-            // Navigate to shopping cart page
-            //window.location.href = '../pages/shoppingCart.html';
+            if(isLoggedIn){
+                const product = {
+                    product_name: brand,
+                    user_id: sessionStorage.user.__id,
+                    user_email: sessionStorage.user.email,
+                    product_id: index + 1,
+                    product_img: productImage,
+                    //shortDescription: shortDescription,
+                    //price: price,
+                    //actualPrice: actualPrice,
+                    //img: productImage,
+                };
+                productsData.push(product);
+                const productsJSON = JSON.stringify(productsData);
+                console.log(productsJSON);
+            }else{
+                return res.json({ 'alert': 'Please Login in system' });
+            }
+            
         });
     });
 
 
     function checkUserLoggedIn() {
     const userData = sessionStorage.user;
-    console.log(userData)
     return userData !== null; // Return true if user data exists, indicating user is logged in
 }
 </script>
