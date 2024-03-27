@@ -110,6 +110,17 @@ app.post('/login', async (req, res) => {
   }
 });
 
+app.get('/cart', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/pages', 'shoppingCart.html'));
+});
+
+/*app.post('/cart', async (req, res) => {
+
+
+})*/
+
+
+
 app.get('/add-product', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/pages', 'addProduct.html'));
 });
