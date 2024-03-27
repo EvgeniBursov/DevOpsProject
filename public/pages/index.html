@@ -167,6 +167,7 @@
             const price = productCard.querySelector('.price').innerText;
             const actualPrice = productCard.querySelector('.actual-price').innerText;
 
+            checkUserLoggedIn()
             // Construct a JSON object for the current product
             const product = {
                 id: index + 1, // Assign a unique ID to each product
@@ -184,9 +185,16 @@
             console.log(productsJSON);
 
             // Navigate to shopping cart page
-            // window.location.href = '../pages/shoppingCart.html';
+            //window.location.href = '../pages/shoppingCart.html';
         });
     });
+
+
+    function checkUserLoggedIn() {
+    const userData = sessionStorage.getItem('user');
+    console.log(getItem('user'))
+    return userData !== null; // Return true if user data exists, indicating user is logged in
+}
 </script>
 
 
