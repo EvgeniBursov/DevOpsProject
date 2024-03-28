@@ -180,6 +180,8 @@
                 };
                 console.log(product)
                 productsData.push(product);
+                updateCartPopup();
+
                 const productsJSON = JSON.stringify(productsData);
                 console.log(productsJSON);
             }else{
@@ -199,6 +201,41 @@ function checkUserLoggedIn() {
         return res.json({ 'alert': 'Please Login in system' });
     }
 }
+
+
+function updateCartPopup() {
+    let cartPopup = document.querySelector('.cart-popup');
+    let cartItemsList = document.querySelector('.cart-items-list');
+    let cartTotal = document.getElementById('cart-total');
+    // Clear previous cart items
+    cartItemsList.innerHTML = '';
+
+    // Populate cart items
+    let total = 0;
+    productsData.forEach(product => {
+        const itemHTML = `
+            <li>
+                <img src="${product.product_img}" alt="${product.product_name}">
+                <div>
+                    <h4>${product.product_name}</h4>
+                    <p>${product.price}</p>
+                </div>
+            </li>
+        `;
+        cartItemsList.insertAdjacentHTML('beforeend', itemHTML);
+
+        // Calculate total price
+        total += product.price;
+    });
+
+    // Update total price
+    cartTotal.textContent = total.toFixed(2); // Format total to two decimal places
+}
+
+
+
+
+
 
 </script>
 
