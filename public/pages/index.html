@@ -180,7 +180,8 @@
                 };
                 console.log(product)
                 productsData.push(product);
-                updateCartPopup();
+
+                updateCartPopup(product_name,actualPrice,product_id);
 
                 const productsJSON = JSON.stringify(productsData);
                 console.log(productsJSON);
@@ -203,7 +204,7 @@ function checkUserLoggedIn() {
 }
 
 
-function updateCartPopup() {
+function updateCartPopup(name,price,productID) {
     let cartPopup = document.querySelector('.cart-popup');
     let cartItemsList = document.querySelector('.cart-items-list');
     let cartTotal = document.getElementById('cart-total');
@@ -215,10 +216,9 @@ function updateCartPopup() {
     productsData.forEach(product => {
         const itemHTML = `
             <li>
-                <img src="${product.product_img}" alt="${product.product_name}">
                 <div>
-                    <h4>${product.product_name}</h4>
-                    <p>${product.price}</p>
+                    <h4>${name},${productID}</h4>
+                    <p>${price}</p>
                 </div>
             </li>
         `;
