@@ -18,8 +18,18 @@ const createNav = () => {
                     <button class="btn" id="user-btn">Log In</button>
                 </div>
                 </a>
-                <a href="../pages/shoppingCart.html"><img src="../img/cart.png" id="cart-btn" alt=""></a>
+
+                <a>
+                <img src="../img/cart.png" id="cart-img" alt="">
                 <span>0</span>
+                <div class="cart-popup hide">
+                    <p class="account-info">Your Order</p>
+                    <ul class="cart-items-list"></ul>
+                    <p class="total">Total: $</p>
+                    <button class="buy_btn" id="buy-btn" >Buy</button>
+                </div>
+                </a>
+
 
                 </div>            
             </div>
@@ -43,8 +53,12 @@ const registerBtn = document.querySelector('.reg_btn');
 const loginBtn = document.querySelector('.btn');
 const actionBtn = document.querySelector('#user-btn');
 const searchBtn = document.querySelector('.search-btn')
+const cartPop = document.querySelector('.cart-popup');
+const cartImg = document.querySelector('#cart-img')
 
-
+cartImg.addEventListener('click', () => {
+    cartPop.classList.toggle('hide')
+})
 
 userImageButton.addEventListener('click', () => {
     userPop.classList.toggle('hide')
@@ -78,3 +92,25 @@ window.onload = () =>{
         popuptext.innerHTML = 'Hello guest '
     }
 } 
+
+
+window.onload = () =>{
+    let user = JSON.parse(sessionStorage.user || null)
+
+    if(user != null){
+        popuptext.innerHTML = `log in as, ${user.name}`
+        actionBtn.innerHTML = 'log-out'
+        loginBtn.style.display = 'none'
+        actionBtn.addEventListener('click', () => {
+            sessionStorage.clear()
+            location.reload()
+        })
+    } else {
+        popuptext.innerHTML = 'Hello guest '
+    }
+} 
+
+/*
+                <a href="../pages/shoppingCart.html"><img src="../img/cart.png" id="cart-btn" alt=""></a>
+                <span>0</span>
+*/ 
