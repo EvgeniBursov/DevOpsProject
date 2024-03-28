@@ -173,8 +173,8 @@
             if(isLoggedIn){
                 const product = {
                     product_name: brand,
-                    user_id: sessionStorage.user.__id,
-                    user_email: sessionStorage.user.email,
+                    user_id: userData.__id,
+                    user_email: userData.email,
                     product_id: index + 1,
                     product_img: productImage,
                     //shortDescription: shortDescription,
@@ -195,6 +195,7 @@
 
     function checkUserLoggedIn() {
     const userData = sessionStorage.user;
+    console.log(userData)
     return userData !== null; // Return true if user data exists, indicating user is logged in
 }
 </script>
