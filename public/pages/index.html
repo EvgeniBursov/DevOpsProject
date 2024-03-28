@@ -170,8 +170,6 @@
             const actualPrice = productCard.querySelector('.actual-price').innerText;
             const productImage = document.querySelector('.product-thumb');
 
-            console.log(userData)
-
             if(userData){
                 const product = {
                     product_name: brand,
@@ -179,10 +177,6 @@
                     user_email: userData.email,
                     product_id: index + 1,
                     product_img: productImage,
-                    //shortDescription: shortDescription,
-                    //price: price,
-                    //actualPrice: actualPrice,
-                    //img: productImage,
                 };
                 console.log(product)
                 productsData.push(product);
@@ -195,18 +189,14 @@
         });
     });
 
-
-    /*function checkUserLoggedIn() {
-    const userData = sessionStorage.user;
-    console.log(userData)
-    return userData
-}*/
+    
 function checkUserLoggedIn() {
     const userDataString = sessionStorage.getItem('user');
     if(userDataString) {
         return JSON.parse(userDataString);
     } else {
-        return null;
+        //return null;
+        return res.json({ 'alert': 'Please Login in system' });
     }
 }
 

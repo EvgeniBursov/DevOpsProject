@@ -19,17 +19,18 @@ const createNav = () => {
                 </div>
                 </a>
                 <a href="../pages/shoppingCart.html"><img src="../img/cart.png" id="cart-btn" alt=""></a>
+                <span>0</span>
+
+                </div>            
             </div>
         </div>
         <ul class="links-container">
-        <li class="link-item"><a href="#" class="link">home</a></li>
+        <li class="link-item"><a href='../pages/index.html' class="link">home</a></li>
         <li class="link-item"><a href="#" class="link" id="pets-link">pets</a></li>
         <li class="link-item"><a href="#" class="link">clothing</a></li>
         <li class="link-item"><a href="#" class="link">electronics</a></li>
         <li class="link-item"><a href="#" class="link">accessories</a></li>
     </ul>
-    
-
     `;
 }
 
