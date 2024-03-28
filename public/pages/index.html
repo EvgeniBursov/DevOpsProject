@@ -173,8 +173,8 @@
             if(isLoggedIn){
                 const product = {
                     product_name: brand,
-                    user_id: userData.__id,
-                    user_email: userData.email,
+                    user_id: isLoggedIn.__id,
+                    user_email: isLoggedIn.email,
                     product_id: index + 1,
                     product_img: productImage,
                     //shortDescription: shortDescription,
