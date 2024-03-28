@@ -175,8 +175,8 @@
             if(userData){
                 const product = {
                     product_name: brand,
-                    user_id: userData.body._id,
-                    user_email: userData.body.email,
+                    user_id: userData._id,
+                    user_email: userData.email,
                     product_id: index + 1,
                     product_img: productImage,
                     //shortDescription: shortDescription,
