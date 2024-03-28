@@ -158,6 +158,7 @@
 <script>
     let productsData = [];
     let buttons = document.querySelectorAll('.card-btn');
+    const userData = sessionStorage.user;
 
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
@@ -173,8 +174,8 @@
             if(isLoggedIn){
                 const product = {
                     product_name: brand,
-                    user_id: isLoggedIn.__id,
-                    user_email: isLoggedIn.email,
+                    user_id: userData.__id,
+                    user_email: userData.email,
                     product_id: index + 1,
                     product_img: productImage,
                     //shortDescription: shortDescription,
