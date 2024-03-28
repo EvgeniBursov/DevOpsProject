@@ -158,12 +158,11 @@
 <script>
     let productsData = [];
     let buttons = document.querySelectorAll('.card-btn');
-    const userData = sessionStorage.user;
 
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
 
-            const isLoggedIn = checkUserLoggedIn();
+            const userData = checkUserLoggedIn();
             const productCard = button.closest('.product-card');
             const brand = productCard.querySelector('.product-brand').innerText;
             const shortDescription = productCard.querySelector('.product-short-des').innerText;
@@ -171,7 +170,9 @@
             const actualPrice = productCard.querySelector('.actual-price').innerText;
             const productImage = document.querySelector('.product-thumb');
 
-            if(isLoggedIn){
+            console.log(userData)
+
+            if(userData){
                 const product = {
                     product_name: brand,
                     user_id: userData.__id,
@@ -197,7 +198,7 @@
     function checkUserLoggedIn() {
     const userData = sessionStorage.user;
     console.log(userData)
-    return userData !== null; // Return true if user data exists, indicating user is logged in
+    return userData
 }
 </script>
 
