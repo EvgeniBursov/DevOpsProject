@@ -175,8 +175,8 @@
             if(userData){
                 const product = {
                     product_name: brand,
-                    user_id: userData.__id,
-                    user_email: userData.email,
+                    user_id: userData.body.__id,
+                    user_email: userData.body.email,
                     product_id: index + 1,
                     product_img: productImage,
                     //shortDescription: shortDescription,
@@ -184,6 +184,7 @@
                     //actualPrice: actualPrice,
                     //img: productImage,
                 };
+                console.log(product)
                 productsData.push(product);
                 const productsJSON = JSON.stringify(productsData);
                 console.log(productsJSON);
