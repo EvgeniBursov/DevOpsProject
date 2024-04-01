@@ -234,8 +234,7 @@ function updateCartPopup() {
                 <div>
                     <p><strong>${product.product_name} - ${product.product_des}</strong></p>
                     <p>Price: ${product.product_price}$</p>
-                    <p>Count: ${product.count}</p>
-                    <p>Count: <span id="count">${product.count}</span> <button onclick="incrementCount()">+</button> <button onclick="decrementCount()">-</button></p>
+                    <p>Count: <span id="count">${product.product_count}</span> <button class="plusBtn" onclick="incrementCount()">+</button> <button class="minusBtn" onclick="decrementCount()">-</button></p>
                 </div>
             </li>
         `;
