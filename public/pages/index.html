@@ -29,7 +29,11 @@
                 <div class="product-image">
                     <span class="discount-tag">50% off</span>
                     <img src="../img/card1.png" class="product-thumb" alt="">
-                    <button class="card-btn" id="card-btn1">add to card</button>
+                    <!--
+
+                        <button class="card-btn" id="card-btn1">add to card</button>
+                    -->
+                    <button class="card-btn" onclick="addToCart(this, '${productImage.src}')">add to card</button>
                 </div>
                 <div class="product-info">
                     <h2 class="product-brand" id="brand a">brand a</h2>
@@ -168,7 +172,7 @@
             const shortDescription = productCard.querySelector('.product-short-des').innerText;
             const price = productCard.querySelector('.price').innerText;
             const actualPrice = productCard.querySelector('.actual-price').innerText;
-            const productImage = document.querySelector('.product-thumb');
+            //const productImage = document.querySelector('.product-thumb');
 
             if(userData){
                 const product = {
@@ -176,7 +180,7 @@
                     user_id: userData._id,
                     user_email: userData.email,
                     product_id: index + 1,
-                    product_img: productImage,
+                    product_img: productImageSrc,
                 };
                 console.log(product)
                 productsData.push(product);
