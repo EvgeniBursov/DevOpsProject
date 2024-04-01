@@ -16,7 +16,13 @@ const UserSchema = new mongoose.Schema({
     nubmer:{
         type: String,
         required: true
-    }
+    },
+    products:[{
+        producct_id: {
+            type: String,
+            required: false
+        }
+    }]
 }, { timestamps: true });
 
 const User = mongoose.model('User', UserSchema);

@@ -1,6 +1,11 @@
-.four-0-four-image{
+.four-0-four-image {
     display: block;
     margin: 60px auto;
+    max-width: 500px;
+    width: 100%; /* Ensure the image takes up the full width */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 400px; /* Set a maximum height for the rectangular image */
+    object-fit: cover; /* Ensure the image covers the container */
 }
 
 .four-0-four-msg{

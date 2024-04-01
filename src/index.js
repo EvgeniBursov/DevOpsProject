@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import User from '../models/user.js'
+import Product from '../models/products.js'
 import path from 'path'
 import bcrypt from 'bcrypt'
 
@@ -114,10 +115,21 @@ app.get('/cart', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/pages', 'shoppingCart.html'));
 });
 
-/*app.post('/cart', async (req, res) => {
+app.get('/end', async (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/pages', 'thankPage.html'));
+})
 
+app.post('/end', async (req, res) => {
+  var req_email = req.body.email;
+  const updateUser = await User.findOne({ 'email': req_email });
+  if (!updateUser) {
+    return res.json({ 'alert': 'User not find' });
+  }else{
+    console.log(req)
+    updateUser.products = req.body
 
-})*/
+  }
+})
 
 
 
