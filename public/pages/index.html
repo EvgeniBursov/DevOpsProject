@@ -179,7 +179,7 @@
                     product_id: index + 1,
                     product_des: shortDescription,
                     product_price: actualPrice,
-                    product_count: "0",
+                    product_count: "1",
                     //product_img: productImageSrc,
                 };
                 console.log(product)
@@ -234,8 +234,7 @@ function updateCartPopup() {
                 <div>
                     <p><strong>${product.product_name} - ${product.product_des}</strong></p>
                     <p>Price: ${product.product_price}$</p>
-                    <p>Count: <span id="count">${product.product_count}</span> <button class="plusBtn" onclick="incrementCount()">+</button> <button class="minusBtn" onclick="decrementCount()">-</button></p>
-                </div>
+                    <p>Count: <span id="count_${index}">${product.product_count}</span> <button class="plusBtn" onclick="incrementCount(${index})">+</button> <button class="minusBtn" onclick="decrementCount(${index})">-</button></p>                </div>
             </li>
         `;
 
@@ -250,27 +249,30 @@ function updateCartPopup() {
 }
 
 
-// Function to increment count
-function incrementCount() {
+// Modify the incrementCount and decrementCount functions to accept the index of the product
+function incrementCount(index) {
     // Get the count element
-    let countElement = document.getElementById('count');
+    let countElement = document.getElementById(`count_${index}`);
     // Increment the count
     let count = parseInt(countElement.textContent);
     count++;
     // Update the count element
     countElement.textContent = count;
+    // Update the count in the productsData array
+    productsData[index].product_count = count.toString();
 }
 
-// Function to decrement count
-function decrementCount() {
+function decrementCount(index) {
     // Get the count element
-    let countElement = document.getElementById('count');
+    let countElement = document.getElementById(`count_${index}`);
     // Decrement the count
     let count = parseInt(countElement.textContent);
     if (count > 0) {
         count--;
         // Update the count element
         countElement.textContent = count;
+        // Update the count in the productsData array
+        productsData[index].product_count = count.toString();
     }
 }
 
