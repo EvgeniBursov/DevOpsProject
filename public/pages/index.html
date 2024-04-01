@@ -29,11 +29,7 @@
                 <div class="product-image">
                     <span class="discount-tag">50% off</span>
                     <img src="../img/card1.png" class="product-thumb" alt="">
-                    <!--
-
-                        <button class="card-btn" id="card-btn1">add to card</button>
-                    -->
-                    <button class="card-btn" onclick="addToCart(this, '${productImage.src}')">add to card</button>
+                    <button class="card-btn" id="card-btn1">add to card</button>
                 </div>
                 <div class="product-info">
                     <h2 class="product-brand" id="brand a">brand a</h2>
@@ -160,46 +156,44 @@
     <script src="../js/footer.js"></script>
 </body>
 <script>
-    function addToCart(button,productImageSrc)
-    {
-        let buttons = document.querySelectorAll('.card-btn');
+    let buttons = document.querySelectorAll('.card-btn');
 
-        let productsData = [];
-    
-        buttons.forEach((button, index) => {
-            button.addEventListener('click', () => {
-    
-                const userData = checkUserLoggedIn();
-                const productCard = button.closest('.product-card');
-                const brand = productCard.querySelector('.product-brand').innerText;
-                const shortDescription = productCard.querySelector('.product-short-des').innerText;
-                const price = productCard.querySelector('.price').innerText;
-                const actualPrice = productCard.querySelector('.actual-price').innerText;
-                //const productImage = document.querySelector('.product-thumb');
-    
-                if(userData){
-                    const product = {
-                        product_name: brand,
-                        user_id: userData._id,
-                        user_email: userData.email,
-                        product_id: index + 1,
-                        product_img: productImageSrc,
-                    };
-                    console.log(product)
-                    productsData.push(product);
-                    
-                    updateCartPopup();
-    
-                    const productsJSON = JSON.stringify(productsData);
-                    console.log(productsJSON);
-                }else{
-                    //return res.json({ 'alert': 'Please Login in system' });
-                    alert("Please Login in system")
-                }
+    let productsData = [];
+
+    buttons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+
+            const userData = checkUserLoggedIn();
+            const productCard = button.closest('.product-card');
+            const brand = productCard.querySelector('.product-brand').innerText;
+            const shortDescription = productCard.querySelector('.product-short-des').innerText;
+            const price = productCard.querySelector('.price').innerText;
+            const actualPrice = productCard.querySelector('.actual-price').innerText;
+            //const productImage = document.querySelector('.product-thumb');
+
+            if(userData){
+                const product = {
+                    product_name: brand,
+                    user_id: userData._id,
+                    user_email: userData.email,
+                    product_id: index + 1,
+                    product_des: userData.product-short-des
+                    //product_img: productImageSrc,
+                };
+                console.log(product)
+                productsData.push(product);
                 
-            });
+                updateCartPopup();
+
+                const productsJSON = JSON.stringify(productsData);
+                console.log(productsJSON);
+            }else{
+                //return res.json({ 'alert': 'Please Login in system' });
+                alert("Please Login in system")
+            }
+            
         });
-    }
+    });
 
     
 function checkUserLoggedIn() {
@@ -224,15 +218,23 @@ function updateCartPopup() {
     // Populate cart items
     let total = 0;
     productsData.forEach(product => {
-        const itemHTML = `
+        /*const itemHTML = `
             <li>
-                <img src="${product.product_img}" alt="${product.product_name}">
+                <img src="${product.product_des}" alt="${product.product_name}">
                 <div>
                     <h4>${product.product_name},${product.product_id}</h4>
                     <p>${2}</p>
                 </div>
             </li>
+        `;*/
+        const itemHTML = `
+            <li>
+                <div>
+                    <h4>${product.product_name} - ${product.product_des} ${product.product_price}$</h4>
+                </div>
+            </li>
         `;
+
         cartItemsList.insertAdjacentHTML('beforeend', itemHTML);
 
         // Calculate total price
