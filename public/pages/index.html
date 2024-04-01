@@ -231,9 +231,10 @@ function updateCartPopup() {
         const itemHTML = `
             <li>
                 <div>
-                    <p><strong>${product.product_name}</strong> - ${product.product_des}</p>
+                    <p><strong>${product.product_name} - ${product.product_des}</strong></p>
                     <p>Price: ${product.product_price}$</p>
                     <p>Count: ${product.count}</p>
+                    <p>Count: <span id="count">${product.count}</span> <button onclick="incrementCount()">+</button> <button onclick="decrementCount()">-</button></p>
                 </div>
             </li>
         `;
@@ -248,6 +249,30 @@ function updateCartPopup() {
     cartTotal.textContent = total.toFixed(2); // Format total to two decimal places
 }
 
+
+// Function to increment count
+function incrementCount() {
+    // Get the count element
+    let countElement = document.getElementById('count');
+    // Increment the count
+    let count = parseInt(countElement.textContent);
+    count++;
+    // Update the count element
+    countElement.textContent = count;
+}
+
+// Function to decrement count
+function decrementCount() {
+    // Get the count element
+    let countElement = document.getElementById('count');
+    // Decrement the count
+    let count = parseInt(countElement.textContent);
+    if (count > 0) {
+        count--;
+        // Update the count element
+        countElement.textContent = count;
+    }
+}
 
 </script>
 
