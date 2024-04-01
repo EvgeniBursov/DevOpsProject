@@ -177,7 +177,8 @@
                     user_id: userData._id,
                     user_email: userData.email,
                     product_id: index + 1,
-                    product_des: shortDescription
+                    product_des: shortDescription,
+                    product_price: actualPrice,
                     //product_img: productImageSrc,
                 };
                 console.log(product)
@@ -230,7 +231,9 @@ function updateCartPopup() {
         const itemHTML = `
             <li>
                 <div>
-                    <h4>${product.product_name} - ${product.product_des} ${product.product_price}$</h4>
+                    <p><strong>${product.product_name}</strong> - ${product.product_des}</p>
+                    <p>Price: ${product.product_price}$</p>
+                    <p>Count: ${product.count}</p>
                 </div>
             </li>
         `;
