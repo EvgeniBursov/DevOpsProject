@@ -186,7 +186,8 @@
                 const productsJSON = JSON.stringify(productsData);
                 console.log(productsJSON);
             }else{
-                return res.json({ 'alert': 'Please Login in system' });
+                //return res.json({ 'alert': 'Please Login in system' });
+                alert("Please Login in system")
             }
             
         });
@@ -198,8 +199,9 @@ function checkUserLoggedIn() {
     if(userDataString) {
         return JSON.parse(userDataString);
     } else {
-        //return null;
-        return res.json({ 'alert': 'Please Login in system' });
+        return null;
+        //return res.json({ 'alert': 'Please Login in system' });
+        //showError()
     }
 }
 
@@ -235,7 +237,6 @@ function updateCartPopup() {
 
 
 </script>
-<script src="../js/form.js" type="module"></script>
 
 
 
