@@ -40,9 +40,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/pages', 'index.html'));
 });
 
-/*app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'signup.html'));
-})*/
 
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/pages', 'signup.html'));
@@ -82,42 +79,9 @@ try{
 })
 
 
-
-  /*const data = new User({
-    name: req_name,
-    email: req_email,
-    password: req_pass,
-    nubmer: req_number
-  })
-  const newUser = await data.save()
-  console.log({newUser})
-  res.json(data)
-})*/
-
-
-
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/pages', 'login.html'));
 });
-
-/*app.post('/login', async (req, res) => {
-  var req_email = req.body.email;
-  var req_pass = req.body.password;
-  if(!req_email.lenght || !req_pass.lenght){
-    return res.json({'alert': 'fill all the inputs'})
-  }
-  try{
-    const logUser = User.findOne({'email': req_email})
-    if(logUser == null){
-      return res.json({'alert': 'incorrect user'})
-    }
-
-    const logPass = User.findOne({'password': req_pass})
-    if(!logPass) return res.json({'alert': 'incorrect password'})
-  }catch(err){
-    return res.json({'alert':'fail checking user'})
-  }
-})*/
 
 app.post('/login', async (req, res) => {
   const req_email = req.body.email;
@@ -144,6 +108,21 @@ app.post('/login', async (req, res) => {
     console.error(err);
     return res.status(500).json({ 'alert': 'Fail checking user' });
   }
+});
+
+app.get('/cart', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/pages', 'shoppingCart.html'));
+});
+
+/*app.post('/cart', async (req, res) => {
+
+
+})*/
+
+
+
+app.get('/add-product', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/pages', 'addProduct.html'));
 });
 
 

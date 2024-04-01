@@ -1,7 +1,12 @@
-const productImages = document.querySelectorAll(".product-images img"); // selecting all image thumbs
-const productImageSlide = document.querySelector(".image-slider"); // seclecting image slider element
+const productImages = document.querySelectorAll(".product-images img");
+const productImageSlide = document.querySelector(".image-slider"); 
+const addCart = document.getElementById("cart-btn")
 
-let activeImageSlide = 0; // default slider image
+let activeImageSlide = 0; 
+
+
+
+
 
 productImages.forEach((item, i) => { // loopinh through each image thumb
     item.addEventListener('click', () => { // adding click event to each image thumbnail
@@ -21,4 +26,10 @@ sizeBtns.forEach((item, i) => { // looping through each button
         item.classList.add('check'); // adding check class to clicked button
         checkedBtn = i; // upading the variable
     })
+})
+
+
+addCart.addEventListener('click', () => {
+    console.log('Add to Cart button clicked')
+    window.location.href = '../pages/404.html'
 })

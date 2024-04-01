@@ -80,3 +80,4 @@ const processData = (data) => {
         location.replace('/');
     }
 }
+
