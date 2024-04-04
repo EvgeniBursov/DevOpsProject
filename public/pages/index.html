@@ -251,8 +251,9 @@ function decrementCount(index) {
 
 buyBtn.addEventListener('click', async () => {
     //cartPop.classList.toggle('hide')
-    //window.location.href = '../pages/thankPage.html'
-    sendData('/end', productsData)
+    //window.location.href = '../pages/thankPage.html    '
+    //sendData('/end', productsData)
+    sendData('/end', productsJSON)
     console.log("from btn:",productsData)
 })
 
