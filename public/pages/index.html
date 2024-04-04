@@ -163,6 +163,10 @@
 
     let productsData = [];
 
+                    
+    let productsJSON = JSON.stringify(productsData);
+    console.log(productsJSON);
+
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
 
@@ -188,8 +192,8 @@
                 updateCartCount(1);
                 updateCartPopup();
                 
-                const productsJSON = JSON.stringify(productsData);
-                console.log(productsJSON);
+                //const productsJSON = JSON.stringify(productsData);
+                //console.log(productsJSON);
             }else{
                 alert("Please Login in system")
             }
@@ -253,15 +257,8 @@ buyBtn.addEventListener('click', async () => {
     //cartPop.classList.toggle('hide')
     //window.location.href = '../pages/thankPage.html    '
     //sendData('/end', productsData)
-    sendData('/end', {
-                    product_name: brand,
-                    user_id: userData._id,
-                    user_email: userData.email,
-                    product_id: index + 1,
-                    product_des: shortDescription,
-                    product_price: parseFloat(actualPrice.replace('$', '')),
-                })
-    console.log("from btn:",productsData)
+    sendData('/end', productsJSON)
+    console.log("from btn:",productsData,"**********",productsJSON)
 })
 
 //new one end 
