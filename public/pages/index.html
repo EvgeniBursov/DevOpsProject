@@ -252,8 +252,15 @@ function decrementCount(index) {
 buyBtn.addEventListener('click', async () => {
     //cartPop.classList.toggle('hide')
     //window.location.href = '../pages/thankPage.html    '
-    json_data = json.dumps(productsData)
-    sendData('/end', json_data)
+    //sendData('/end', productsData)
+    sendData('/end', {
+                    product_name: brand,
+                    user_id: userData._id,
+                    user_email: userData.email,
+                    product_id: index + 1,
+                    product_des: shortDescription,
+                    product_price: parseFloat(actualPrice.replace('$', '')),
+                })
     console.log("from btn:",productsData)
 })
 
