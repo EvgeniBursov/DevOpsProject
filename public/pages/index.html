@@ -250,11 +250,11 @@ function decrementCount(index) {
 
 buyBtn.addEventListener('click', async () => {
     //cartPop.classList.toggle('hide')
-    //window.location.href = '../pages/thankPage.html    '
+    //window.location.href = '../pages/thankPage.html'
     //sendData('/end', productsData)
-    updateProductsJSON();
+    //updateProductsJSON();
     sendData('/end', productsData)
-    console.log("from btn:",productsData,"**********",productsJSON)
+    //console.log("from btn:",productsData,"**********",productsJSON)
 })
 
 //new one end 
@@ -279,9 +279,20 @@ const sendData = (path, data) => {
     });
 }
 
-function updateProductsJSON() {
-    productsJSON = JSON.stringify(productsData);
+const processData = (data) => {
+    loader.style.display = null;
+    if(data.alert){
+        showAlert(data.alert);
+    } else if(data.name){
+        sessionStorage.user = JSON.stringify(data);
+        location.replace('/');
+    }
 }
+
+
+/*function updateProductsJSON() {
+    productsJSON = JSON.stringify(productsData);
+}*/
 
 </script>
 
