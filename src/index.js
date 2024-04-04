@@ -126,7 +126,7 @@ app.post('/end', async (req, res) => {
   if (!updateUser) {
     return res.json({ 'alert': 'User not find' });
   }else{
-    console.log(req)
+    console.log('from index.js line 129:',req)
     updateUser.products = req.body
 
   }
