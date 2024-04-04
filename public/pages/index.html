@@ -249,16 +249,17 @@ function decrementCount(index) {
 }
 
 buyBtn.addEventListener('click', async () => {
-    //cartPop.classList.toggle('hide')
-    //window.location.href = '../pages/thankPage.html'
+    cartPop.classList.toggle('hide')
+    window.location.href = '../pages/thankPage.html'
+    productsData = []
     //sendData('/end', productsData)
     //updateProductsJSON();
-    sendData('/end', productsData)
+    //sendData('/end', productsData)
     //console.log("from btn:",productsData,"**********",productsJSON)
 })
 
 //new one end 
-const sendData = (path, data) => {
+/*const sendData = (path, data) => {
     console.log(path, data);  
     fetch(path, {
         method: "POST", 
@@ -277,17 +278,7 @@ const sendData = (path, data) => {
         loader.style.display = null;
         showAlert('An error occurred while sending data.');
     });
-}
-
-const processData = (data) => {
-    loader.style.display = null;
-    if(data.alert){
-        showAlert(data.alert);
-    } else if(data.name){
-        sessionStorage.user = JSON.stringify(data);
-        location.replace('/');
-    }
-}
+}*/
 
 
 /*function updateProductsJSON() {
