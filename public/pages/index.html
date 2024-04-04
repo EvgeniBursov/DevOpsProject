@@ -163,9 +163,10 @@
 
     let productsData = [];
 
-                    
-    let productsJSON = JSON.stringify(productsData);
-    console.log(productsJSON);
+    if(productsData !== null){
+        let productsJSON = JSON.stringify(productsData);
+        console.log(productsJSON);
+    }
 
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
