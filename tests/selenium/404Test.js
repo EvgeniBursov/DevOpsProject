@@ -1,12 +1,13 @@
 import { By, Builder, until } from 'selenium-webdriver';
 import assert from 'assert';
+import { WebDriver } from 'selenium-webdriver';
 
 
 
 async function notFoungPageTest() {
   let driver;
-  driver = await new Builder().forBrowser('chrome').build();
-    
+  //driver = await new Builder().forBrowser('chrome').build();
+  driver = WebDriver.Chrome()  
   try {
     await driver.get('https://devopsproject-v74y.onrender.com/');
   
