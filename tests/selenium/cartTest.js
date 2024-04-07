@@ -5,11 +5,10 @@ import assert from 'assert';
 
 async function cartTest() {
   let driver;
-  driver = await new Builder().forBrowser('chrome').build();
-    
+  
   try {
-    //await driver.get('https://devopsproject-v74y.onrender.com/');
-    await driver.get('http://localhost:7000/');
+    driver = await new Builder().forBrowser('chrome').build();
+    await driver.get('https://devopsproject-v74y.onrender.com/');
 
     let title = await driver.getTitle();
     assert.equal("Web Store", title);
@@ -50,7 +49,8 @@ async function cartTest() {
   }
 }catch (e) {
     console.error(e);
-  } finally { await driver.quit() }
+  } 
+  //finally { await driver.quit() }
 }
 
 cartTest();
