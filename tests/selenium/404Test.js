@@ -5,9 +5,9 @@ import assert from 'assert';
 
 async function notFoungPageTest() {
   let driver;
+  driver = await new Builder().forBrowser('chrome').build();
     
   try {
-    driver = await new Builder().forBrowser('chrome').build();
     await driver.get('https://devopsproject-v74y.onrender.com/');
   
     let title = await driver.getTitle();
