@@ -8,8 +8,9 @@ async function cartTest() {
   driver = await new Builder().forBrowser('chrome').build();
     
   try {
-    await driver.get('https://devopsproject-v74y.onrender.com/');
-  
+    //await driver.get('https://devopsproject-v74y.onrender.com/');
+    await driver.get('http://localhost:7000/');
+
     let title = await driver.getTitle();
     assert.equal("Web Store", title);
 
