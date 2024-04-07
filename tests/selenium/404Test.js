@@ -1,16 +1,27 @@
-import { By, Builder, until } from 'selenium-webdriver';
+import { By, Builder, until, chrome, Browser } from 'selenium-webdriver';
 import assert from 'assert';
 import { WebDriver } from 'selenium-webdriver';
 
 
 
+
+/**
+ * from selenium import webdriver 
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+driver = webdriver.Chrome(options=chrome_options)
+ */
+
+
 async function notFoungPageTest() {
   let driver;
-  //driver = await new Builder().forBrowser('chrome').build();
-  driver = WebDriver.Chrome()  
+  driver = await new Builder().forBrowser(Browser.CHROME).build()
   try {
     await driver.get('https://devopsproject-v74y.onrender.com/');
-  
+   
+
     let title = await driver.getTitle();
     assert.equal("Web Store", title);
     await driver.sleep(2500)
