@@ -13,10 +13,7 @@ describe('Page not found', () =>{
     await driver.manage().setTimeouts({ implicit: 30000 });
   })
 
-  afterEach(async function () {
-    await driver.manage().setTimeouts({ implicit: 30000 });
-    await driver.quit();
-  })
+
 
   it('Web Store page', async function () {
     this.timeout(10000); // Adjust timeout if needed
