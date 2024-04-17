@@ -7,10 +7,10 @@ async function cartTest() {
   try {
    //const hubUrl = 'http://localhost:4444/wd/hub';
         
-    driver = await new Builder().forBrowser('chrome').build();
-    await driver.get('https://devopsproject-v74y.onrender.com/');
+    //driver = await new Builder().forBrowser('chrome').build();
+    //await driver.get('https://devopsproject-v74y.onrender.com/');
   
-    driver = await new Builder().forBrowser(Browser.CHROME).setChromeOptions('--no-sandbox').build();
+    driver = await new Builder().forBrowser(Browser.CHROME).setChromeOptions('--headless').build();
     await driver.get('https://devopsproject-v74y.onrender.com/');
     //await driver.get('http://localhost:5000/');
 
