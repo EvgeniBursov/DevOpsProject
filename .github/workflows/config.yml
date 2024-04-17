@@ -43,7 +43,7 @@ jobs:
     #  run: npm run test:selenium
 
     - name: Test Route
-      run: npx mocha tests/selenium/404Test.spec.js
+      run: node tests/selenium/404Test.js
 
 
     - name: Test Cart
