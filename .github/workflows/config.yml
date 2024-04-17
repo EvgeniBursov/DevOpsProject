@@ -11,13 +11,25 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [16]
 
     steps:
+    - name: Add Google Chrome Repository
+      run: |
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+
+    - name: Update Package Lists
+      run: sudo apt update
+
+    - name: Install Google Chrome
+      run: sudo apt install google-chrome-stable
+
+
     - name: Checkout code
       uses: actions/checkout@v2
 
