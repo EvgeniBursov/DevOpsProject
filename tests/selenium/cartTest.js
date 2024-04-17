@@ -1,13 +1,12 @@
-import { By, Builder, until, Browser } from 'selenium-webdriver';
+import { By, Builder, until, Browser} from 'selenium-webdriver';
 import assert from 'assert';
-
-
 
 async function cartTest() {
   let driver;
   
   try {
-    driver = await new Builder().forBrowser(Browser.CHROME).build();
+
+    driver = await new Builder().forBrowser(Browser.CHROME).setChromeOptions('--no-sandbox').build();
     await driver.get('https://devopsproject-v74y.onrender.com/');
 
     let title = await driver.getTitle();
