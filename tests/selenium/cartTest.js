@@ -5,6 +5,10 @@ async function cartTest() {
   let driver;
   
   try {
+    const hubUrl = 'http://localhost:4444/wd/hub';
+        
+    driver = await new Builder().usingServer(hubUrl)
+    .forBrowser('chrome').build();
 
     driver = await new Builder().forBrowser(Browser.CHROME).setChromeOptions('--no-sandbox').build();
     //await driver.get('https://devopsproject-v74y.onrender.com/');
