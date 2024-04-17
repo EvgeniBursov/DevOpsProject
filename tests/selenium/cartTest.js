@@ -1,4 +1,4 @@
-import { By, Builder, until } from 'selenium-webdriver';
+import { By, Builder, until, Browser } from 'selenium-webdriver';
 import assert from 'assert';
 
 
@@ -7,7 +7,7 @@ async function cartTest() {
   let driver;
   
   try {
-    driver = await new Builder().forBrowser('chrome').build();
+    driver = await new Builder().forBrowser(Browser.CHROME).build();
     await driver.get('https://devopsproject-v74y.onrender.com/');
 
     let title = await driver.getTitle();
@@ -64,7 +64,7 @@ async function cartTest() {
 }catch (e) {
     console.error(e);
   } 
-  //finally { await driver.quit() }
+  finally { await driver.quit() }
 }
 
 cartTest();

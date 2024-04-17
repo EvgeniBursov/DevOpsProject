@@ -41,13 +41,13 @@ jobs:
 
     #- name: Run Selenium tests
     #  run: npm run test:selenium
+    - name: Test Cart
+      run: node tests/selenium/cartTest.js
 
     - name: Test Route
       run: node tests/selenium/404Test.js
 
 
-    - name: Test Cart
-      run: node tests/selenium/cartTest.js
 
     - name: Test Login
       run: node tests/selenium/loginSeleniumTest.js
