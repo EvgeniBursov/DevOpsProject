@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shoppin Cart</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Shopping Cart</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>    
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/nav.css">
 </head>
@@ -15,7 +15,15 @@
     <nav class="navbar"></nav>
 
 
-
+             
+         
+    <footer></footer>
+    <script  src="../js/shoppingCart.js"></script>
+    <script src="../js/nav.js"></script>
+    <script src="../js/home.js"></script>
+    <script src="../js/footer.js"></script>
+</body>
+<!--
 
 
 
@@ -23,7 +31,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Retrieve product data from sessionStorage
             let product = JSON.parse(sessionStorage.getItem('cartProduct'));
-
+    
             // Display product details
             let cartProductDetails = document.getElementById('cartProductDetails');
             if (product) {
@@ -39,9 +47,69 @@
         });
     </script>
 
-    <footer></footer>
-    
-    <script src="../js/nav.js"></script>
-    <script src="../js/home.js"></script>
-    <script src="../js/footer.js"></script>
-</body>
+
+
+
+
+
+
+        <header class="intro">
+        <div class="action">
+        </div>
+        </header>
+         
+             
+        <main>
+        <div class="app">
+       <div class="closewindow">
+       <span>x</span>
+       </div>
+            <h2>Cart Details</h2>
+                <i class="fa fa-shopping-basket fa-3x" aria-hidden="true"></i>
+           <p>You have choose the following items.</p>
+         <div class="tooltipshop">Не вписан артикул</div>
+         <div class="tooltipshop2">Выберите товар</div>
+            <div class="app-body">
+                <ul class="list"> 			
+                </ul>
+            </div>
+           <div class="openpopup">
+       Check out
+       </div>
+        <div class="openpopup2">
+       Clear Cart
+       </div>
+        </div>
+         <div class="b-popup" id="popup1">
+           <div id="contactform">
+       <div class="closepopup">
+       x
+       </div>
+       
+
+           </div>
+        </div>
+         <div id="tray">
+         <div class="count">
+         
+         </div>
+       <i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i>
+        </div>
+            
+            <h2> Choose products to add in your cart.</h2>
+            
+        <div id="market">
+            
+        <div class="items product">
+            <img src="../img/card1.png">
+        </div>
+        <div class="items product">
+            <img src="../img/card2.png">
+       </div>
+        <div class="items product">
+            <img src="../img/card3.png">
+       </div>
+        </div>
+
+        </main>
+-->
