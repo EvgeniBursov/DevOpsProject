@@ -5,14 +5,14 @@ async function cartTest() {
   let driver;
   
   try {
-    const hubUrl = 'http://localhost:4444/wd/hub';
+   //const hubUrl = 'http://localhost:4444/wd/hub';
         
-    driver = await new Builder().usingServer(hubUrl)
-    .forBrowser('chrome').build();
-
+    driver = await new Builder().forBrowser('chrome').build();
+    await driver.get('https://devopsproject-v74y.onrender.com/');
+  
     driver = await new Builder().forBrowser(Browser.CHROME).setChromeOptions('--no-sandbox').build();
-    //await driver.get('https://devopsproject-v74y.onrender.com/');
-    await driver.get('http://localhost:5000/');
+    await driver.get('https://devopsproject-v74y.onrender.com/');
+    //await driver.get('http://localhost:5000/');
 
     let title = await driver.getTitle();
     assert.equal("Web Store", title);
