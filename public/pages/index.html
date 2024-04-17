@@ -250,8 +250,7 @@ function decrementCount(index) {
 
 buyBtn.addEventListener('click', async () => {
     const userData = checkUserLoggedIn();
-    let cartTotal = document.getElementById('total');
-    if (userData && cartTotal > 0) {
+    if (userData && productsData.length > 0) {
         cartPop.classList.toggle('hide')
         window.location.href = '../pages/thankPage.html'
         productsData = []

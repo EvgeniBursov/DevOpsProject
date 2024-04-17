@@ -42,7 +42,7 @@ jobs:
     #- name: Run Selenium tests
     #  run: npm run test:selenium
     - name: SeleniumIDE
-      run: selenium-side-runner WebStoreIDE.side
+      run: node tests/seleniumIDE/login.spec.js
 
     - name: Test Cart
       run: node tests/selenium/cartTest.js
