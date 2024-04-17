@@ -249,19 +249,14 @@ function decrementCount(index) {
 }
 
 buyBtn.addEventListener('click', async () => {
-    if (checkUserLoggedIn) {
+    const userData = checkUserLoggedIn();
+    let cartTotal = document.getElementById('total');
+    if (userData && cartTotal > 0) {
         cartPop.classList.toggle('hide')
         window.location.href = '../pages/thankPage.html'
         productsData = []
     }else{
-        alert("Please Login in system")
-    }
-    if (cartCount > 1)  {
-        cartPop.classList.toggle('hide')
-        window.location.href = '../pages/thankPage.html'
-        productsData = []
-    }else{
-        alert("Please add something in cart")
+        alert("Please Login in system or add products")
     }
 
     //sendData('/end', productsData)
