@@ -18,16 +18,19 @@ jobs:
         node-version: [16]
 
     steps:
-    - name: Add Google Chrome Repository
+    - name: Install Google Chrome
       run: |
         wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
         sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+        sudo apt update
+        sudo apt install google-chrome-stable
 
-    - name: Update Package Lists
-      run: sudo apt update
-
-    - name: Install Google Chrome
-      run: sudo apt install google-chrome-stable
+    - name: Download ChromeDriver
+      run: |
+        wget https://chromedriver.storage.googleapis.com/$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/local/bin/
+        rm chromedriver_linux64.zip
 
 
     - name: Checkout code
