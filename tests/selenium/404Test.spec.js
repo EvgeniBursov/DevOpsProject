@@ -8,6 +8,7 @@ describe('Page not found', () =>{
   let driver;
 
   beforeEach(async function () {
+    this.timeout(10000)
     driver = await new Builder().forBrowser('chrome').build()
     await driver.manage().setTimeouts({ implicit: 30000 });
   })
