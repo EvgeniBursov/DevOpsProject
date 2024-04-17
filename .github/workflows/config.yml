@@ -42,7 +42,7 @@ jobs:
     #- name: Run Selenium tests
     #  run: npm run test:selenium
     - name: SeleniumIDE
-      run: selenium-side-runner C:\Users\Evgeni\Documents\GitHub\DevOpsProject\WebStoreIDE.side
+      run: selenium-side-runner WebStoreIDE.side
 
     - name: Test Cart
       run: node tests/selenium/cartTest.js
