@@ -12,6 +12,13 @@ async function cartTest() {
 
     let title = await driver.getTitle();
     assert.equal("Web Store", title);
+    await driver.sleep(3500)
+    
+    await driver.findElement(By.id('card-btn1')).click();
+    await driver.sleep(2500)
+    let alert = await driver.switchTo().alert();
+    await driver.sleep(1500)
+    await alert.accept();
 
     await driver.findElement(By.id('user-img')).click();
     await driver.sleep(3500)
@@ -28,17 +35,20 @@ async function cartTest() {
     await driver.findElement(By.className('submit-btn')).click();
     await driver.sleep(3500)
     
+
+    await driver.findElement(By.id('cart-img')).click();
+    await driver.sleep(1500)
+
     await driver.findElement(By.id('card-btn1')).click();
     await driver.sleep(3500)
     await driver.findElement(By.id('card-btn2')).click();
     await driver.sleep(3500)
     await driver.findElement(By.id('card-btn3')).click();
     await driver.sleep(3500)
-    await driver.findElement(By.id('cart-img')).click();
+    await driver.findElement(By.className('minusBtn')).click();
     await driver.sleep(3500)
     await driver.findElement(By.id('buy-btn')).click();
     await driver.sleep(3500)
-
     await driver.wait(until.urlContains('https://devopsproject-v74y.onrender.com/pages/thankPage.html'), 5000);
     await driver.manage().setTimeouts({ implicit: 10000 });
     let dashboardPageUrl = await driver.getCurrentUrl();
@@ -47,6 +57,10 @@ async function cartTest() {
   } else {
       console.log("Buy failed.");
   }
+    await driver.findElement(By.id('home')).click();
+    await driver.sleep(2500)
+
+
 }catch (e) {
     console.error(e);
   } 

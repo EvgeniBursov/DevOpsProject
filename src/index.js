@@ -132,6 +132,7 @@ app.get('/end', async (req, res) => {
   }
 })*/
 
+/*
 app.post('/end', async (req, res) => {
   try {
       // Extract email from request body
@@ -156,7 +157,7 @@ app.post('/end', async (req, res) => {
       console.error('Error:', error);
       return res.status(500).json({ 'error': 'An error occurred while processing the request' });
   }
-})
+})*/
 
 
 

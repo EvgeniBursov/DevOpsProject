@@ -1,6 +1,9 @@
 import { By, Builder, Key, until } from 'selenium-webdriver';
 import assert from 'assert';
 
+
+
+
 async function registerTest() {
   let driver;
   try {
@@ -18,6 +21,16 @@ async function registerTest() {
     //check register page
     title = await driver.getTitle();
     assert.equal("Sign Up", title);
+
+    await driver.findElement(By.id('login')).click();
+    title = await driver.getTitle();
+    assert.equal("Login Page", title);
+    await driver.sleep(3500)
+    await driver.navigate().back()
+    await driver.findElement(By.id('home')).click();
+    await driver.sleep(3500)
+    await driver.navigate().back()
+    await driver.sleep(3500)
 
     //try enter invalid register name < 1, password < 6 , email < 1
     await driver.wait(until.elementLocated(By.id('name')), 5000);

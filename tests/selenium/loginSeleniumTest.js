@@ -20,11 +20,14 @@ async function loginTest() {
     title = await driver.getTitle();
     assert.equal("Login Page", title);
     await driver.findElement(By.id('create')).click();
+    title = await driver.getTitle();
+    assert.equal("Sign Up", title);
     await driver.sleep(3500)
     await driver.navigate().back()
+    await driver.sleep(3500)
     await driver.findElement(By.id('home')).click();
-    await driver.navigate().back()
     await driver.sleep(3500)
+    await driver.navigate().back()
     await driver.wait(until.elementLocated(By.id('email')), 5000);
     await driver.findElement(By.id('email')).sendKeys('Bursov@gmail123.com');
     await driver.sleep(3500)

@@ -16,6 +16,10 @@ async function notFoungPageTest() {
     assert.equal("Page Not Found", title);
     await driver.sleep(3500)
     await driver.wait(until.urlContains('https://devopsproject-v74y.onrender.com/404'), 5000);
+    await driver.findElement(By.id('home')).click();
+    await driver.sleep(3500)
+    title = await driver.getTitle();
+    assert.equal("Web Store", title);
     await driver.manage().setTimeouts({ implicit: 10000 });
     let dashboardPageUrl = await driver.getCurrentUrl();
     if (dashboardPageUrl.includes('https://devopsproject-v74y.onrender.com/404')) {
