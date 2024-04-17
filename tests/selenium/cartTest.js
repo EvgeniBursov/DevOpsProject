@@ -63,7 +63,7 @@ async function cartTest() {
 }catch (e) {
     console.error(e);
   } 
-  finally { await driver.quit() }
+  ///finally { await driver.quit() }
 }
 
 cartTest();

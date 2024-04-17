@@ -249,9 +249,21 @@ function decrementCount(index) {
 }
 
 buyBtn.addEventListener('click', async () => {
-    cartPop.classList.toggle('hide')
-    window.location.href = '../pages/thankPage.html'
-    productsData = []
+    if (checkUserLoggedIn) {
+        cartPop.classList.toggle('hide')
+        window.location.href = '../pages/thankPage.html'
+        productsData = []
+    }else{
+        alert("Please Login in system")
+    }
+    if (cartCount > 1)  {
+        cartPop.classList.toggle('hide')
+        window.location.href = '../pages/thankPage.html'
+        productsData = []
+    }else{
+        alert("Please add something in cart")
+    }
+
     //sendData('/end', productsData)
     //updateProductsJSON();
     //sendData('/end', productsData)
