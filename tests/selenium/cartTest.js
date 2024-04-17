@@ -7,7 +7,8 @@ async function cartTest() {
   try {
 
     driver = await new Builder().forBrowser(Browser.CHROME).setChromeOptions('--no-sandbox').build();
-    await driver.get('https://devopsproject-v74y.onrender.com/');
+    //await driver.get('https://devopsproject-v74y.onrender.com/');
+    await driver.get('http://localhost:5000/');
 
     let title = await driver.getTitle();
     assert.equal("Web Store", title);
@@ -63,7 +64,7 @@ async function cartTest() {
 }catch (e) {
     console.error(e);
   } 
-  ///finally { await driver.quit() }
+  finally { await driver.quit() }
 }
 
 cartTest();
