@@ -39,7 +39,26 @@ jobs:
     #- name: Run tests
     #  run: npm test
 
+    - name: SeleniumIDE Register
+      run: npx mocha tests/seleniumIDE/register.spec.js
 
+    - name: SeleniumIDE Login
+      run: npx mocha tests/seleniumIDE/login.spec.js
+
+    - name: SeleniumIDE Pages
+      run: npx mocha tests/seleniumIDE/pages.spec.js
+
+    - name: WebDriver Test Cart 
+      run: node tests/selenium/cartTest.js
+
+    - name: WebDriver Test Route
+      run: node tests/selenium/404Test.js
+
+    - name: WebDriver Test Login
+      run: node tests/selenium/loginSeleniumTest.js
+
+    - name: WebDriver Test Regsier
+      run: node tests/selenium/registerSeleniumTest.js
 
 
 
