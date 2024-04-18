@@ -1,6 +1,6 @@
 import { By, Builder, until, Key} from 'selenium-webdriver';
 import assert from 'assert';
-import { describe, beforeEach,afterEach,it } from 'mocha';
+import { describe, beforeEach, afterEach, it } from 'mocha';
 
 describe('login', function() {
   this.timeout(30000)

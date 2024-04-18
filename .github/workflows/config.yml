@@ -39,10 +39,8 @@ jobs:
     #- name: Run tests
     #  run: npm test
 
-    #- name: Run Selenium tests
-    #  run: npm run test:selenium
     - name: SeleniumIDE
-      run: node tests/seleniumIDE/login.spec.js
+      run: npx mocha tests/seleniumIDE/login.spec.js
 
     - name: Test Cart
       run: node tests/selenium/cartTest.js
