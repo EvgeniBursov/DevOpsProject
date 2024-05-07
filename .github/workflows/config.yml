@@ -39,8 +39,9 @@ jobs:
 
     - name: Download Selenium Server
       run: |
-        wget https://selenium-release.storage.googleapis.com/4.18/selenium-server-4.18.1.jar -O selenium-server-standalone.jar
+        Invoke-WebRequest -Uri "https://selenium-release.storage.googleapis.com/4.18/selenium-server-4.18.1.jar" -OutFile "selenium-server-standalone.jar"
         # Downloads Selenium Server 4.18.1 and renames it to selenium-server-standalone.jar
+      shell: pwsh
 
     - name: Start Selenium Grid Hub
       run: java -jar selenium-server-standalone.jar -role hub &
