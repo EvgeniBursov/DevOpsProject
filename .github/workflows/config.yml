@@ -36,6 +36,9 @@ jobs:
     - name: ESLint Check
       run: npm run lint
 
+    - name: Run Selenium Grid Tests
+      run: node tests/seleniumGrid/login.js
+
     #- name: Run tests
     #  run: npm test
 
@@ -59,12 +62,6 @@ jobs:
 
     - name: WebDriver Test Regsier
       run: node tests/selenium/registerSeleniumTest.js
-
-
-
-
-
-
 
 
 
