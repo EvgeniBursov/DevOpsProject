@@ -25,6 +25,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
+      
 
     - name: Install dependencies
       run: npm install
@@ -35,6 +36,20 @@ jobs:
 
     - name: ESLint Check
       run: npm run lint
+
+
+    - name: Install Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+
+    - name: Download Selenium Server
+      run: |
+        wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
+        mv selenium-server-standalone-3.141.59.jar selenium-server-standalone.jar
+
+    - name: Start Selenium Grid Hub
+      run: java -jar selenium-server-standalone.jar -role hub
 
     - name: Run Selenium Grid Tests
       run: node tests/seleniumGrid/login.js
