@@ -8,83 +8,80 @@ on:
       - feature_0.2_selenium_tests
       - feature_version_3
 
-
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16]
+    services:
+      selenium-hub:
+        image: selenium/hub:latest
+        ports:
+          - 4444:4444
+
+      chrome:
+        image: selenium/node-chrome:latest
+        depends-on:
+          - selenium-hub
+
+      firefox:
+        image: selenium/node-firefox:latest
+        depends-on:
+          - selenium-hub
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
       
+      - name: Install dependencies
+        run: npm install
 
-    - name: Install dependencies
-      run: npm install
+      - name: Set up environment variables
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
 
-    - name: Set up environment variables
-      run: |
-        echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+      - name: ESLint Check
+        run: npm run lint
 
-    - name: ESLint Check
-      run: npm run lint
+      - name: Run Selenium Tests on Chrome
+        run: node tests/seleniumGrid/test.js chrome
 
-    - name: Download Selenium Server
-      run: |
-        Invoke-WebRequest -Uri "https://selenium-release.storage.googleapis.com/4.18/selenium-server-4.18.1.jar" -OutFile "selenium-server-standalone.jar"
-        # Downloads Selenium Server 4.18.1 and renames it to selenium-server-standalone.jar
-      shell: pwsh
+      - name: Run Selenium Tests on Firefox
+        run: node tests/seleniumGrid/test.js firefox
 
-    - name: Start Selenium Grid Hub
-      run: java -jar selenium-server-standalone.jar -role hub &
-      # Start the Selenium Grid Hub in the background
+      - name: Run Selenium Tests
+        run: node tests/seleniumGrid/test.js
 
-    - name: Wait for Selenium Grid Hub to start
-      run: sleep 10
-      # Adjust the sleep time as needed to ensure the hub is ready
+      #- name: Run tests
+      #  run: npm test
 
-    - name: Run Selenium Tests
-      run: node tests/seleniumGrid/login.js
+      #- name: SeleniumIDE Register
+      #  run: npx mocha tests/seleniumIDE/register.spec.js
 
-    - name: Run Selenium Grid Tests
-      run: node tests/seleniumGrid/login.js
+      - name: SeleniumIDE Login
+        run: npx mocha tests/seleniumIDE/login.spec.js
 
-    #- name: Run tests
-    #  run: npm test
+      - name: SeleniumIDE Pages
+        run: npx mocha tests/seleniumIDE/pages.spec.js
 
-    #- name: SeleniumIDE Register
-    #  run: npx mocha tests/seleniumIDE/register.spec.js
+      - name: WebDriver Test Cart 
+        run: node tests/selenium/cartTest.js
 
-    - name: SeleniumIDE Login
-      run: npx mocha tests/seleniumIDE/login.spec.js
+      - name: WebDriver Test Route
+        run: node tests/selenium/404Test.js
 
-    - name: SeleniumIDE Pages
-      run: npx mocha tests/seleniumIDE/pages.spec.js
+      - name: WebDriver Test Login
+        run: node tests/selenium/loginSeleniumTest.js
 
-    - name: WebDriver Test Cart 
-      run: node tests/selenium/cartTest.js
+      - name: WebDriver Test Register
+        run: node tests/selenium/registerSeleniumTest.js
 
-    - name: WebDriver Test Route
-      run: node tests/selenium/404Test.js
-
-    - name: WebDriver Test Login
-      run: node tests/selenium/loginSeleniumTest.js
-
-    - name: WebDriver Test Regsier
-      run: node tests/selenium/registerSeleniumTest.js
-
-
-
-    - name: Build and deploy
-      run: |
-        # Add any additional build or deploy steps here
-        # For example, you can deploy to a server or a cloud platform
-        curl "https://api.render.com/deploy/srv-cn8vmhmd3nmc73dfkff0?key=Mkkg-BEOOww"
+      - name: Build and deploy
+        run: |
+          # Add any additional build or deploy steps here
+          # For example, you can deploy to a server or a cloud platform
+          curl "https://api.render.com/deploy/srv-cn8vmhmd3nmc73dfkff0?key=Mkkg-BEOOww"

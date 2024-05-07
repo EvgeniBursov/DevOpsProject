@@ -1,4 +1,4 @@
-import { By, Builder } from 'selenium-webdriver';
+/*import { By, Builder } from 'selenium-webdriver';
 import { Capabilities } from 'selenium-webdriver';
 import { describe, it } from 'mocha';
 
@@ -49,4 +49,25 @@ async function runTests() {
   console.log("All tests completed.");
 }
 
-runTests();
+runTests();*/
+import { By, Builder, Key, until} from 'selenium-webdriver';
+import { Capabilities } from 'selenium-webdriver';
+
+
+async function exampleTest() {
+    const driver = await new Builder()
+        .forBrowser('chrome')
+        .usingServer('http://selenium-hub:4444/wd/hub')
+        .build();
+
+    try {
+        await driver.get('https://www.example.com');
+        const title = await driver.getTitle();
+        console.log('Page title:', title);
+    } finally {
+        await driver.quit();
+    }
+}
+
+exampleTest();
+
