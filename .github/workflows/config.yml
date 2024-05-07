@@ -37,19 +37,21 @@ jobs:
     - name: ESLint Check
       run: npm run lint
 
-
-    - name: Install Java
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-
     - name: Download Selenium Server
       run: |
-        wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
-        mv selenium-server-standalone-3.141.59.jar selenium-server-standalone.jar
+        wget https://selenium-release.storage.googleapis.com/4.18/selenium-server-4.18.1.jar -O selenium-server-standalone.jar
+        # Downloads Selenium Server 4.18.1 and renames it to selenium-server-standalone.jar
 
     - name: Start Selenium Grid Hub
-      run: java -jar selenium-server-standalone.jar -role hub
+      run: java -jar selenium-server-standalone.jar -role hub &
+      # Start the Selenium Grid Hub in the background
+
+    - name: Wait for Selenium Grid Hub to start
+      run: sleep 10
+      # Adjust the sleep time as needed to ensure the hub is ready
+
+    - name: Run Selenium Tests
+      run: node tests/seleniumGrid/login.js
 
     - name: Run Selenium Grid Tests
       run: node tests/seleniumGrid/login.js
