@@ -24,7 +24,7 @@ async function loginTest(browser) {
   }
 
   try {
-    await driver.get('https://www.google.com');
+    await driver.get('https://devopsproject-v74y.onrender.com');
     const title = await driver.getTitle();
     console.log('Page title:', title);
   } finally {
