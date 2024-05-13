@@ -24,8 +24,6 @@ jobs:
     - name: Download Selenium Server
       run: |
         Invoke-WebRequest -Uri "https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar" -OutFile "selenium-server.jar"
-        dir   # List files in the directory for debugging
-        java -version  # Check Java version for debugging
 
     - name: Start Selenium Server
       run: |

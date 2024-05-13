@@ -11,7 +11,8 @@ async function loginTest(browser) {
       .forBrowser('chrome')
       .build();
       try {
-        await driver.get('http://localhost:5000');
+        await driver.get('https://www.google.com');
+        //        await driver.get('http://localhost:5000');
         const title = await driver.getTitle();
         console.log('Page title:', title);
       } finally {
