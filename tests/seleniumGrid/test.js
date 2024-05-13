@@ -1,4 +1,4 @@
-/*import { By, Builder } from 'selenium-webdriver';
+import { By, Builder } from 'selenium-webdriver';
 import { Capabilities } from 'selenium-webdriver';
 import { describe, it } from 'mocha';
 
@@ -10,6 +10,13 @@ async function loginTest(browser) {
       .usingServer('http://localhost:4444/wd/hub')
       .forBrowser('chrome')
       .build();
+      try {
+        await driver.get('https://www.google.com');
+        const title = await driver.getTitle();
+        console.log('Page title:', title);
+      } finally {
+        await driver.quit();
+      }
   } else if (browser === 'firefox') {
     const firefoxCapabilities = Capabilities.firefox();
     driver = await new Builder()
@@ -22,21 +29,8 @@ async function loginTest(browser) {
     return;
   }
 
-  try {
-    // Your test logic here
-    await driver.get('http://localhost:3000/login.html');
-    const idCard = '318761616'; // Hardcoded ID card for testing
-    const password = '12345678'; // Hardcoded password for testing
-    await driver.findElement(By.id('idCard')).sendKeys(idCard);
-    await driver.findElement(By.id('password')).sendKeys(password);
-    await driver.findElement(By.css('button[type="submit"]')).click();
-    await driver.sleep(3000);
-  } catch (error) {
-    console.error("An error occurred:", error);
-  } finally {
-    await driver.quit();
-  }
 }
+
 
 async function runTests() {
   // Run tests in Chrome
@@ -49,8 +43,9 @@ async function runTests() {
   console.log("All tests completed.");
 }
 
-runTests();*/
-import { By, Builder, Key, until} from 'selenium-webdriver';
+runTests();
+
+/*import { By, Builder, Key, until} from 'selenium-webdriver';
 import { Capabilities } from 'selenium-webdriver';
 
 
@@ -69,5 +64,5 @@ async function exampleTest() {
     }
 }
 
-exampleTest();
+exampleTest();*/
 
