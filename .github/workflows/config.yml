@@ -34,7 +34,7 @@ jobs:
 
     - name: Verify Selenium Server is Running
       run: |
-        netstat -tuln  # Check if the Selenium server is listening on port 4444
+        netstat -an | findstr :4444
 
     - name: Install dependencies
       run: npm install selenium-webdriver
