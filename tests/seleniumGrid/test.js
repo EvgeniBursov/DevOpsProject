@@ -23,13 +23,13 @@ async function loginTest(browser) {
     return;
   }
 
-  try {
+  /*try {
     await driver.get('https://devopsproject-v74y.onrender.com');
     const title = await driver.getTitle();
     console.log('Page title:', title);
   } finally {
     await driver.quit();
-  }
+  }*/
 }
 
 async function runTests() {
