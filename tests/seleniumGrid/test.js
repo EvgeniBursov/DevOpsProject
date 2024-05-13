@@ -2,6 +2,7 @@ import { By, Builder, Key, until} from 'selenium-webdriver';
 import { Capabilities } from 'selenium-webdriver';
 
 
+
 async function loginTest(browser) {
   let driver;
 
@@ -10,41 +11,32 @@ async function loginTest(browser) {
       .usingServer('http://localhost:4444/wd/hub')
       .forBrowser('chrome')
       .build();
-      try {
-        await driver.get('https://www.google.com');
-        //        await driver.get('http://localhost:5000');
-        const title = await driver.getTitle();
-        console.log('Page title:', title);
-      } finally {
-        await driver.quit();
-      }
   } else if (browser === 'firefox') {
     const firefoxCapabilities = Capabilities.firefox();
     driver = await new Builder()
       .forBrowser('firefox')
-      .usingWebDriverProxy('http://selenium-hub:4444')
+      .usingServer('http://localhost:4444/wd/hub')
       .withCapabilities(firefoxCapabilities)
       .build();
-      try {
-        await driver.get('https://www.google.com');
-        //        await driver.get('http://localhost:5000');
-        const title = await driver.getTitle();
-        console.log('Page title:', title);
-      } finally {
-        await driver.quit();
-      }
   } else {
     console.log("Unsupported browser.");
     return;
   }
 
+  try {
+    await driver.get('https://www.google.com');
+    const title = await driver.getTitle();
+    console.log('Page title:', title);
+  } finally {
+    await driver.quit();
+  }
 }
-
 
 async function runTests() {
   // Run tests in Chrome
   //console.log("Running tests in Chrome...");
- // await loginTest('chrome');
+  //await loginTest('chrome');
+  
   // Run tests in Firefox
   console.log("Running tests in Firefox...");
   await loginTest('firefox');
@@ -53,6 +45,7 @@ async function runTests() {
 }
 
 runTests();
+
 
 /*import { By, Builder, Key, until} from 'selenium-webdriver';
 import { Capabilities } from 'selenium-webdriver';
