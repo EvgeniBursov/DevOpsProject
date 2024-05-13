@@ -1,3 +1,4 @@
+
 name: Selenium Test
 
 on: [push, pull_request]
@@ -5,7 +6,7 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -13,7 +14,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '18'
 
     - name: Install Java
       uses: actions/setup-java@v2
@@ -23,17 +24,20 @@ jobs:
 
     - name: Download Selenium Server
       run: |
-        Invoke-WebRequest -Uri "https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar" -OutFile "selenium-server.jar"
+        wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
+        mv selenium-server-standalone-3.141.59.jar selenium-server.jar
+        ls -la   # List files in the directory for debugging
+        java -version  # Check Java version for debugging
 
     - name: Start Selenium Server
       run: |
         java -jar selenium-server.jar -port 4444 &
-        Start-Sleep -s 10  # Wait for the server to start (adjust if needed)
+        sleep 10  # Wait for the server to start (adjust if needed)
 
     - name: Verify Selenium Server is Running
       run: |
-        netstat -an | findstr :4444
-
+        netstat -tuln  # Check if the Selenium server is listening on port 4444
+        
     - name: Install dependencies
       run: npm install selenium-webdriver
 
