@@ -31,4 +31,4 @@ jobs:
       - name: ESLint Check
         run: npm run lint
   call-workflow1:
-    uses: ./github/workflows/NonFunctionalTests.yml
+    uses: ./.github/workflows/NonFunctionalTests.yml
