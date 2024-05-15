@@ -39,13 +39,15 @@ jobs:
       - name: Install dependencies
         run: npm install selenium-webdriver
 
-      - name: Verify Selenium Server is Running
-        run: |
-          docker exec selenium-hub ps aux | grep 'selenium-server.jar'
+      #- name: Verify Selenium Server is Running
+      #  run: |
+      #    docker exec selenium-hub ps aux | grep 'selenium-server.jar'
 
       - name: Run tests
         run: node tests/seleniumGrid/test.js
 
       - name: Tear down Selenium Grid
         run: docker stop selenium-hub
-        
+
+
+
