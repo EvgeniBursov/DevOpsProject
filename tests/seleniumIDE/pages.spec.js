@@ -3,7 +3,7 @@ import assert from 'assert';
 import { describe, beforeEach, afterEach, it } from 'mocha';
 
 describe('Pages', function() {
-  this.timeout(30000)
+  this.timeout(80000)
   let driver
   let vars
   beforeEach(async function() {

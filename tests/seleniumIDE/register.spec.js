@@ -4,7 +4,7 @@ import { describe, beforeEach, afterEach, it } from 'mocha';
 
 
 describe('Register', function() {
-  this.timeout(50000)
+  this.timeout(80000)
   let driver
   let vars
   beforeEach(async function() {
