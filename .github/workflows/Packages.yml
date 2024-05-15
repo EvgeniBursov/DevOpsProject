@@ -10,24 +10,23 @@ on:
 
 jobs:
   install_packages:
-    build:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm install
 
-        - name: Setup Node.js
-          uses: actions/setup-node@v2
-          with:
-            node-version: '20'
-        
-        - name: Install dependencies
-          run: npm install
+      - name: Set up environment variables
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
 
-        - name: Set up environment variables
-          run: |
-            echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-
-        - name: ESLint Check
-          run: npm run lint
+      - name: ESLint Check
+        run: npm run lint

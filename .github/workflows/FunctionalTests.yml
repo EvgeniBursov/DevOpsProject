@@ -10,11 +10,10 @@ on:
 
 jobs:
   run_functional_tests:
-    build:
-      runs-on: windows-latest
-      needs: install_packages
+    runs-on: windows-latest
+    needs: install_packages
 
-      steps:
+    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -35,5 +34,3 @@ jobs:
 
       - name: WebDriver Test Register
         run: node tests/selenium/registerSeleniumTest.js
-
-    
