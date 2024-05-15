@@ -7,12 +7,12 @@ on:
       - develop_v_0.2_back
       - feature_0.2_selenium_tests
       - feature_version_3
-
+      
 jobs:
-  runs-on: ubuntu-latest
-  name: JMeter Test Execution
-  
-  steps:      
+  jmeter_job:
+    runs-on: ubuntu-latest
+    name: JMeter Test Execution
+    steps:      
     - name: Checkout
       uses: actions/checkout@v3
 
@@ -21,7 +21,6 @@ jobs:
       with:
         test-plan-path: ./FistTest.jmx
         args: ""
-        
     - name: Upload Results
       uses: actions/upload-artifact@v3
       with:
