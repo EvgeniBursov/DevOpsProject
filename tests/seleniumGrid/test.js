@@ -1,4 +1,32 @@
-import { By, Builder, Key, until} from 'selenium-webdriver';
+import { Builder, By, until }  from 'selenium-webdriver'
+
+(async function example() {
+  let driver = await new Builder().forBrowser('chrome').usingServer('http://localhost:4444/wd/hub').build();
+  try {
+    await driver.get('https://www.google.com');
+    let title = await driver.getTitle();
+    console.log("Title of the page:", title);
+  } finally {
+    await driver.quit();
+  }
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import { By, Builder, Key, until} from 'selenium-webdriver';
 import { Capabilities } from 'selenium-webdriver';
 
 
@@ -30,9 +58,9 @@ async function loginTest(browser) {
   } finally {
     await driver.quit();
   }*/
-}
+///}
 
-async function runTests() {
+/*async function runTests() {
   // Run tests in Chrome
   //console.log("Running tests in Chrome...");
   //await loginTest('chrome');
@@ -44,7 +72,7 @@ async function runTests() {
   console.log("All tests completed.");
 }
 
-runTests();
+runTests();*/
 
 
 /*import { By, Builder, Key, until} from 'selenium-webdriver';
