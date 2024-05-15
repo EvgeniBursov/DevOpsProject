@@ -1,7 +1,7 @@
 import { Builder, By, until }  from 'selenium-webdriver'
 
 (async function example() {
-  let driver = await new Builder().forBrowser('firefox').usingServer('http://localhost:4444/wd/hub').build();
+  let driver = await new Builder().usingServer('http://localhost:4444/wd/hub').forBrowser('firefox').build();
   try {
     await driver.get('https://devopsproject-v74y.onrender.com');
     let title = await driver.getTitle();

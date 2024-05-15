@@ -12,6 +12,10 @@ jobs:
         ports:
           - 4444:4444
         options: --name selenium-hub
+      firefox-node:
+        image: selenium/node-firefox:latest
+        depends-on:
+          - selenium-hub
 
     steps:
     - name: Checkout repository
