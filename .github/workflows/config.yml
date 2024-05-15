@@ -14,12 +14,9 @@ jobs:
 
       firefox-node:
         image: selenium/node-firefox:latest
-        depends-on:
-          - selenium-hub
         env:
           HUB_HOST: selenium-hub
           HUB_PORT: 4444
-        options: --name firefox-node
 
     steps:
       - name: Checkout repository
@@ -45,3 +42,4 @@ jobs:
 
       - name: Tear down Selenium Grid
         run: docker stop selenium-hub
+        
