@@ -17,6 +17,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Check Docker containers
+      run: docker ps
+
     - name: Install Node.js
       uses: actions/setup-node@v2
       with:
