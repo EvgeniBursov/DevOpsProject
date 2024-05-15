@@ -9,13 +9,21 @@ on:
       - feature_version_3
 
 jobs:
+  dummy_job:
+    runs-on: ubuntu-latest
+    # This job has no dependencies
+
+    steps:
+      - name: Dummy Step
+        run: echo "This is a dummy job"
+      
   run_non_functional_tests:
     runs-on: ubuntu-latest
     needs: install_packages
     
     steps:
       - name: Wait for install_packages completion
-        run: sleep 70s
+        run: sleep 65s
         if: ${{ always() }}
 
       - name: Checkout
