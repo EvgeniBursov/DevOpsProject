@@ -9,11 +9,15 @@ on:
       - feature_version_3
 
 jobs:
-  non_functional_tests:
+  run_non_functional_tests:
     runs-on: ubuntu-latest
     needs: install_packages
+    
+    steps:
+      - name: Wait for install_packages completion
+        run: sleep 70s
+        if: ${{ always() }}
 
-    steps:      
       - name: Checkout
         uses: actions/checkout@v3
 
