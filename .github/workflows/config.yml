@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -13,7 +13,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '20'
+        node-version: '14' # You can adjust the Node.js version as needed
 
     - name: Install Java
       uses: actions/setup-java@v2
@@ -23,9 +23,9 @@ jobs:
 
     - name: Download Selenium Server
       run: |
-        wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
-        mv selenium-server-standalone-3.141.59.jar selenium-server.jar
-        ls -la   # List files in the directory for debugging
+        Invoke-WebRequest -Uri https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar -OutFile selenium-server.jar
+        Get-ChildItem -Path .\ -Filter "selenium-server*.jar" | Rename-Item -NewName "selenium-server.jar"
+        dir  # List files in the directory for debugging
         java -version  # Check Java version for debugging
 
 
@@ -35,12 +35,11 @@ jobs:
     - name: Start Selenium Server
       run: |
         java -jar selenium-server.jar -port 4444 &
-        sleep 20  # Wait for the server to start (adjust if needed)
+        Start-Sleep -Seconds 20  # Wait for the server to start (adjust if needed)
 
     - name: Verify Selenium Server is Running
       run: |
-        netstat -tuln  # Check if the Selenium server is listening on port 4444
-
+        Get-NetTCPConnection -LocalPort 4444  # Check if the Selenium server is listening on port 4444
 
     - name: Run Selenium Tests on Chrome
       run: node tests/seleniumGrid/test.js
