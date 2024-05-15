@@ -7,25 +7,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Create reports directory
-      run: mkdir reports
-      
-    - name: Run JMeter Tests
-      uses: ./
+    - name: JMeter Test
+      uses: QAInsights/PerfAction@v5.6.2
       with:
         test-plan-path: ./FistTest.jmx
-        args: "-e -o ./reports/html/"
-        
+        args: ""
     - name: Upload Results
       uses: actions/upload-artifact@v3
       with:
         name: jmeter-results
         path: result.jtl
-        if-no-files-found: error
-
-    - name: Upload HTML Reports
-      uses: actions/upload-artifact@v3
-      with:
-        name: jmeter-reports
-        path: reports
         if-no-files-found: error
