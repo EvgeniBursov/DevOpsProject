@@ -13,7 +13,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18'
+        node-version: '20'
 
     - name: Install Java
       uses: actions/setup-java@v2
@@ -28,6 +28,11 @@ jobs:
         ls -la   # List files in the directory for debugging
         java -version  # Check Java version for debugging
 
+
+    - name: Install dependencies
+      run: npm install selenium-webdriver
+
+
     - name: Start app Server
       run: node src/index.js
 
@@ -41,8 +46,6 @@ jobs:
       run: |
         netstat -tuln  # Check if the Selenium server is listening on port 4444
 
-    - name: Install dependencies
-      run: npm install selenium-webdriver
 
     - name: Run Selenium Tests on Chrome
       run: node tests/seleniumGrid/test.js
