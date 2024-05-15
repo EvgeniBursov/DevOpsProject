@@ -18,6 +18,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install dependencies
+        run: npm install
+
       - name: SeleniumIDE Login
         run: npx mocha tests/seleniumIDE/login.spec.js
 
