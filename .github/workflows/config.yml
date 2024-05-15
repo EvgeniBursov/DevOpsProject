@@ -10,18 +10,17 @@ jobs:
       selenium-hub:
         image: selenium/hub:latest
         ports:
-          - 4444:4444
+          - "4444:4444"
         volumes:
           - ./selenium-server-4.18.1.jar:/selenium-server.jar  # Mount selenium-server-4.18.1.jar from the host
-        command: java -jar /selenium-server.jar -port 4444  # Custom command to start Selenium Server
+        env:
+          SE_OPTS: "-port 4444"  # Custom Selenium options to specify the port
 
       firefox-node:
         image: selenium/node-firefox:latest
-        depends_on:
-          - selenium-hub
-        environment:
-          - HUB_HOST=selenium-hub
-          - HUB_PORT=4444
+        env:
+          HUB_HOST: selenium-hub
+          HUB_PORT: 4444
         volumes:
           - /dev/shm:/dev/shm
 
@@ -49,3 +48,4 @@ jobs:
 
       - name: Tear down Selenium Grid
         run: docker stop selenium-hub
+        
