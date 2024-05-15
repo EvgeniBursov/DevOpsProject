@@ -30,6 +30,3 @@ jobs:
 
       - name: ESLint Check
         run: npm run lint
-
-      - name: Check
-        uses: ./.github/workflows/NonFunctionalTests.yml
