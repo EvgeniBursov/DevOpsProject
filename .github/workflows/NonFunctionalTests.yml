@@ -3,12 +3,19 @@ name: NoN-Functional Tests
 on:
   push:
 #    branches:
-#      - main
-#      - develop_v_0.2_back
-#     - feature_0.2_selenium_tests
+   - main
+    - develop_v_0.2_back
+     - feature_0.2_selenium_tests
       - feature_version_3
 
+
 on:
+  push:
+    branches:
+      - main
+      - develop_v_0.2_back
+      - feature_0.2_selenium_tests
+      - feature_version_3
   workflow_run:
     workflows: ["Install Packages"]
     types:
@@ -19,18 +26,18 @@ jobs:
     runs-on: ubuntu-latest
     name: JMeter Test Execution
     steps:      
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: JMeter Test
-      uses: QAInsights/PerfAction@v5.6.2
-      with:
-        test-plan-path: ./FistTest.jmx
-        args: ""
-    - name: Upload Results
-      uses: actions/upload-artifact@v3
-      with:
-        name: jmeter-results
-        path: result.jtl
-        if-no-files-found: error
+      - name: JMeter Test
+        uses: QAInsights/PerfAction@v5.6.2
+        with:
+          test-plan-path: ./FistTest.jmx
+          args: ""
 
+      - name: Upload Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: jmeter-results
+          path: result.jtl
+          if-no-files-found: error
