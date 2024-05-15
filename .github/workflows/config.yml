@@ -7,37 +7,41 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      selenium:
+      selenium-hub:
         image: selenium/hub:latest
         ports:
           - 4444:4444
-        options: --name selenium-hub
+
       firefox-node:
         image: selenium/node-firefox:latest
         depends-on:
           - selenium-hub
+        env:
+          HUB_HOST: selenium-hub
+          HUB_PORT: 4444
+        options: --name firefox-node
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Check Docker containers
-      run: docker ps
+      - name: Check Docker containers
+        run: docker ps
 
-    - name: Install Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install dependencies
-      run: npm install selenium-webdriver
+      - name: Install dependencies
+        run: npm install selenium-webdriver
 
-    - name: Verify Selenium Server is Running
-      run: |
-        netstat -tuln  # Check if the Selenium server is listening on port 4444
+      - name: Verify Selenium Server is Running
+        run: |
+          netstat -tuln  # Check if the Selenium server is listening on port 4444
 
-    - name: Run tests
-      run: node tests/seleniumGrid/test.js
+      - name: Run tests
+        run: node tests/seleniumGrid/test.js
 
-    - name: Tear down Selenium Grid
-      run: docker stop selenium-hub
+      - name: Tear down Selenium Grid
+        run: docker stop selenium-hub
