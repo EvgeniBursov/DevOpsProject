@@ -9,7 +9,7 @@ on:
       - feature_version_3
 
 jobs:
-  run_non_functional_tests:
+  non_functional_tests:
     runs-on: ubuntu-latest
     needs: install_packages
 

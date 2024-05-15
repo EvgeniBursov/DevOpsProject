@@ -9,7 +9,7 @@ on:
       - feature_version_3
 
 jobs:
-  run_functional_tests:
+  functional_tests:
     runs-on: windows-latest
     needs: install_packages
 
