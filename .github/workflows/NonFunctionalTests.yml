@@ -8,7 +8,6 @@ name: NoN-Functional Tests
 #     - feature_0.2_selenium_tests
 #      - feature_version_3
 
-
 on:
   workflow_run:
     workflows: ["Install Packages"]
@@ -34,3 +33,4 @@ jobs:
         name: jmeter-results
         path: result.jtl
         if-no-files-found: error
+
