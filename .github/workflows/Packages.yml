@@ -9,7 +9,7 @@ on:
       - feature_version_3
 
 jobs:
-  install_packages:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,3 +30,5 @@ jobs:
 
       - name: ESLint Check
         run: npm run lint
+  call-workflow1:
+    uses: ./github/workflows/NonFunctionalTests.yml
