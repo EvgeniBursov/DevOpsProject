@@ -1,37 +1,48 @@
-name: Selenium Tests
+name: Selenium Test
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
-    services:
-      selenium:
-        image: selenium/hub:latest
-        ports:
-          - 4444:4444
-        options: --name selenium-hub
-
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '18'
+
+    - name: Install Java
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Download Selenium Server
+      run: |
+        wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
+        mv selenium-server-standalone-3.141.59.jar selenium-server.jar
+        ls -la   # List files in the directory for debugging
+        java -version  # Check Java version for debugging
+
+    - name: Start app Server
+      run: node src/index.js
+
+
+    - name: Start Selenium Server
+      run: |
+        java -jar selenium-server.jar -port 4444 &
+        sleep 20  # Wait for the server to start (adjust if needed)
+
+    - name: Verify Selenium Server is Running
+      run: |
+        netstat -tuln  # Check if the Selenium server is listening on port 4444
 
     - name: Install dependencies
       run: npm install selenium-webdriver
 
-    - name: sleep
-      uses: whatnick/wait-action@master
-      with:
-        time: "15s"
-
-    - name: Run tests
+    - name: Run Selenium Tests on Chrome
       run: node tests/seleniumGrid/test.js
-
-    - name: Tear down Selenium Grid
-      run: docker stop selenium-hub
