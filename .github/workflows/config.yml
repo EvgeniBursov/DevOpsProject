@@ -1,53 +1,42 @@
-name: Selenium Tests
+name: Test grid
 
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        type: choice
+        description: Which browser to test
+        required: true
+        options:
+          - chrome
+          - firefox
+          - edge
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
 
-    services:
-      selenium-hub:
-        image: selenium/hub:latest
-        ports:
-          - "4444:4444"
-        volumes:
-          - ./selenium-server-4.18.1.jar:/selenium-server.jar  # Mount selenium-server-4.18.1.jar from the host
-        env:
-          SE_OPTS: "-port 4444"  # Custom Selenium options to specify the port
+    container:
+      image: node:19
 
-      firefox-node:
-        image: selenium/node-firefox:latest
-        env:
-          HUB_HOST: selenium-hub
-          HUB_PORT: 4444
-        volumes:
-          - /dev/shm:/dev/shm
+    services:
+      selenium:
+        image: selenium/standalone-${{ github.event.inputs.browser }}
+        options: --shm-size=2gb
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Check Docker containers
-        run: docker ps
-
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
-
-      - name: Install dependencies
-        run: npm install selenium-webdriver
-
-      #- name: Verify Selenium Server is Running
-      #  run: |
-      #    docker exec selenium-hub ps aux | grep 'selenium-server.jar'
-
-      - name: Run tests
-        run: node tests/seleniumGrid/test.js
-
-      - name: Tear down Selenium Grid
-        run: docker stop selenium-hub
-
-
-
+          node-version: '19'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run tests\seleniumGrid\test.js
+        env:
+          BROWSER: ${{ github.event.inputs.browser }}
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: screenshots
+          path: screenshots/
