@@ -1,12 +1,12 @@
 name: NoN-Functional Tests
 
-#on:
-#  push:
+on:
+  push:
 #    branches:
 #      - main
 #      - develop_v_0.2_back
 #     - feature_0.2_selenium_tests
-#      - feature_version_3
+      - feature_version_3
 
 on:
   workflow_run:
