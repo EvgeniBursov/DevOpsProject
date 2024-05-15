@@ -11,12 +11,19 @@ jobs:
         image: selenium/hub:latest
         ports:
           - 4444:4444
+        volumes:
+          - ./selenium-server-4.18.1.jar:/selenium-server.jar  # Mount selenium-server-4.18.1.jar from the host
+        command: java -jar /selenium-server.jar -port 4444  # Custom command to start Selenium Server
 
       firefox-node:
         image: selenium/node-firefox:latest
-        env:
-          HUB_HOST: selenium-hub
-          HUB_PORT: 4444
+        depends_on:
+          - selenium-hub
+        environment:
+          - HUB_HOST=selenium-hub
+          - HUB_PORT=4444
+        volumes:
+          - /dev/shm:/dev/shm
 
     steps:
       - name: Checkout repository
@@ -35,11 +42,10 @@ jobs:
 
       - name: Verify Selenium Server is Running
         run: |
-          netstat -tuln  # Check if the Selenium server is listening on port 4444
+          docker exec selenium-hub ps aux | grep 'selenium-server.jar'
 
       - name: Run tests
         run: node tests/seleniumGrid/test.js
 
       - name: Tear down Selenium Grid
         run: docker stop selenium-hub
-        
