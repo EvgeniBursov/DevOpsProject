@@ -1,49 +1,37 @@
-name: Test grid
+name: Selenium Tests
 
-on:
-  push:
-    branches:
-      - main
-      - develop_v_0.2_back
-      - feature_0.2_selenium_tests
-      - feature_version_3
-
-  workflow_dispatch:
-    inputs:
-      browser:
-        type: choice
-        description: Which browser to test
-        required: true
-        options:
-          - chrome
-          - firefox
-          - edge
+on: [push]
 
 jobs:
   test:
-    name: Test
     runs-on: ubuntu-latest
-
-    container:
-      image: node:19
 
     services:
       selenium:
-        image: selenium/standalone-${{ github.event.inputs.browser }}
-        options: --shm-size=2gb
+        image: selenium/hub:latest
+        ports:
+          - 4444:4444
+        options: --name selenium-hub
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '19'
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run tests\seleniumGrid\test.js
-        env:
-          BROWSER: ${{ github.event.inputs.browser }}
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: screenshots
-          path: screenshots/
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install selenium-webdriver
+
+    - name: sleep
+      uses: whatnick/wait-action@master
+      with:
+        time: "15s"
+
+    - name: Run tests
+      run: node tests/seleniumGrid/test.js
+
+    - name: Tear down Selenium Grid
+      run: docker stop selenium-hub
