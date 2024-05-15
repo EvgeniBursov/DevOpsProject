@@ -32,11 +32,6 @@ jobs:
     - name: Install dependencies
       run: npm install selenium-webdriver
 
-
-    - name: Start app Server
-      run: node src/index.js
-
-
     - name: Start Selenium Server
       run: |
         java -jar selenium-server.jar -port 4444 &
