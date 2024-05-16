@@ -1,0 +1,40 @@
+name: Functional Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop_v_0.2_back
+      - feature_0.2_selenium_tests
+      - feature_version_3
+
+
+
+
+jobs:
+  Selenim:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: SeleniumIDE Login
+        run: npx mocha tests/FunctionalTest/seleniumIDE/login.spec.js
+
+      - name: SeleniumIDE Pages
+        run: npx mocha tests/FunctionalTest/seleniumIDE/pages.spec.js
+
+      - name: WebDriver Test Cart 
+        run: node tests/FunctionalTest/SeleniumWebDriver/cartTest.js
+
+      - name: WebDriver Test Route
+        run: node tests/FunctionalTest/SeleniumWebDriver/404Test.js
+
+      - name: WebDriver Test Login
+        run: node tests/FunctionalTest/SeleniumWebDriver/loginSeleniumTest.js
+
+      - name: WebDriver Test Register
+        run: node tests/FunctionalTest/SeleniumWebDriver/registerSeleniumTest.js

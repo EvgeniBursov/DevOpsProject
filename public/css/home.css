@@ -197,3 +197,30 @@
     grid-column: span 2;
     margin-bottom: 10px;
 }
+<<<<<<< HEAD
+=======
+
+.minusBtn {
+    background-color: #383838;
+    border: none;
+    color: white; 
+    padding: 5px 15px; 
+    font-size: 15px; 
+    cursor: pointer;
+    border-radius: 10px; 
+}
+
+.minusBtn:hover{
+    background-color: #a69a9a;
+}
+
+.minusBtn {
+    margin-left: 15px;
+}
+
+#count {
+    padding: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+>>>>>>> feature_version_3

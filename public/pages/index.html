@@ -156,8 +156,16 @@
     <script src="../js/footer.js"></script>
 </body>
 <script>
+<<<<<<< HEAD
     let productsData = [];
     let buttons = document.querySelectorAll('.card-btn');
+=======
+    let buttons = document.querySelectorAll('.card-btn');
+    let cartCount = document.getElementById('cart-count')
+    let total = document.getElementById('total') 
+    let buyBtn = document.querySelector('.buy_btn');
+    let productsData = []
+>>>>>>> feature_version_3
 
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
@@ -168,7 +176,11 @@
             const shortDescription = productCard.querySelector('.product-short-des').innerText;
             const price = productCard.querySelector('.price').innerText;
             const actualPrice = productCard.querySelector('.actual-price').innerText;
+<<<<<<< HEAD
             const productImage = document.querySelector('.product-thumb');
+=======
+            //const productImage = document.querySelector('.product-thumb');
+>>>>>>> feature_version_3
 
             if(userData){
                 const product = {
@@ -176,6 +188,7 @@
                     user_id: userData._id,
                     user_email: userData.email,
                     product_id: index + 1,
+<<<<<<< HEAD
                     product_img: productImage,
                 };
                 console.log(product)
@@ -187,19 +200,44 @@
                 console.log(productsJSON);
             }else{
                 return res.json({ 'alert': 'Please Login in system' });
+=======
+                    product_des: shortDescription,
+                    product_price: parseFloat(actualPrice.replace('$', '')),
+                };
+                console.log(product)
+                productsData.push(product);
+                updateCartCount(1);
+                updateCartPopup();
+                
+                //const productsJSON = JSON.stringify(productsData);
+                //console.log(productsJSON);
+            }else{
+                alert("Please Login in system")
+>>>>>>> feature_version_3
             }
             
         });
     });
 
+<<<<<<< HEAD
     
+=======
+function updateCartCount(num) {
+    cartCount.textContent = parseInt(cartCount.textContent) + num;
+}
+
+>>>>>>> feature_version_3
 function checkUserLoggedIn() {
     const userDataString = sessionStorage.getItem('user');
     if(userDataString) {
         return JSON.parse(userDataString);
     } else {
+<<<<<<< HEAD
         //return null;
         return res.json({ 'alert': 'Please Login in system' });
+=======
+        return null;
+>>>>>>> feature_version_3
     }
 }
 
@@ -207,6 +245,7 @@ function checkUserLoggedIn() {
 function updateCartPopup() {
     let cartPopup = document.querySelector('.cart-popup');
     let cartItemsList = document.querySelector('.cart-items-list');
+<<<<<<< HEAD
     let cartTotal = document.getElementById('cart-total');
     // Clear previous cart items
     cartItemsList.innerHTML = '';
@@ -220,10 +259,23 @@ function updateCartPopup() {
                 <div>
                     <h4>${product.product_name},${product.product_id}</h4>
                     <p>${2}</p>
+=======
+    let cartTotal = document.getElementById('total');
+
+    let totalPrice = 0
+    cartItemsList.innerHTML = '';
+    productsData.forEach((product,index) => {
+        const itemHTML = `
+            <li>
+                <div>
+                    <p><strong>${product.product_name} - ${product.product_des}</strong><button class="minusBtn" onclick="decrementCount(${index})">X</button></p>
+                    <p><h3>Price: ${product.product_price}$</h3></p>
+>>>>>>> feature_version_3
                 </div>
             </li>
         `;
         cartItemsList.insertAdjacentHTML('beforeend', itemHTML);
+<<<<<<< HEAD
 
         // Calculate total price
         total += product.price;
@@ -241,5 +293,72 @@ function updateCartPopup() {
 </script>
 
 
+=======
+        totalPrice += product.product_price
+    });
+    total.textContent = parseInt(totalPrice)
+}
+
+
+function incrementCount(index) {
+    let countElement = document.getElementById(`count`);
+    let count = parseInt(countElement.textContent);
+    count++;
+    countElement.textContent = count;
+    productsData.splice(index, 1);
+    updateCartPopup(); 
+}
+
+function decrementCount(index) {
+    productsData.splice(index, 1);
+    updateCartCount(-1)
+    updateCartPopup(); 
+}
+
+buyBtn.addEventListener('click', async () => {
+    const userData = checkUserLoggedIn();
+    if (userData && productsData.length > 0) {
+        cartPop.classList.toggle('hide')
+        window.location.href = '../pages/thankPage.html'
+        productsData = []
+    }else{
+        alert("Please Login in system or add products")
+    }
+
+    //sendData('/end', productsData)
+    //updateProductsJSON();
+    //sendData('/end', productsData)
+    //console.log("from btn:",productsData,"**********",productsJSON)
+})
+
+//new one end 
+/*const sendData = (path, data) => {
+    console.log(path, data);  
+    fetch(path, {
+        method: "POST", 
+        mode: "cors", 
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: data,
+    })
+    .then((res) => res.json())
+    .then(response => {
+        processData(response);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        loader.style.display = null;
+        showAlert('An error occurred while sending data.');
+    });
+}*/
+
+
+/*function updateProductsJSON() {
+    productsJSON = JSON.stringify(productsData);
+}*/
+
+</script>
+>>>>>>> feature_version_3
 
 

@@ -4,6 +4,11 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import User from '../models/user.js'
+<<<<<<< HEAD
+=======
+// eslint-disable-next-line no-unused-vars
+import Product from '../models/products.js'
+>>>>>>> feature_version_3
 import path from 'path'
 import bcrypt from 'bcrypt'
 
@@ -114,9 +119,53 @@ app.get('/cart', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/pages', 'shoppingCart.html'));
 });
 
+<<<<<<< HEAD
 /*app.post('/cart', async (req, res) => {
 
 
+=======
+app.get('/end', async (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/pages', 'thankPage.html'));
+})
+
+/*app.post('/end', async (req, res) => {
+  var req_email = req.body.email;
+  const updateUser = await User.findOne({ 'email': req_email });
+  if (!updateUser) {
+    return res.json({ 'alert': 'User not find' });
+  }else{
+    console.log('from index.js line 129:',req)
+    updateUser.products = req.body
+
+  }
+})*/
+
+/*
+app.post('/end', async (req, res) => {
+  try {
+      // Extract email from request body
+      const req_email = req.body.user_email; // Assuming user_email is sent in the request body
+
+      // Find user by email
+      const updateUser = await User.findOne({ 'email': req_email });
+      if (!updateUser) {
+          return res.status(404).json({ 'alert': 'User not found' });
+      }
+
+      // Extract products data from request body
+      const productsData = req.body.productsData; // Assuming productsData is sent in the request body
+
+      // Update user's products field with the extracted products data
+      updateUser.products = productsData;
+      await updateUser.save();
+
+      // Respond with success message
+      return res.status(200).json({ 'success': 'Products data updated successfully' });
+  } catch (error) {
+      console.error('Error:', error);
+      return res.status(500).json({ 'error': 'An error occurred while processing the request' });
+  }
+>>>>>>> feature_version_3
 })*/
 
 
