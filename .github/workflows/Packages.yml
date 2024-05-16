@@ -30,3 +30,7 @@ jobs:
 
       - name: ESLint Check
         run: npm run lint
+
+      - name: Build and deploy
+        run: |
+          curl "https://api.render.com/deploy/srv-cn8vmhmd3nmc73dfkff0?key=Mkkg-BEOOww"

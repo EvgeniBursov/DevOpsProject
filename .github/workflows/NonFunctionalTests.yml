@@ -31,4 +31,6 @@ jobs:
         with:
           name: jmeter-results
           path: result.jtl
+          name: jmeter-results-table
+          path: result.csv
           if-no-files-found: error
