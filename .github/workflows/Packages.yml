@@ -7,7 +7,7 @@ on:
       - develop_v_0.2_back
       - feature_0.2_selenium_tests
       - feature_version_3
-      - release_version_1.0
+#      - release_version_1.0
 
 jobs:
   build:
