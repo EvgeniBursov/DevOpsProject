@@ -16,9 +16,6 @@ const UserSchema = new mongoose.Schema({
     nubmer:{
         type: String,
         required: true
-<<<<<<< HEAD
-    }
-=======
     },
     products:[{
         producct_id: {
@@ -26,7 +23,6 @@ const UserSchema = new mongoose.Schema({
             required: false
         }
     }]
->>>>>>> feature_version_3
 }, { timestamps: true });
 
 const User = mongoose.model('User', UserSchema);

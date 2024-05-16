@@ -4,11 +4,8 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import User from '../models/user.js'
-<<<<<<< HEAD
-=======
 // eslint-disable-next-line no-unused-vars
 import Product from '../models/products.js'
->>>>>>> feature_version_3
 import path from 'path'
 import bcrypt from 'bcrypt'
 
@@ -119,11 +116,6 @@ app.get('/cart', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/pages', 'shoppingCart.html'));
 });
 
-<<<<<<< HEAD
-/*app.post('/cart', async (req, res) => {
-
-
-=======
 app.get('/end', async (req, res) => {
   res.sendFile(path.join(__dirname, '../public/pages', 'thankPage.html'));
 })
@@ -165,7 +157,6 @@ app.post('/end', async (req, res) => {
       console.error('Error:', error);
       return res.status(500).json({ 'error': 'An error occurred while processing the request' });
   }
->>>>>>> feature_version_3
 })*/
 
 
