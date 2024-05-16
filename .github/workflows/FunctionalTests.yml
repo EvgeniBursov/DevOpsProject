@@ -22,19 +22,19 @@ jobs:
         run: npm install
 
       - name: SeleniumIDE Login
-        run: npx mocha tests/seleniumIDE/login.spec.js
+        run: npx mocha tests/FunctionalTest/seleniumIDE/login.spec.js
 
       - name: SeleniumIDE Pages
-        run: npx mocha tests/seleniumIDE/pages.spec.js
+        run: npx mocha tests/FunctionalTest/seleniumIDE/pages.spec.js
 
       - name: WebDriver Test Cart 
-        run: node tests/selenium/cartTest.js
+        run: node tests/FunctionalTest/SeleniumWebDriver/cartTest.js
 
       - name: WebDriver Test Route
-        run: node tests/selenium/404Test.js
+        run: node tests/FunctionalTest/SeleniumWebDriver/404Test.js
 
       - name: WebDriver Test Login
-        run: node tests/selenium/loginSeleniumTest.js
+        run: node tests/FunctionalTest/SeleniumWebDriver/loginSeleniumTest.js
 
       - name: WebDriver Test Register
-        run: node tests/selenium/registerSeleniumTest.js
+        run: node tests/FunctionalTest/SeleniumWebDriver/registerSeleniumTest.js
