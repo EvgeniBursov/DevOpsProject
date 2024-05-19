@@ -11,7 +11,7 @@ jobs:
         image: selenium/hub:latest
         ports:
           - 4444:4444
-        options: --name selenium-hub --selenium-manager true
+        options: --selenium-manager true
 
     steps:
     - name: Checkout repository
