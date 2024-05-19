@@ -8,7 +8,7 @@ async function loginTest(browser) {
 
   if (browser === 'chrome') {
     driver = await new Builder()
-      .usingServer('http://localhost:4444/wd/hub')
+      .usingServer('http://localhost:4444')
       .forBrowser('chrome')
       .build();
       try {
