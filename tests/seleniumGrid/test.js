@@ -15,7 +15,7 @@ async function loginTest(browser) {
       console.log("after build")
       try {
         console.log("before connecting localhost 5000")
-        await driver.get('http://localhost:5000');
+        await driver.get('https://devopsproject-v74y.onrender.com');
         const title = await driver.getTitle();
         console.log('Page title:', title);
       }finally {
