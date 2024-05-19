@@ -7,11 +7,14 @@ async function loginTest(browser) {
   let driver;
 
   if (browser === 'chrome') {
+    console.log("before tests build")
     driver = await new Builder()
       .usingServer('http://localhost:4444')
       .forBrowser('chrome')
       .build();
+      console.log("after build")
       try {
+        console.log("before connecting localhost 5000")
         await driver.get('http://localhost:5000');
         const title = await driver.getTitle();
         console.log('Page title:', title);
