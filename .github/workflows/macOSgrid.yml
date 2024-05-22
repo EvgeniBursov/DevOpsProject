@@ -1,0 +1,28 @@
+name: Selenium Test Grid - Safari
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    services:
+      selenium-chrome:
+        image: selenium/standalone-safari
+        ports:
+          - 4444:4444
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install selenium-webdriver
+
+    - name: Run tests on Safari
+      run: node tests/seleniumGrid/test.js --browser=safari
