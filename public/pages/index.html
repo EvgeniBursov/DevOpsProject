@@ -216,7 +216,7 @@
     console.log(typeof productsData)  
 
     window.onload = function() {
-        if(localStorage.length === 0){
+        if(localStorage.length != 0){
             console.log(localproducts)
             console.log(productsData)
             console.log(typeof localproducts)
@@ -300,14 +300,14 @@ function incrementCount(index) {
     count++;
     countElement.textContent = count;
     productsData.splice(index, 1);
-    localStorage.splice(index, 1)
+    //localStorage.splice(index, 1)
     updateCartPopup(); 
 }
 
 function decrementCount(index) {
     if(index!=0){
         productsData.splice(index, 1);
-        localStorage.splice(index, 1)
+        //localStorage.splice(index, 1)
         updateCartCount(-1)
         updateCartPopup(); 
     }
