@@ -9,10 +9,10 @@ on:
       - feature_version_3
     #  - release_version_1.0
 
-  workflow_run:
-    workflows: ["Install Packages"]
-    types:
-      - completed
+  #workflow_run:
+  #  workflows: ["Install Packages"]
+  #  types:
+  #    - completed
 
 jobs:
   jmeter_job:
@@ -28,20 +28,9 @@ jobs:
           test-plan-path: ./tests/NoNFunctionalTest/PerformanceTesting.jmx
           args: ""
 
-      - name: Convert Results to Markdown Table
-        run: |
-          echo "Test Name, Latency (ms), Response Code" > result.csv
-          jq -r '.[] | [.name, .latency, .responseCode] | @csv' result.json >> result.csv
-          echo "| Test Name | Latency (ms) | Response Code |" > result.md
-          echo "| ----------| -------------| -------------|" >> result.md
-          tail -n +2 result.csv | awk -F, '{ printf("| %s | %s | %s |\n", $1, $2, $3) }' >> result.md
-
-      - name: Display Results
-        run: cat result.md
-
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
           name: jmeter-results
-          path: result.md
+          path: result.csv
           if-no-files-found: error
