@@ -315,14 +315,18 @@ function incrementCount(index) {
     let count = parseInt(countElement.textContent);
     count++;
     countElement.textContent = count;
-    productsData.splice(index, 1);
+    //productsData.splice(index, 1);
+    products.splice(index, 1);
     updateCartPopup(); 
 }
 
 function decrementCount(index) {
-    productsData.splice(index, 1);
-    updateCartCount(-1)
-    updateCartPopup(); 
+    if(index!=0){
+        //productsData.splice(index, 1);
+        products.splice(index, 1);
+        updateCartCount(-1)
+        updateCartPopup(); 
+    }
 }
 
 buyBtn.addEventListener('click', async () => {
