@@ -112,8 +112,3 @@ window.onload = () =>{
         popuptext.innerHTML = '<h4>Hello guest</h4>'
     }
 } 
-
-/*
-                <a href="../pages/shoppingCart.html"><img src="../img/cart.png" id="cart-btn" alt=""></a>
-                <span>0</span>
-*/ 

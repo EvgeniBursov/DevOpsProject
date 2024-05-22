@@ -208,7 +208,7 @@
     let total = document.getElementById('total') 
     let buyBtn = document.querySelector('.buy_btn');
     let productsData = []
-    var products = JSON.parse(localStorage.getItem('product')) || []
+    let localproducts = JSON.parse(localStorage.getItem('product')) || []
 
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
@@ -219,7 +219,6 @@
             const shortDescription = productCard.querySelector('.product-short-des').innerText;
             const price = productCard.querySelector('.price').innerText;
             const actualPrice = productCard.querySelector('.actual-price').innerText;
-            //const productImage = document.querySelector('.product-thumb');
 
             if(userData){
                 const product = {
@@ -231,10 +230,10 @@
                     product_price: parseFloat(actualPrice.replace('$', '')),
                 };
                 console.log(product)
-                productsData.push(product);
+                //productsData.push(product);
                 //NEW
-                products.push(product)
-                console.log(products)
+                localproducts.push(product)
+                console.log(localproducts)
 
                 updateCartCount(1);
                 updateCartPopup();
@@ -292,7 +291,7 @@ function updateCartPopup() {
 
     let totalPrice = 0
     cartItemsList.innerHTML = '';
-    products.forEach((product,index) => {
+    localproducts.forEach((product,index) => {
         const itemHTML = `
             <li>
                 <div>
@@ -316,14 +315,14 @@ function incrementCount(index) {
     count++;
     countElement.textContent = count;
     //productsData.splice(index, 1);
-    products.splice(index, 1);
+    localproducts.splice(index, 1);
     updateCartPopup(); 
 }
 
 function decrementCount(index) {
     if(index!=0){
         //productsData.splice(index, 1);
-        products.splice(index, 1);
+        localproducts.splice(index, 1);
         updateCartCount(-1)
         updateCartPopup(); 
     }
@@ -331,10 +330,10 @@ function decrementCount(index) {
 
 buyBtn.addEventListener('click', async () => {
     const userData = checkUserLoggedIn();
-    if (userData && productsData.length > 0) {
+    if (userData && localproducts.length > 0) {
         cartPop.classList.toggle('hide')
         window.location.href = '../pages/thankPage.html'
-        productsData = []
+        //productsData = []
     }else{
         alert("Please Login in system or add products")
     }
