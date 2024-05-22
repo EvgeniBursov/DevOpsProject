@@ -229,11 +229,10 @@
                     product_des: shortDescription,
                     product_price: parseFloat(actualPrice.replace('$', '')),
                 };
-                console.log(product)
                 //productsData.push(product);
                 //NEW
                 localproducts.push(product)
-                localStorage.setItem('localproducts', JSON.stringify(localproducts))
+                localStorage.setItem('localproducts', JSON.stringify(product))
                 console.log(localproducts)
 
                 updateCartCount(1);
