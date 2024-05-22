@@ -208,12 +208,12 @@
     let total = document.getElementById('total') 
     let buyBtn = document.querySelector('.buy_btn');
     let localproducts = JSON.parse(localStorage.getItem('localproducts')) || []
+    let productsData = [] 
 
-    if (localStorage != null)
-    {
-        let productsData = localproducts
-    }else{
-        let productsData = []
+    window.onload = function() {
+        if(localproducts != null){
+            productsData = localproducts
+        }
     }
 
     buttons.forEach((button, index) => {
@@ -306,18 +306,13 @@ function decrementCount(index) {
 
 buyBtn.addEventListener('click', async () => {
     const userData = checkUserLoggedIn();
-    if (userData && localproducts.length > 0) {
+    if (userData && productsData.length > 0) {
         cartPop.classList.toggle('hide')
         window.location.href = '../pages/thankPage.html'
         //productsData = []
     }else{
         alert("Please Login in system or add products")
     }
-
-    //sendData('/end', productsData)
-    //updateProductsJSON();
-    //sendData('/end', productsData)
-    //console.log("from btn:",productsData,"**********",productsJSON)
 })
 
 //new one end 
