@@ -208,10 +208,19 @@
     let total = document.getElementById('total') 
     let buyBtn = document.querySelector('.buy_btn');
     var localproducts = JSON.parse(localStorage.getItem('localproducts')) || []
-    var productsData = [] 
+    var productsData = []
+    console.log(localproducts)
+    console.log(productsData)
+    
+    console.log(typeof localproducts)
+    console.log(typeof productsData)  
 
     window.onload = function() {
-        if(localproducts != null){
+        if(localStorage.length === 0){
+            console.log(localproducts)
+            console.log(productsData)
+            console.log(typeof localproducts)
+            console.log(typeof productsData)      
             productsData = localproducts
         }
     }
