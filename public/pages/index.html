@@ -224,6 +224,7 @@
                     product_des: shortDescription,
                     product_price: parseFloat(actualPrice.replace('$', '')),
                 };
+                console.log(product)
                 productsData.push(product);
                 
                 updateCartCount(1);
@@ -281,11 +282,9 @@ function incrementCount(index) {
 }
 
 function decrementCount(index) {
-    if(index!=0){
-        productsData.splice(index, 1);
-        updateCartCount(-1)
-        updateCartPopup(); 
-    }
+    productsData.splice(index, 1);
+    updateCartCount(-1)
+    updateCartPopup(); 
 }
 
 buyBtn.addEventListener('click', async () => {
@@ -299,10 +298,6 @@ buyBtn.addEventListener('click', async () => {
     }
 })
 
-if (window.onload){
-    var localProducts = localStorage.setItem('products', productsData)
-    productsData = localProducts
-}
 
 //new one end 
 /*const sendData = (path, data) => {
