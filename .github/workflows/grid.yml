@@ -36,4 +36,4 @@ jobs:
       run: node tests/seleniumGrid/test.js
 
     - name: Tear down Selenium Grid
-      run: docker stop selenium-chrome
+      run: docker stop selenium-chrome selenium-firefox selenium-edge
