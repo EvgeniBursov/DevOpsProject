@@ -34,6 +34,3 @@ jobs:
 
     - name: Run tests
       run: node tests/seleniumGrid/browserTests.js
-
-    - name: Tear down Selenium Grid
-      run: docker stop ${{ job.services.selenium-chrome.name }} ${{ job.services.selenium-firefox.name }} ${{ job.services.selenium-edge.name }}
