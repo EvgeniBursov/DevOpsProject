@@ -6,38 +6,38 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-  services:
-      selenium-hub:
-        image: selenium/hub:latest
-        ports:
-          - 4444:4444
+    services:
+        selenium-hub:
+          image: selenium/hub:latest
+          ports:
+            - 4444:4444
 
-      chrome:
-        image: selenium/node-chrome:latest
-        depends_on:
-          - selenium-hub
-        environment:
-          HUB_HOST: selenium-hub
-        ports:
-          - 5555:5555
+        chrome:
+          image: selenium/node-chrome:latest
+          depends_on:
+            - selenium-hub
+          environment:
+            HUB_HOST: selenium-hub
+          ports:
+            - 5555:5555
 
-      firefox:
-        image: selenium/node-firefox:latest
-        depends_on:
-          - selenium-hub
-        environment:
-          HUB_HOST: selenium-hub
-        ports:
-          - 5556:5556
+        firefox:
+          image: selenium/node-firefox:latest
+          depends_on:
+            - selenium-hub
+          environment:
+            HUB_HOST: selenium-hub
+          ports:
+            - 5556:5556
 
-      edge:
-        image: selenium/node-edge:latest
-        depends_on:
-          - selenium-hub
-        environment:
-          HUB_HOST: selenium-hub
-        ports:
-          - 5557:5557
+        edge:
+          image: selenium/node-edge:latest
+          depends_on:
+            - selenium-hub
+          environment:
+            HUB_HOST: selenium-hub
+          ports:
+            - 5557:5557
 
     steps:
     - name: Checkout repository
