@@ -208,7 +208,7 @@
     let total = document.getElementById('total') 
     let buyBtn = document.querySelector('.buy_btn');
     let productsData = []
-    let localproducts = JSON.parse(localStorage.getItem('product')) || []
+    let localproducts = JSON.parse(localStorage.getItem('localproducts')) || []
 
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
@@ -232,8 +232,8 @@
                 console.log(product)
                 //productsData.push(product);
                 //NEW
-                localproducts = JSON.parse(localStorage.setItem(product.product_name, product.product_des, product.product_price)) 
                 localproducts.push(product)
+                localStorage.setItem('localproducts', JSON.stringify(localproducts))
                 console.log(localproducts)
 
                 updateCartCount(1);
@@ -292,7 +292,8 @@ function updateCartPopup() {
 
     let totalPrice = 0
     cartItemsList.innerHTML = '';
-    localproducts.forEach((product,index) => {
+    const selectedProducts = JSON.parse(localStorage.getItem('selectedProducts'));
+    selectedProducts.forEach((localproducts,index) => {
         const itemHTML = `
             <li>
                 <div>
