@@ -7,38 +7,19 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-        selenium-hub:
-          image: selenium/hub:latest
-          ports:
-            - 4444:4444
-
-        chrome:
-          image: selenium/node-chrome:latest
-          depends_on:
-            - selenium-hub
-          environment:
-            HUB_HOST: selenium-hub
-          ports:
-            - 5555:5555
-
-        firefox:
-          image: selenium/node-firefox:latest
-          depends_on:
-            - selenium-hub
-          environment:
-            HUB_HOST: selenium-hub
-          ports:
-            - 5556:5556
-
-        edge:
-          image: selenium/node-edge:latest
-          depends_on:
-            - selenium-hub
-          environment:
-            HUB_HOST: selenium-hub
-          ports:
-            - 5557:5557
-
+      selenium chrome:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+      selenium firefox:
+        image: selenium/standalone-firefox:latest
+        ports:
+          - 4445:4444
+      selenium edge:
+        image: selenium/standalone-edge:latest
+        ports:
+          - 4446:4444
+          
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
