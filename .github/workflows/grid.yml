@@ -27,13 +27,13 @@ jobs:
     - name: Install Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '20'
 
     - name: Install dependencies
       run: npm install selenium-webdriver
 
     - name: Run tests
-      run: node tests/seleniumGrid/test.js
+      run: node tests/seleniumGrid/browserTests.js
 
     - name: Tear down Selenium Grid
-      run: docker stop selenium-chrome selenium-firefox selenium-edge
+      run: docker stop ${{ job.services.selenium-chrome.name }} ${{ job.services.selenium-firefox.name }} ${{ job.services.selenium-edge.name }}

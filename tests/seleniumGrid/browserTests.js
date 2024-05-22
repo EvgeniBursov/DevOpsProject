@@ -1,5 +1,6 @@
 import { By, Builder, Key, until} from 'selenium-webdriver';
 import { Capabilities } from 'selenium-webdriver';
+import { Options } from 'selenium-webdriver/safari';
 
 
 
@@ -46,21 +47,6 @@ async function loginTest(browser) {
       }finally {
         await driver.quit();
     }
-  }else if (browser === 'safari') {
-    console.log("Running tests in Safari...");
-    const safariCapabilities = Capabilities.safari();
-    driver = await new Builder()
-      .forBrowser('safari')
-      .usingServer('http://localhost:4444')
-      .withCapabilities(safariCapabilities)
-      .build();
-      try {
-        await driver.get('https://devopsproject-v74y.onrender.com');
-        const title = await driver.getTitle();
-        console.log('Page title from safari:', title);
-      }finally {
-        await driver.quit();
-    }
   }else {
     console.log("Unsupported browser.");
     return;
@@ -74,7 +60,6 @@ async function runTests() {
   
   console.log("Running tests in Firefox...");
   await loginTest('firefox');
-
   
   console.log("Running tests in Edge...");
   await loginTest('edge');
