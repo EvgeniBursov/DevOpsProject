@@ -207,8 +207,8 @@
     let cartCount = document.getElementById('cart-count')
     let total = document.getElementById('total') 
     let buyBtn = document.querySelector('.buy_btn');
-    let localproducts = JSON.parse(localStorage.getItem('localproducts')) || []
-    let productsData = [] 
+    var localproducts = JSON.parse(localStorage.getItem('localproducts')) || []
+    var productsData = [] 
 
     window.onload = function() {
         if(localproducts != null){
