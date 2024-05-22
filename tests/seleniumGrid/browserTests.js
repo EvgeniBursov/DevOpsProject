@@ -1,8 +1,5 @@
 import { By, Builder, Key, until} from 'selenium-webdriver';
 import { Capabilities } from 'selenium-webdriver';
-import { Options } from 'selenium-webdriver/safari';
-
-
 
 async function loginTest(browser) {
   let driver;
