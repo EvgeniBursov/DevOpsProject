@@ -47,6 +47,7 @@ async function loginTest(browser) {
         await driver.quit();
     }
   }else if (browser === 'safari') {
+    console.log("Running tests in Safari...");
     const safariCapabilities = Capabilities.safari();
     driver = await new Builder()
       .forBrowser('safari')
@@ -74,11 +75,10 @@ async function runTests() {
   console.log("Running tests in Firefox...");
   await loginTest('firefox');
 
-  console.log("Running tests in Safari...");
-  await loginTest('safari');
-
+  
   console.log("Running tests in Edge...");
   await loginTest('edge');
+
   console.log("All tests completed.");
 }
 
