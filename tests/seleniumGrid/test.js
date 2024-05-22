@@ -22,7 +22,7 @@ async function loginTest(browser) {
     const firefoxCapabilities = Capabilities.firefox();
     driver = await new Builder()
       .forBrowser('firefox')
-      .usingServer('http://localhost:4444')
+      .usingServer('http://localhost:5555')
       .withCapabilities(firefoxCapabilities)
       .build();
       try {
@@ -36,7 +36,7 @@ async function loginTest(browser) {
     const edgeCapabilities = Capabilities.edge();
     driver = await new Builder()
       .forBrowser('edge')
-      .usingServer('http://localhost:4444')
+      .usingServer('http://localhost:6666')
       .withCapabilities(edgeCapabilities)
       .build();
       try {

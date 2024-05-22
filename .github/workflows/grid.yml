@@ -8,9 +8,16 @@ jobs:
 
     services:
       selenium:
-        image: selenium/standalone-chrome
+        image: selenium/standalone-chrome:latest
         ports:
           - 4444:4444
+        image: selenium/standalone-firefox:latest
+        ports:
+          - 5555:5555
+        image: selenium/standalone-edge:latest
+        ports:
+          - 6666:6666
+
 
     steps:
     - name: Checkout repository
