@@ -232,6 +232,7 @@
                 console.log(product)
                 //productsData.push(product);
                 //NEW
+                localproducts = JSON.parse(localStorage.setItem('product')) 
                 localproducts.push(product)
                 console.log(localproducts)
 
