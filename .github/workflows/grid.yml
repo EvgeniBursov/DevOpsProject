@@ -1,8 +1,10 @@
 name: Selenium Test Grid
 
 on:
-  workflow_call:
-
+  push:
+    branches:
+      - main
+      - release_version_1.0
 
 jobs:
   test:
@@ -35,4 +37,5 @@ jobs:
       run: npm install selenium-webdriver
 
     - name: Run tests
-      run: node tests/seleniumGrid/browserTests.js
+      run: node tests/FunctionalTest/seleniumGrid/browserTests.js
+ 
