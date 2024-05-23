@@ -15,6 +15,6 @@ jobs:
     name: Scan ZAP website
     steps:
       - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.3.0
+        uses: zaproxy/action-full-scan@v0.10.0
         with:
           target: 'https://devopsproject-v74y.onrender.com/pages/index.html'
