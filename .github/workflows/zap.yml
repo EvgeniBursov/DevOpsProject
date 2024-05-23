@@ -41,7 +41,6 @@ jobs:
           if [ "${{ steps.zap_scan.outputs.fail-new }}" -ne 0 ] || [ "${{ steps.zap_scan.outputs.fail-inprog }}" -ne 0 ]; then
             echo "Failing build due to ZAP scan failures"
             exit 1
-          fi
 
       - name: Create GitHub Issue for Alerts
         if: ${{ steps.zap_scan.outputs.warn-new != '0' }}
