@@ -24,6 +24,33 @@ jobs:
             ./tests/NoNFunctionalTest/TestForPUTS/Login.jmx
           args: ""
 
+
+      - name: JMeter Test For 100 Users
+        uses: QAInsights/PerfAction@v5.6.2
+        with:
+          test-plan-path: ./tests/NoNFunctionalTest/TestforGETS/LoadPerformancePlanFor100.jmx
+          args: ""
+
+
+      - name: JMeter Test For 500 Users
+        uses: QAInsights/PerfAction@v5.6.2
+        with:
+          test-plan-path: ./tests/NoNFunctionalTest/TestforGETS/LoadPerformancePlanFor500.jmx
+          args: ""
+
+
+      - name: JMeter Test For PUT Register
+        uses: QAInsights/PerfAction@v5.6.2
+        with:
+          test-plan-path: ./tests/NoNFunctionalTest/TestForPUTS/Register.jmx
+          args: ""
+
+      - name: JMeter Test For PUT Login 100 Users
+        uses: QAInsights/PerfAction@v5.6.2
+        with:
+          test-plan-path: ./tests/NoNFunctionalTest/TestForPUTS/Login.jmx
+          args: ""
+
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
