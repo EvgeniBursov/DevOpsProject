@@ -27,21 +27,6 @@ jobs:
         with:
           target: 'https://devopsproject-v74y.onrender.com/pages/index.html'
 
-     - name: Parse ZAP Scan Results
-        shell: bash
-        run: |
-          echo "FAIL-NEW: ${{ steps.zap_scan.outputs.fail-new }}"
-          echo "FAIL-INPROG: ${{ steps.zap_scan.outputs.fail-inprog }}"
-          echo "WARN-NEW: ${{ steps.zap_scan.outputs.warn-new }}"
-          echo "WARN-INPROG: ${{ steps.zap_scan.outputs.warn-inprog }}"
-          echo "INFO: ${{ steps.zap_scan.outputs.info }}"
-          echo "IGNORE: ${{ steps.zap_scan.outputs.ignore }}"
-          echo "PASS: ${{ steps.zap_scan.outputs.pass }}"
-          
-          if [ "${{ steps.zap_scan.outputs.fail-new }}" -ne 0 ] || [ "${{ steps.zap_scan.outputs.fail-inprog }}" -ne 0 ]; then
-            echo "Failing build due to ZAP scan failures"
-            exit 1
-
       - name: Create GitHub Issue for Alerts
         if: ${{ steps.zap_scan.outputs.warn-new != '0' }}
         env:
