@@ -39,13 +39,13 @@ jobs:
           args: ""
 
 
-      - name: JMeter Test For PUT Register
+      - name: JMeter Test For PUT Register for 10 Users
         uses: QAInsights/PerfAction@v5.6.2
         with:
           test-plan-path: ./tests/NoNFunctionalTest/TestForPUTS/Register.jmx
           args: ""
 
-      - name: JMeter Test For PUT Login 100 Users
+      - name: JMeter Test For PUT Login for 10 Users
         uses: QAInsights/PerfAction@v5.6.2
         with:
           test-plan-path: ./tests/NoNFunctionalTest/TestForPUTS/Login.jmx
