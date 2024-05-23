@@ -4,10 +4,7 @@ on:
   push:
     branches:
       - main
-      - develop_v_0.2_back
-      - feature_0.2_selenium_tests
-      - feature_version_3
-#      - release_version_1.0
+      - release_version_1.0
 
 jobs:
   jmeter_job:
@@ -20,7 +17,11 @@ jobs:
       - name: JMeter Test
         uses: QAInsights/PerfAction@v5.6.2
         with:
-          test-plan-path: ./tests/NoNFunctionalTest/PerformanceTesting.jmx
+          test-plan-path: |
+          ./tests/NoNFunctionalTest/TestforGETS/LoadPerformancePlanFor100.jmx
+          ./tests/NoNFunctionalTest/TestforGETS/LoadPerformancePlanFor500.jmx
+          ./tests/NoNFunctionalTest/TestForPUTS/Register.jmx
+          ./tests/NoNFunctionalTest/TestForPUTS/Login.jmx
           args: ""
 
       - name: Upload Results
@@ -29,3 +30,34 @@ jobs:
           name: jmeter-results
           path: result.jtl
           if-no-files-found: error
+
+
+     - name: Display Results Table
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: |
+          const fs = require('fs');
+          const parse = require('csv-parse/lib/sync');
+          const { table } = require('table');
+
+          // Read the JTL file
+          const jtlFile = 'result.jtl';
+          const jtlData = fs.readFileSync(jtlFile, 'utf8');
+
+          // Parse the CSV data
+          const parsedData = parse(jtlData, {
+            columns: true,
+            skip_empty_lines: true
+          });
+
+          // Prepare table headers
+          const headers = Object.keys(parsedData[0]);
+
+          // Prepare table data
+          const data = [headers].concat(parsedData.map(row => headers.map(header => row[header])));
+
+          // Generate the table
+          const output = table(data);
+
+          console.log(output);
