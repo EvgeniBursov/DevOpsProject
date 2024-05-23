@@ -30,8 +30,3 @@ jobs:
           name: jmeter-results
           path: result.jtl
           if-no-files-found: error
-
-      - name: Display Results Table
-        run: |
-          node generateTable.js
-        shell: bash
