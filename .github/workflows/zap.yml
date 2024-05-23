@@ -1,0 +1,40 @@
+name: ZAP Scanning Test
+
+on:
+  push:
+    branches:
+      - main
+      
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan ZAP website
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: ZAP Scan
+        id: zap_scan
+        uses: zaproxy/action-full-scan@v0.10.0
+        with:
+          target: 'https://devopsproject-v74y.onrender.com/pages/index.html'
+
+      - name: Create GitHub Issue for Alerts
+        if: ${{ steps.zap_scan.outputs.warn-new != '0' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: ZAP Scan Alerts
+          content-filepath: ./zap_scan_report.md
+          labels: bug, security
+
+      - name: Upload ZAP Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: zap-report
+          path: ./zap_scan_report.md

@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-      - develop_v_0.2_back
-      - feature_0.2_selenium_tests
-      - feature_version_3
 
 jobs:
   build:
