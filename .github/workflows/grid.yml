@@ -1,10 +1,8 @@
 name: Selenium Test Grid
 
 on:
-  workflow_run:
-    workflows: ["Functional Tests"]
-    types:
-      - completed
+  workflow_call:
+
 
 jobs:
   test:
