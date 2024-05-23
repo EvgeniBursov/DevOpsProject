@@ -9,9 +9,6 @@ on:
       - feature_version_3
 #      - release_version_1.0
 
-
-
-
 jobs:
   Selenim:
     runs-on: windows-latest
@@ -39,3 +36,6 @@ jobs:
 
       - name: WebDriver Test Register
         run: node tests/FunctionalTest/SeleniumWebDriver/registerSeleniumTest.js
+
+      - name: Run Grid
+        run: echo "Running grid workflow tasks"
