@@ -31,9 +31,7 @@ jobs:
           path: result.jtl
           if-no-files-found: error
 
-      - name: Upload HTML Reports
-        uses: actions/upload-artifact@v3
-        with:
-          name: jmeter-html-reports
-          path: reports
-          if-no-files-found: error
+      - name: Display Results Table
+        run: |
+          node generateTable.js
+        shell: bash
