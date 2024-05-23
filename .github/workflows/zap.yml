@@ -9,6 +9,10 @@ on:
       - feature_version_3
       - release_version_1.0
 
+permissions:
+  issues: write
+  contents: read
+
 jobs:
   zap_scan:
     runs-on: ubuntu-latest
@@ -36,10 +40,11 @@ jobs:
           if [ "${{ steps.zap_scan.outputs.fail-new }}" -ne 0 ] || [ "${{ steps.zap_scan.outputs.fail-inprog }}" -ne 0 ]; then
             echo "Failing build due to ZAP scan failures"
             exit 1
-          fi
 
       - name: Create GitHub Issue for Alerts
-        if: ${{ steps.zap_scan.outputs.fail-new != '0' || steps.zap_scan.outputs.warn-new != '0' }}
+        if: ${{ steps.zap_scan.outputs.warn-new != '0' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         uses: peter-evans/create-issue-from-file@v4
         with:
           title: ZAP Scan Alerts
