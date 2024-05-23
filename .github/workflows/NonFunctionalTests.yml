@@ -31,33 +31,9 @@ jobs:
           path: result.jtl
           if-no-files-found: error
 
-      - name: Display Results Table
-        uses: actions/setup-node@v3
+      - name: Upload HTML Reports
+        uses: actions/upload-artifact@v3
         with:
-          node-version: '14'
-      - run: |
-          const fs = require('fs');
-          const parse = require('csv-parse/lib/sync');
-          const { table } = require('table');
-
-          // Read the JTL file
-          const jtlFile = 'result.jtl';
-          const jtlData = fs.readFileSync(jtlFile, 'utf8');
-
-          // Parse the CSV data
-          const parsedData = parse(jtlData, {
-            columns: true,
-            skip_empty_lines: true
-          });
-
-          // Prepare table headers
-          const headers = Object.keys(parsedData[0]);
-
-          // Prepare table data
-          const data = [headers].concat(parsedData.map(row => headers.map(header => row[header])));
-
-          // Generate the table
-          const output = table(data);
-
-          console.log(output);
-        shell: bash
+          name: jmeter-html-reports
+          path: reports
+          if-no-files-found: error
