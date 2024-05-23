@@ -60,3 +60,4 @@ jobs:
           const output = table(data);
 
           console.log(output);
+        shell: bash
