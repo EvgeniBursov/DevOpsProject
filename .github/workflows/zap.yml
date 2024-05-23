@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - main
-      - release_version_1.0
-
+      
 permissions:
   issues: write
   contents: read
