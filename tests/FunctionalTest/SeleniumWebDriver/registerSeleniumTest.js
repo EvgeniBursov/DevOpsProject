@@ -1,9 +1,6 @@
 import { By, Builder, Key, until } from 'selenium-webdriver';
 import assert from 'assert';
 
-
-
-
 async function registerTest() {
   let driver;
   try {
