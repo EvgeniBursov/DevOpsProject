@@ -1,3 +1,5 @@
+import { response } from "express";
+
 const loader = document.querySelector('.loader');
 const submitBtn = document.querySelector('.submit-btn');
 const nameUser = document.querySelector('#name');
@@ -90,12 +92,20 @@ const processData = (data) => {
             twoFaForm.style.display = 'block';
             if (accessBtn) {
                 accessBtn.addEventListener('click', () => {
-                    sendData('/verify', {
-                        verify: secret.value,
-                        email: data.email,
-                    });
-                    sessionStorage.user = JSON.stringify(data);
-                    location.replace('/');
+                    try{
+                        sendData('/verify', {
+                            verify: secret.value,
+                            email: data.email,
+                        });
+                        if(response.alert){
+                            showAlert(data.alert);
+                        }else{
+                            sessionStorage.user = JSON.stringify(data);
+                            location.replace('/');
+                        }
+                    }catch{
+                        showAlert("error")
+                    }
                 });
             } else {
                 console.error('Access button not found');
