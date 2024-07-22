@@ -88,12 +88,26 @@ try{
 })
 
 app.post('/verify', async (req, res) => {
-  try{
-    const req_code = req.body.verify;
-    console.log(req_code)
-  }catch(err){
-    return (res,err)
-  }
+  const req_code = req.body.verify;
+  const req_email = req.body.email;
+  console.log(req_code,req_email)
+
+    try {
+      // Find the user by email
+      const logUser = await User.findOne({ 'email': req_email });
+      if (!logUser) {
+        return res.json({ 'alert': 'Incorrect user' });
+      }
+      const match_secret = await authenticator.check(req_code, logUser.twoFa);
+      if(!match_secret) {
+        return res.json({ 'alert': "incorrect token"})
+      }else{
+        return res.json(logUser)
+      }
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ 'alert': 'Fail checking user' });
+    }
 });
 
 app.get('/login', (req, res) => {

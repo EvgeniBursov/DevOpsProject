@@ -88,13 +88,12 @@ const processData = (data) => {
         if (form && twoFaForm) {
             form.style.display = 'none';
             twoFaForm.style.display = 'block';
-            console.log("work");
-
             if (accessBtn) {
                 accessBtn.addEventListener('click', () => {
                     console.log("work");
                     sendData('/verify', {
-                        verify: secret.value
+                        verify: secret.value,
+                        email: data.email,
                     });
                     console.log("work");
                     location.replace('/');
