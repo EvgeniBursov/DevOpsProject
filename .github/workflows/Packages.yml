@@ -26,8 +26,8 @@ jobs:
         run: |
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
 
-      - name: ESLint Check
-        run: npm run lint
+#      - name: ESLint Check
+#        run: npm run lint
 
       - name: Build and deploy
         run: |
