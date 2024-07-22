@@ -89,15 +89,17 @@ const processData = (data) => {
             const accessBtn = document.getElementById('access-account-btn');
     
             createAccountBtn.addEventListener('click', () => {
-                // Hide the account form and show the 2FA form
                 form.style.display = 'none';
                 twoFaForm.style.display = 'block';
+                console.log("work")
             });
 
             accessBtn.addEventListener('click', () => {
+                console.log("work")
                 sendData('/verify',{
                     verify: secret.value
                 })
+                console.log("work")
                 location.replace('/');
             });
 

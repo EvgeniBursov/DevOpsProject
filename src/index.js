@@ -81,16 +81,19 @@ try{
   const newUser = await data.save()
   const token = authenticator.generate(newUser.twoFa);
   sendMail(req_email, token)
-  res.json(data)
+  res.json("message send,", data)
 }catch(err){
   return (res,err)
 }
 })
 
 app.post('/verify', async (req, res) => {
-  const req_code = req.body.verify;
-  console.log(req_code)
-
+  try{
+    const req_code = req.body.verify;
+    console.log(req_code)
+  }catch(err){
+    return (res,err)
+  }
 });
 
 app.get('/login', (req, res) => {
