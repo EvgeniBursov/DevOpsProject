@@ -9,6 +9,7 @@ import Product from '../models/products.js'
 import path from 'path'
 import bcrypt from 'bcrypt'
 
+import { sendMail } from '../sendEmail.js';
 import { authenticator } from 'otplib';
 
 import { fileURLToPath } from 'url';
@@ -78,12 +79,19 @@ try{
   })
   // eslint-disable-next-line no-unused-vars
   const newUser = await data.save()
+  const token = authenticator.generate(newUser.twoFa);
+  sendMail(req_email, token)
   res.json(data)
 }catch(err){
   return (res,err)
 }
 })
 
+app.post('/verify', async (req, res) => {
+  const req_code = req.body.verify;
+  console.log(req_code)
+
+});
 
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/pages', 'login.html'));

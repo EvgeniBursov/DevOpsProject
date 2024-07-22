@@ -5,6 +5,8 @@ const email = document.querySelector('#email');
 const password = document.querySelector('#password');
 const conf_password = document.getElementById('conf_password');
 const number = document.querySelector('#number');
+const secret = document.getElementById('2fa');
+
 
 submitBtn.addEventListener('click', () => {
     if(nameUser != null){
@@ -27,7 +29,6 @@ submitBtn.addEventListener('click', () => {
                 email: email.value,
                 password: password.value,
                 number: number.value,
-                //twoFa: authenticator.generateSecret(),
             })
         }
     } else {
@@ -80,6 +81,28 @@ const processData = (data) => {
         showAlert(data.alert);
     } else if(data.name){
         sessionStorage.user = JSON.stringify(data);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const createAccountBtn = document.getElementById('create-account-btn');
+            const twoFaForm = document.getElementById('2fa-form');
+            const form = document.getElementById('signup-form');
+            const accessBtn = document.getElementById('access-account-btn');
+    
+            createAccountBtn.addEventListener('click', () => {
+                // Hide the account form and show the 2FA form
+                form.style.display = 'none';
+                twoFaForm.style.display = 'block';
+            });
+
+            accessBtn.addEventListener('click', () => {
+                sendData('/verify',{
+                    verify: secret.value
+                })
+            });
+
+
+        });
+        
         location.replace('/');
     }
 }
