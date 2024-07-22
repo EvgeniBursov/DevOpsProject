@@ -98,12 +98,13 @@ const processData = (data) => {
                 sendData('/verify',{
                     verify: secret.value
                 })
+                location.replace('/');
             });
 
 
         });
         
-        location.replace('/');
+
     }
 }
 
