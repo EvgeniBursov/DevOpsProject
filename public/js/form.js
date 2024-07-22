@@ -90,12 +90,11 @@ const processData = (data) => {
             twoFaForm.style.display = 'block';
             if (accessBtn) {
                 accessBtn.addEventListener('click', () => {
-                    console.log("work");
                     sendData('/verify', {
                         verify: secret.value,
                         email: data.email,
                     });
-                    console.log("work");
+                    sessionStorage.user = JSON.stringify(data);
                     location.replace('/');
                 });
             } else {
@@ -104,27 +103,6 @@ const processData = (data) => {
         } else {
             console.error('Form or 2FA form not found');
         }
-
-        /*
-        const createAccountBtn = document.getElementById('create-account-btn');
-        const twoFaForm = document.getElementById('2fa-form');
-        const form = document.getElementById('signup-form');
-        const accessBtn = document.getElementById('access-account-btn');
-
-        createAccountBtn.addEventListener('click', () => {
-            form.style.display = 'none';
-            twoFaForm.style.display = 'block';
-            console.log("work")
-        });
-
-        accessBtn.addEventListener('click', () => {
-            console.log("work")
-            sendData('/verify',{
-                verify: secret.value
-            })
-            console.log("work")
-            location.replace('/');
-        });*/
     }
 }
 
