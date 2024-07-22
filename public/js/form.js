@@ -80,7 +80,7 @@ const processData = (data) => {
     console.log("im ghere line 80")
     if(data.alert){
         showAlert(data.alert);
-    } else if(data.name && window.location.pathname === '/signup'){
+    } else if(data.name){
         const twoFaForm = document.getElementById('2fa-form');
         const form = document.getElementById('signup-form');
         const accessBtn = document.getElementById('access-account-btn');
