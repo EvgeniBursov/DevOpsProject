@@ -1,8 +1,11 @@
+import crypto from 'crypto'
+
 const loader = document.querySelector('.loader');
 const submitBtn = document.querySelector('.submit-btn');
 const nameUser = document.querySelector('#name');
 const email = document.querySelector('#email');
 const password = document.querySelector('#password');
+const conf_password = document.getElementById('conf_password');
 const number = document.querySelector('#number');
 
  
@@ -14,6 +17,8 @@ submitBtn.addEventListener('click', () => {
             showAlert('enter your email');
         } else if(password.value.length < 6){
             showAlert('password should be 6 letters long');
+        } else if(conf_password.value != password.value){
+            showAlert('password should be same');
         } else if(!number.value.length){
             showAlert('enter your phone number');
         } else if(!Number(number.value) || number.value.length < 1){
@@ -25,6 +30,7 @@ submitBtn.addEventListener('click', () => {
                 email: email.value,
                 password: password.value,
                 number: number.value,
+                twoFa: generate2FACode(),
             })
         }
     } else {
@@ -81,3 +87,6 @@ const processData = (data) => {
     }
 }
 
+const generate2FACode = () => {
+    return crypto.randomInt(100000, 1000000); 
+};
