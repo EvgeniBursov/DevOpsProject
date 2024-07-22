@@ -80,7 +80,7 @@ const processData = (data) => {
     console.log("im ghere line 80")
     if(data.alert){
         showAlert(data.alert);
-    } else if(data.name){
+    } else if(data.name && window.location.pathname === '/signup'){
         const twoFaForm = document.getElementById('2fa-form');
         const form = document.getElementById('signup-form');
         const accessBtn = document.getElementById('access-account-btn');
@@ -101,6 +101,8 @@ const processData = (data) => {
                 console.error('Access button not found');
             }
         } else {
+            sessionStorage.user = JSON.stringify(data);
+            location.replace('/');
             console.error('Form or 2FA form not found');
         }
     }
