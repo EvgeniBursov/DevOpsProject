@@ -81,7 +81,7 @@ try{
   const newUser = await data.save()
   const token = authenticator.generate(newUser.twoFa);
   sendMail(req_email, token)
-  res.json("message send,", data)
+  res.json(data)
 }catch(err){
   return (res,err)
 }

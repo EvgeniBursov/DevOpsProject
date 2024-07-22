@@ -82,7 +82,7 @@ const processData = (data) => {
     } else if(data.name){
         sessionStorage.user = JSON.stringify(data);
 
-        document.addEventListener('DOMContentLoaded', () => {
+        /*document.addEventListener('DOMContentLoaded', () => {
             const createAccountBtn = document.getElementById('create-account-btn');
             const twoFaForm = document.getElementById('2fa-form');
             const form = document.getElementById('signup-form');
@@ -102,11 +102,26 @@ const processData = (data) => {
                 console.log("work")
                 location.replace('/');
             });
+        });*/
+        const createAccountBtn = document.getElementById('create-account-btn');
+        const twoFaForm = document.getElementById('2fa-form');
+        const form = document.getElementById('signup-form');
+        const accessBtn = document.getElementById('access-account-btn');
 
-
+        createAccountBtn.addEventListener('click', () => {
+            form.style.display = 'none';
+            twoFaForm.style.display = 'block';
+            console.log("work")
         });
-        
 
+        accessBtn.addEventListener('click', () => {
+            console.log("work")
+            sendData('/verify',{
+                verify: secret.value
+            })
+            console.log("work")
+            location.replace('/');
+        });
     }
 }
 
