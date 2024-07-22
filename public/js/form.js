@@ -77,29 +77,35 @@ const sendData = (path, data) => {
 
 const processData = (data) => {
     loader.style.display = null;
+    console.log("im ghere line 80")
     if(data.alert){
         showAlert(data.alert);
     } else if(data.name){
-        sessionStorage.user = JSON.stringify(data);
+        const twoFaForm = document.getElementById('2fa-form');
+        const form = document.getElementById('signup-form');
+        const accessBtn = document.getElementById('access-account-btn');
 
-        document.addEventListener('DOMContentLoaded', () => {
-            //const createAccountBtn = document.getElementById('create-account-btn');
-            const twoFaForm = document.getElementById('2fa-form');
-            const form = document.getElementById('signup-form');
-            const accessBtn = document.getElementById('access-account-btn');
+        if (form && twoFaForm) {
             form.style.display = 'none';
             twoFaForm.style.display = 'block';
-            console.log("work")
+            console.log("work");
 
-            accessBtn.addEventListener('click', () => {
-                console.log("work")
-                sendData('/verify',{
-                    verify: secret.value
-                })
-                console.log("work")
-                location.replace('/');
-            });
-        });
+            if (accessBtn) {
+                accessBtn.addEventListener('click', () => {
+                    console.log("work");
+                    sendData('/verify', {
+                        verify: secret.value
+                    });
+                    console.log("work");
+                    location.replace('/');
+                });
+            } else {
+                console.error('Access button not found');
+            }
+        } else {
+            console.error('Form or 2FA form not found');
+        }
+
         /*
         const createAccountBtn = document.getElementById('create-account-btn');
         const twoFaForm = document.getElementById('2fa-form');
