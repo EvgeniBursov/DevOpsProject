@@ -9,6 +9,8 @@ import Product from '../models/products.js'
 import path from 'path'
 import bcrypt from 'bcrypt'
 
+import { authenticator } from 'otplib';
+
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
@@ -52,7 +54,7 @@ app.post('/signup', async (req, res) => {
   var req_email = req.body.email;
   var req_pass = req.body.password;
   var req_number = req.body.number;
-  var req_2fa = req.body.twoFa;
+
 
   try{
     const user = await User.findOne({'email': req_email})
@@ -72,7 +74,7 @@ try{
     email: req_email,
     password: encryptedPwd,
     nubmer: req_number,
-    twoFa: req_2fa,
+    twoFa: authenticator.generateSecret(),
   })
   // eslint-disable-next-line no-unused-vars
   const newUser = await data.save()

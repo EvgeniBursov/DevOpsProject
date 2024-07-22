@@ -1,5 +1,3 @@
-import crypto from 'crypto'
-
 const loader = document.querySelector('.loader');
 const submitBtn = document.querySelector('.submit-btn');
 const nameUser = document.querySelector('#name');
@@ -8,7 +6,6 @@ const password = document.querySelector('#password');
 const conf_password = document.getElementById('conf_password');
 const number = document.querySelector('#number');
 
- 
 submitBtn.addEventListener('click', () => {
     if(nameUser != null){
         if(nameUser.value.length < 2){
@@ -30,7 +27,7 @@ submitBtn.addEventListener('click', () => {
                 email: email.value,
                 password: password.value,
                 number: number.value,
-                twoFa: generate2FACode(),
+                //twoFa: authenticator.generateSecret(),
             })
         }
     } else {
@@ -87,6 +84,3 @@ const processData = (data) => {
     }
 }
 
-const generate2FACode = () => {
-    return crypto.randomInt(100000, 1000000); 
-};
