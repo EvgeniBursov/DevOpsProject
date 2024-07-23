@@ -141,6 +141,11 @@ app.post('/login', async (req, res) => {
     if(!match_pass) {
       return res.json({ 'alert': "incorrect password"})
     }else{
+      logUser.access = false;
+      logUser.twoFa = authenticator.generateSecret()
+      await logUser.save();
+      const token = authenticator.generate(logUser.twoFa);
+      sendMail(req_email, token)
       return res.json(logUser)
     }
   } catch (err) {
