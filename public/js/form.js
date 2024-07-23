@@ -132,9 +132,14 @@ const processData = (data) => {
                             verify: secret.value,
                             email: data.email,
                         });
-                        console.log(data)
-                        sessionStorage.user = JSON.stringify(data);
-                        location.replace('/');
+                        if(response.alert)
+                        {
+                            showAlert(data.alert); 
+                        }else{
+                            console.log(data)
+                            sessionStorage.user = JSON.stringify(response.name);
+                            location.replace('/');
+                        }
                     } catch (error) {
                         console.error('Error verifying TOTP:', error);
                         showAlert('Error verifying TOTP. Please try again.');
