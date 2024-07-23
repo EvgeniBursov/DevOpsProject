@@ -68,7 +68,7 @@ app.post('/signup', async (req, res) => {
 try{
   const salt = await bcrypt.genSalt(10)
   const encryptedPwd = await bcrypt.hash(req_pass,salt)
-  
+
   authenticator.options = { step: 180}
   const secret = authenticator.generateSecret()
 
@@ -94,7 +94,6 @@ try{
 app.post('/verify', async (req, res) => {
   const req_code = req.body.verify;
   const req_email = req.body.email;
-  console.log("line 93 back",req_code,req_email)
 
     try {
       // Find the user by email
@@ -102,7 +101,6 @@ app.post('/verify', async (req, res) => {
       if (!logUser) {
         return res.json({ 'alert': 'Incorrect user' });
       }
-      console.log(logUser.twoFa,req_code)
       const match_secret = authenticator.check(req_code,logUser.twoFa)
       console.log(match_secret)
       if(!match_secret) {
