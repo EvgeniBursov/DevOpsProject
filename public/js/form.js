@@ -132,6 +132,8 @@ const processData = (data) => {
                             verify: secret.value,
                             email: data.email,
                         });
+                        console.log(response)
+                        console.log(response.data)
                         if(response.alert)
                         {
                             showAlert(data.alert); 
