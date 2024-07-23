@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    access:{
+        type: Boolean,
+        required: true
+    },
     products:[{
         producct_id: {
             type: String,

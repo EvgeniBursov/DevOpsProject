@@ -14,6 +14,7 @@ import { authenticator } from 'otplib';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { access } from 'fs'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -78,6 +79,7 @@ try{
     password: encryptedPwd,
     nubmer: req_number,
     twoFa: secret,
+    access: false,
   })
 
   // eslint-disable-next-line no-unused-vars
@@ -106,6 +108,8 @@ app.post('/verify', async (req, res) => {
       if(!match_secret) {
         return res.json({ 'alert': "incorrect token"})
       }else{
+        logUser.access = true;
+        await logUser.save();
         return res.json(logUser)
       }
     } catch (err) {

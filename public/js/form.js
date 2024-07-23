@@ -146,10 +146,13 @@ const processData = (data) => {
                         showAlert('Error verifying TOTP. Please try again.');
                     }
                 });
-            } else {
+            }else {
                 console.error('Access button not found');
             }
-        } else {
+        } else if (data.name && data.access === true){
+            sessionStorage.user = JSON.stringify(data);
+            location.replace('/');
+        }else {
             sessionStorage.user = JSON.stringify(data);
             location.replace('/');
             console.error('Form or 2FA form not found');
