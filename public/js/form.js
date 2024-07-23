@@ -126,20 +126,18 @@ const processData = (data) => {
             form.style.display = 'none';
             twoFaForm.style.display = 'block';
             if (accessBtn) {
-                accessBtn.addEventListener('click', () => {
-                    sendData('/verify', {
-                        verify: secret.value,
-                        email: data.email,
-                    })
-                    .then(res => res.json())
-                    .then(response => {
+                accessBtn.addEventListener('click', async () => {
+                    try {
+                        const response = await sendData('/verify', {
+                            verify: secret.value,
+                            email: data.email,
+                        });
                         sessionStorage.user = JSON.stringify(response.data);
                         location.replace('/');
-                    })
-                    .catch(error => {
+                    } catch (error) {
                         console.error('Error verifying TOTP:', error);
                         showAlert('Error verifying TOTP. Please try again.');
-                    });
+                    }
                 });
             } else {
                 console.error('Access button not found');

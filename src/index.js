@@ -98,7 +98,7 @@ app.post('/verify', async (req, res) => {
       if (!logUser) {
         return res.json({ 'alert': 'Incorrect user' });
       }
-      const match_secret = authenticator.check(req_code, logUser.twoFa);
+      const match_secret = authenticator.verify(req_code, logUser.twoFa);
       console.log(match_secret)
       if(!match_secret) {
         return res.json({ 'alert': "incorrect token"})
