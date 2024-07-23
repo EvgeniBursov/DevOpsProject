@@ -69,17 +69,18 @@ app.post('/signup', async (req, res) => {
 try{
   const salt = await bcrypt.genSalt(10)
   const encryptedPwd = await bcrypt.hash(req_pass,salt)
+  const secret = authenticator.generateSecret()
 
   const data = new User({
     name: req_name,
     email: req_email,
     password: encryptedPwd,
     nubmer: req_number,
-    twoFa: authenticator.generateSecret(),
+    twoFa: secret.base32,
   })
   // eslint-disable-next-line no-unused-vars
   const newUser = await data.save()
-  const token = authenticator.generate(newUser.twoFa);
+  const token = authenticator.generate(secret.base32);
   sendMail(req_email, token)
   res.json(data)
 }catch(err){
