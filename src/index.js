@@ -68,6 +68,7 @@ app.post('/signup', async (req, res) => {
 try{
   const salt = await bcrypt.genSalt(10)
   const encryptedPwd = await bcrypt.hash(req_pass,salt)
+  
   authenticator.options = { step: 180}
   const secret = authenticator.generateSecret()
 

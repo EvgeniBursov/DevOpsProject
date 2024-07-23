@@ -21,10 +21,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    token:{
-        type: String,
-        required: true
-    },
     products:[{
         producct_id: {
             type: String,
