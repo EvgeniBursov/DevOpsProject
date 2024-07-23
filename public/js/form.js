@@ -85,9 +85,11 @@ const processData = (data) => {
         const twoFaForm = document.getElementById('2fa-form');
         const form = document.getElementById('signup-form');
         const accessBtn = document.getElementById('access-account-btn');
+        const loginform = document.getElementById('login-form');
 
-        if (form && twoFaForm) {
+        if (form && twoFaForm || loginform && twoFaForm ) {
             form.style.display = 'none';
+            loginform.style.display = 'none';
             twoFaForm.style.display = 'block';
             if (accessBtn) {
                 accessBtn.addEventListener('click', async () => {
