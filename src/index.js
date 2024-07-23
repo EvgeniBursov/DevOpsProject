@@ -70,7 +70,7 @@ try{
   const salt = await bcrypt.genSalt(10)
   const encryptedPwd = await bcrypt.hash(req_pass,salt)
 
-  authenticator.options = { step: 180}
+  authenticator.options = { step: 360}
   const secret = authenticator.generateSecret()
 
   const data = new User({
