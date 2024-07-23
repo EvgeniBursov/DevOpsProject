@@ -70,6 +70,7 @@ try{
   const salt = await bcrypt.genSalt(10)
   const encryptedPwd = await bcrypt.hash(req_pass,salt)
   const secret = authenticator.generateSecret()
+  const secret_token = authenticator.generate(secret)
 
   const data = new User({
     name: req_name,
@@ -77,11 +78,16 @@ try{
     password: encryptedPwd,
     nubmer: req_number,
     twoFa: secret,
+    token: secret_token
   })
+
   // eslint-disable-next-line no-unused-vars
   const newUser = await data.save()
-  const token = authenticator.generate(secret);
-  sendMail(req_email, token)
+  //const token = authenticator.generate(secret);
+  const match_secret = authenticator.check(secret_token,secret)
+  console.log(match_secret)
+
+  sendMail(req_email, secret_token)
   res.json(data)
 }catch(err){
   return (res,err)
@@ -102,7 +108,7 @@ app.post('/verify', async (req, res) => {
       }
       console.log(logUser.twoFa,req_code)
       console.log(typeof(req_code),typeof(logUser.twoFa))
-      const match_secret = authenticator.check(req_code,logUser.twoFa)
+      const match_secret = authenticator.check(logUser.token,logUser.twoFa)
       console.log(match_secret)
       if(!match_secret) {
         return res.json({ 'alert': "incorrect token"})
