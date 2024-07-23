@@ -126,7 +126,7 @@ const processData = (data) => {
     console.log("Processing data", data);
     if (data.alert) {
         showAlert(data.alert);
-    } else if (data.name) {
+    } else if (data.name && data.access === false) {
         const twoFaForm = document.getElementById('2fa-form');
         const form = document.getElementById('signup-form');
         const accessBtn = document.getElementById('access-account-btn');
