@@ -128,6 +128,7 @@ const processData = (data) => {
             if (accessBtn) {
                 accessBtn.addEventListener('click', async () => {
                     try {
+                        console.log("line 131 front:",secret.value, data.email)
                         const response = await sendData('/verify', {
                             verify: secret.value,
                             email: data.email,
