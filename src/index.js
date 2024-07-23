@@ -68,25 +68,22 @@ app.post('/signup', async (req, res) => {
 try{
   const salt = await bcrypt.genSalt(10)
   const encryptedPwd = await bcrypt.hash(req_pass,salt)
-  const secret = Math.floor(Math.random() * 900000) + 100000
-  console.log(secret)
-  const secret2Fa = await bcrypt.hash(secret,salt)
+  authenticator.options = { step: 180}
+  const secret = authenticator.generateSecret()
 
   const data = new User({
     name: req_name,
     email: req_email,
     password: encryptedPwd,
     nubmer: req_number,
-    twoFa: secret2Fa,
+    twoFa: secret,
   })
 
   // eslint-disable-next-line no-unused-vars
   const newUser = await data.save()
-  //const token = authenticator.generate(secret);
-  //const match_secret = authenticator.check(secret_token,secret)
-  //console.log(match_secret)
+  const token = authenticator.generate(secret);
 
-  sendMail(req_email, secret)
+  sendMail(req_email, token)
   res.json(data)
 }catch(err){
   return (res,err)
@@ -101,15 +98,12 @@ app.post('/verify', async (req, res) => {
     try {
       // Find the user by email
       const logUser = await User.findOne({ 'email': req_email });
-      console.log("line 98 back",logUser)
       if (!logUser) {
         return res.json({ 'alert': 'Incorrect user' });
       }
       console.log(logUser.twoFa,req_code)
-      //console.log(typeof(req_code),typeof(logUser.twoFa))
-      //const match_secret = authenticator.check(logUser.token,logUser.twoFa)
-      //console.log(match_secret)
-      const match_secret = await bcrypt.compare(req_code, logUser.twoFa)
+      const match_secret = authenticator.check(req_code,logUser.twoFa)
+      console.log(match_secret)
       if(!match_secret) {
         return res.json({ 'alert': "incorrect token"})
       }else{
