@@ -76,11 +76,11 @@ try{
     email: req_email,
     password: encryptedPwd,
     nubmer: req_number,
-    twoFa: secret.base32,
+    twoFa: secret,
   })
   // eslint-disable-next-line no-unused-vars
   const newUser = await data.save()
-  const token = authenticator.generate(secret.base32);
+  const token = authenticator.generate(secret);
   sendMail(req_email, token)
   res.json(data)
 }catch(err){
