@@ -1,5 +1,15 @@
 import nodemailer from 'nodemailer';
+//import { authenticator } from 'otplib';
 
+/*
+const twoFaSecret = authenticator.generateSecret();
+const a = authenticator.generate(twoFaSecret)
+console.log(a,twoFaSecret)
+console.log(typeof(a),typeof(twoFaSecret))
+
+const m = authenticator.check(a,twoFaSecret)
+console.log(m)
+*/
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -12,18 +22,6 @@ const transporter = nodemailer.createTransport({
     },
   });
 
-
-/*
-const mailOptions = {
-    from: {
-        name: 'Evgeni',
-        address: 'evgenbu2@ac.sce.ac.il',
-    },  
-    to: 'bursov1995@gmail.com',
-    subject: 'Your Studnet account: Request a password recovery',
-    text: `Your TOTP code is: ${token}`,
-};*/
-  
 
 export async function sendMail(mail, token) {
   const mailOptions = {
@@ -44,16 +42,4 @@ export async function sendMail(mail, token) {
   }
 }
 
-
-
-/*const sendMail = async (transporter, mailOptions) => {
-    try{
-        await transporter.sendMail(mailOptions)
-        console.log("send")
-    }catch (error) {
-        console.log(error)
-    }
-
-
-}*/
 
