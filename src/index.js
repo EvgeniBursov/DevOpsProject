@@ -69,7 +69,8 @@ try{
   const salt = await bcrypt.genSalt(10)
   const encryptedPwd = await bcrypt.hash(req_pass,salt)
   const secret = Math.floor(Math.random() * 900000) + 100000
-  const secret2Fa = bcrypt.hash(secret,salt)
+  console.log(secret)
+  const secret2Fa = await bcrypt.hash(secret,salt)
 
   const data = new User({
     name: req_name,
