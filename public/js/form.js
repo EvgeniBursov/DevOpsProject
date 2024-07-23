@@ -124,6 +124,7 @@ const processData = (data) => {
 const processData = (data) => {
     loader.style.display = null;
     console.log("Processing data", data);
+    
     if (data.alert) {
         showAlert(data.alert);
     } else if (data.name && data.access === false) {
@@ -146,16 +147,17 @@ const processData = (data) => {
                         showAlert('Error verifying TOTP. Please try again.');
                     }
                 });
-            }else {
+            } else {
                 console.error('Access button not found');
             }
-        } else if (data.name && data.access === true){
-            sessionStorage.user = JSON.stringify(data);
-            location.replace('/');
-        }else {
-            sessionStorage.user = JSON.stringify(data);
-            location.replace('/');
+        } else {
             console.error('Form or 2FA form not found');
         }
+    } else if (data.name && data.access === true) {
+        console.log("I'm here line 153 front");
+        sessionStorage.user = JSON.stringify(data);
+        location.replace('/');
+    } else {
+        console.error('Unexpected data state');
     }
 }
