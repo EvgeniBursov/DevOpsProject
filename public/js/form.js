@@ -132,14 +132,13 @@ const processData = (data) => {
                             verify: secret.value,
                             email: data.email,
                         });
-                        console.log(response)
-                        console.log(response.data)
+                        console.log(data)
                         if(response.alert)
                         {
                             showAlert(data.alert); 
                         }else{
                             console.log(data)
-                            sessionStorage.user = JSON.stringify(response.name);
+                            sessionStorage.user = JSON.stringify(data.name);
                             location.replace('/');
                         }
                     } catch (error) {
