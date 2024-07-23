@@ -141,6 +141,7 @@ app.post('/login', async (req, res) => {
     if(!match_pass) {
       return res.json({ 'alert': "incorrect password"})
     }else{
+      authenticator.options = { step: 360}
       logUser.access = false;
       logUser.twoFa = authenticator.generateSecret()
       await logUser.save();
