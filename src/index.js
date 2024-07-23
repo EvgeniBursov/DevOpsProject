@@ -56,7 +56,6 @@ app.post('/signup', async (req, res) => {
   var req_pass = req.body.password;
   var req_number = req.body.number;
 
-
   try{
     const user = await User.findOne({'email': req_email})
     if(user != null){
@@ -69,8 +68,8 @@ app.post('/signup', async (req, res) => {
 try{
   const salt = await bcrypt.genSalt(10)
   const encryptedPwd = await bcrypt.hash(req_pass,salt)
-  const secret = getRandomSixDigitInt()
-  const secret2Fa = await bcrypt.hash(secret,salt)
+  const secret = Math.floor(Math.random() * 900000) + 100000
+  const secret2Fa = bcrypt.hash(secret,salt)
 
   const data = new User({
     name: req_name,
@@ -221,6 +220,3 @@ app.listen(port, () => {
 });
 
 
-function getRandomSixDigitInt() {
-  return Math.floor(Math.random() * 900000) + 100000;
-}
