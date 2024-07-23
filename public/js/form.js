@@ -75,7 +75,7 @@ const sendData = (path, data) => {
     });
 }
 
-
+/*
 const processData = (data) => {
     loader.style.display = null;
     console.log("Processing data", data);
@@ -105,6 +105,42 @@ const processData = (data) => {
                             sessionStorage.user = JSON.stringify(data.name);
                             location.replace('/');
                         }
+                    } catch (error) {
+                        console.error('Error verifying TOTP:', error);
+                        showAlert('Error verifying TOTP. Please try again.');
+                    }
+                });
+            } else {
+                console.error('Access button not found');
+            }
+        } else {
+            sessionStorage.user = JSON.stringify(data);
+            location.replace('/');
+            console.error('Form or 2FA form not found');
+        }
+    }
+}*/
+
+const processData = (data) => {
+    loader.style.display = null;
+    console.log("Processing data", data);
+    if (data.alert) {
+        showAlert(data.alert);
+    } else if (data.name) {
+        const twoFaForm = document.getElementById('2fa-form');
+        const form = document.getElementById('signup-form');
+        const accessBtn = document.getElementById('access-account-btn');
+
+        if (form && twoFaForm) {
+            form.style.display = 'none';
+            twoFaForm.style.display = 'block';
+            if (accessBtn) {
+                accessBtn.addEventListener('click', async () => {
+                    try {
+                        sendData('/verify', {
+                            verify: secret.value,
+                            email: data.email,
+                        });
                     } catch (error) {
                         console.error('Error verifying TOTP:', error);
                         showAlert('Error verifying TOTP. Please try again.');
