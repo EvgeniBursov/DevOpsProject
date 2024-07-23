@@ -88,8 +88,11 @@ const processData = (data) => {
         const loginform = document.getElementById('login-form');
 
         if (form && twoFaForm || loginform && twoFaForm ) {
-            form.style.display = 'none';
-            loginform.style.display = 'none';
+            if(form){
+                form.style.display = 'none' 
+            }else{
+                loginform.style.display = 'none';
+            }
             twoFaForm.style.display = 'block';
             if (accessBtn) {
                 accessBtn.addEventListener('click', async () => {
