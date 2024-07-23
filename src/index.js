@@ -90,16 +90,17 @@ try{
 app.post('/verify', async (req, res) => {
   const req_code = req.body.verify;
   const req_email = req.body.email;
-  console.log(req_code,req_email)
+  console.log("line 93 back",req_code,req_email)
 
     try {
       // Find the user by email
       const logUser = await User.findOne({ 'email': req_email });
+      console.log("line 98 back",logUser)
       if (!logUser) {
         return res.json({ 'alert': 'Incorrect user' });
       }
       console.log(logUser.twoFa)
-      const match_secret = authenticator.verify(logUser.twoFa,req_code);
+      const match_secret = authenticator.check(req_code,logUser.twoFa)
       console.log(match_secret)
       if(!match_secret) {
         return res.json({ 'alert': "incorrect token"})
