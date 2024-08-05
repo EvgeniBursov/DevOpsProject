@@ -9,27 +9,32 @@ const secret = document.getElementById('2fa');
 
 
 submitBtn.addEventListener('click', () => {
-    if(nameUser != null){
-        if(nameUser.value.length < 2){
-            showAlert('name must be 2 letters long');
-        } else if(!email.value.length){
-            showAlert('enter your email');
-        } else if(password.value.length < 6){
-            showAlert('password should be 6 letters long');
-        } else if(conf_password.value != password.value){
-            showAlert('password should be same');
-        } else if(!number.value.length){
-            showAlert('enter your phone number');
-        } else if(!Number(number.value) || number.value.length < 1){
-            showAlert('invalid number, please enter valid one');
-        } else{
-            loader.style.display = 'block'
+    if (nameUser != null) {
+        const namePattern = /^[A-Za-z]+$/;
+        const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d{6,})(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{9,}$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phonePattern = /^\d{10}$/;
+
+        if (nameUser.value.length < 2) {
+            showAlert('Name must be at least 2 characters long');
+        } else if (!namePattern.test(nameUser.value)) {
+            showAlert('Name must contain only digits');
+        } else if (!emailPattern.test(email.value)) {
+            showAlert('Enter a valid email');
+        } else if (!passwordPattern.test(password.value)) {
+            showAlert('Password must be at least 6 characters long and include at least one letter, one number, and one special character');
+        } else if (conf_password.value != password.value) {
+            showAlert('Passwords should match');
+        } else if (!phonePattern.test(number.value)) {
+            showAlert('Phone number must be exactly 10 digits');
+        } else {
+            loader.style.display = 'block';
             sendData('/signup', {
                 nameUser: nameUser.value,
                 email: email.value,
                 password: password.value,
                 number: number.value,
-            })
+            });
         }
     } else {
         if(email.value.length < 1|| password.value.length < 1){
