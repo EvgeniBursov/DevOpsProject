@@ -5,7 +5,6 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import User from '../models/user.js'
 // eslint-disable-next-line no-unused-vars
-import Product from '../models/products.js'
 import path from 'path'
 import bcrypt from 'bcrypt'
 
@@ -222,5 +221,3 @@ app.use((req, res) => {
 app.listen(port, () => {
   console.log('server is up and running ', port);
 });
-
-
