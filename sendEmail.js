@@ -1,15 +1,8 @@
 import nodemailer from 'nodemailer';
-//import { authenticator } from 'otplib';
+import { authenticator } from 'otplib';
 
-/*
-const twoFaSecret = authenticator.generateSecret();
-const a = authenticator.generate(twoFaSecret)
-console.log(a,twoFaSecret)
-console.log(typeof(a),typeof(twoFaSecret))
-
-const m = authenticator.check(a,twoFaSecret)
-console.log(m)
-*/
+authenticator.options = { step: 60 };
+console.log("Current time step:", authenticator.options.step);
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -41,5 +34,3 @@ export async function sendMail(mail, token) {
       console.error("Error sending email:", error);
   }
 }
-
-

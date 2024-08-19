@@ -221,3 +221,5 @@ app.use((req, res) => {
 app.listen(port, () => {
   console.log('server is up and running ', port);
 });
+
+export default app;
