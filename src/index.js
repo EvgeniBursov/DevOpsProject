@@ -5,12 +5,15 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import User from '../models/user.js'
 // eslint-disable-next-line no-unused-vars
-import Product from '../models/products.js'
 import path from 'path'
 import bcrypt from 'bcrypt'
 
+import { sendMail } from '../sendEmail.js';
+import { authenticator } from 'otplib';
+
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { access } from 'fs'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -66,20 +69,53 @@ try{
   const salt = await bcrypt.genSalt(10)
   const encryptedPwd = await bcrypt.hash(req_pass,salt)
 
+  authenticator.options = { step: 360}
+  const secret = authenticator.generateSecret()
+
   const data = new User({
     name: req_name,
     email: req_email,
     password: encryptedPwd,
-    nubmer: req_number
+    nubmer: req_number,
+    twoFa: secret,
+    access: false,
   })
+
   // eslint-disable-next-line no-unused-vars
   const newUser = await data.save()
+  const token = authenticator.generate(secret);
+
+  sendMail(req_email, token)
   res.json(data)
 }catch(err){
   return (res,err)
 }
 })
 
+app.post('/verify', async (req, res) => {
+  const req_code = req.body.verify;
+  const req_email = req.body.email;
+
+    try {
+      // Find the user by email
+      const logUser = await User.findOne({ 'email': req_email });
+      if (!logUser) {
+        return res.json({ 'alert': 'Incorrect user' });
+      }
+      const match_secret = authenticator.check(req_code,logUser.twoFa)
+      console.log(match_secret)
+      if(!match_secret) {
+        return res.json({ 'alert': "incorrect token"})
+      }else{
+        logUser.access = true;
+        await logUser.save();
+        return res.json(logUser)
+      }
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ 'alert': 'Fail checking user' });
+    }
+});
 
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/pages', 'login.html'));
@@ -104,6 +140,12 @@ app.post('/login', async (req, res) => {
     if(!match_pass) {
       return res.json({ 'alert': "incorrect password"})
     }else{
+      authenticator.options = { step: 360}
+      logUser.access = false;
+      logUser.twoFa = authenticator.generateSecret()
+      await logUser.save();
+      const token = authenticator.generate(logUser.twoFa);
+      sendMail(req_email, token)
       return res.json(logUser)
     }
   } catch (err) {
@@ -179,3 +221,5 @@ app.use((req, res) => {
 app.listen(port, () => {
   console.log('server is up and running ', port);
 });
+
+export default app;

@@ -12,22 +12,26 @@
     <img src="../img/loader.gif" class="loader" alt="">
     <div class="container">
         <img src="../img/dark-logo.png" class="logo" alt="">
-        <div>
+        <div id="signup-form">
             <input type="text" autocomplete="off" id="name" placeholder="name">
             <input type="email" autocomplete="off" id="email" placeholder="email">
             <input type="password" autocomplete="off" id="password" placeholder="password">
+            <input type="password" autocomplete="off" id="conf_password" placeholder="confirm password">
             <input type="text" autocomplete="off" id="number" placeholder="number">
-            <button class="submit-btn">create account</button>
+            <button id="create-account-btn" class="submit-btn">create account</button>
         </div>
-        <a href="../pages/login.html" id="login">already have an account? Log in here</a><br>
-        <a href="../pages/index.html" id="home">wanna gonna back? back to homepage</a>
+        <div id="2fa-form" style="display: none;">
+            <input type="text" autocomplete="off" id="2fa" placeholder="Two-Factor Authentication">
+            <button id="access-account-btn" class="submit-btn">access</button>
+        </div>
+        <a href="../pages/login.html" id="login">Already have an account? Log in here</a><br>
+        <br><a href="../pages/index.html" id="home">Wanna gonna back? back to homepage</a>
     </div>
     <div class="alert-box">
         <img src="../img/error.png" class="alert-img" alt="">
         <p class="alert-msg">Error message</p>
     </div>
 </body>
-
 
 
 <script src="../js/form.js" type="module"></script>
